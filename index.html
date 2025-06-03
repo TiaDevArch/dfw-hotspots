@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DFW Hotspots & Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .filters {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .filters select {
+      margin: 0 0.5rem;
+      padding: 0.5rem;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .card h3 {
+      margin: 0 0 0.5rem;
+    }
+    .card a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    .tags {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>DFW Hotspots & Events</h1>
+  <div class="filters">
+    <select id="categoryFilter">
+      <option value="">All Categories</option>
+    </select>
+    <select id="locationFilter">
+      <option value="">All Locations</option>
+    </select>
+  </div>
+  <div class="card-grid" id="grid"></div>
+
+  <script>
+    const data = [
+      {
+        name: "Happiest Hour",
+        description: "Rooftop views, cocktails, and big summer energy.",
+        category: "Happy Hour",
+        location: "Dallas",
+        cost: "$$",
+        tags: ["Rooftop", "Happy Hour", "Grown & Sexy"],
+        maps: "https://www.google.com/maps/place/Happiest+Hour/@32.7911,-96.8067,17z",
+        link: "https://happiesthourdallas.com/"
+      },
+      {
+        name: "Lava Cantina",
+        description: "Live music, food, and high-energy vibes in The Colony.",
+        category: "Live Music",
+        location: "The Colony",
+        cost: "$$$",
+        tags: ["Live Music", "Turn Up", "Outdoor"],
+        maps: "https://www.google.com/maps/place/Lava+Cantina/@33.0735,-96.8291,17z",
+        link: "https://lavacantina.com/"
+      }
+      // Add more listings here
+    ];
+
+    const grid = document.getElementById('grid');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const locationFilter = document.getElementById('locationFilter');
+
+    const renderOptions = (select, values) => {
+      [...new Set(values)].sort().forEach(value => {
+        const opt = document.createElement('option');
+        opt.value = value;
+        opt.textContent = value;
+        select.appendChild(opt);
+      });
+    };
+
+    const renderGrid = () => {
+      const catVal = categoryFilter.value;
+      const locVal = locationFilter.value;
+      grid.innerHTML = '';
+      data.filter(item =>
+        (!catVal || item.category === catVal) &&
+        (!locVal || item.location === locVal)
+      ).forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${item.name}</h3>
+          <p>${item.description}</p>
+          <p><strong>Cost:</strong> ${item.cost}</p>
+          <p><a href="${item.link}" target="_blank">More Info</a> | <a href="${item.maps}" target="_blank">Map</a></p>
+          <div class="tags">${item.tags.join(', ')}</div>
+        `;
+        grid.appendChild(card);
+      });
+    };
+
+    renderOptions(categoryFilter, data.map(d => d.category));
+    renderOptions(locationFilter, data.map(d => d.location));
+
+    categoryFilter.onchange = renderGrid;
+    locationFilter.onchange = renderGrid;
+
+    renderGrid();
+  </script>
+</body>
+</html>
