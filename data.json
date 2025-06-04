@@ -42,7 +42,7 @@ for result in data["results"]:
         "description": get_text(props, "Description"),
         "location": get_text(props, "Location"),
         "cost": get_text(props, "Cost"),
-        "tags": get_multi(props, "Tags/Vibes"),
+        "tags": get_multi(props, "Fun"),
         "maps": get_url(props, "Google Maps Link"),
         "link": get_url(props, "Event Page/Info Link")
     })
