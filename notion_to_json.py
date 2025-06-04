@@ -17,8 +17,8 @@ data = response.json()
 
 output = []
 
-for result in data["results"]:
-    props = result["properties"]
+for result in data.get("results", []):
+    props = result.get("properties", {})
 
     def get_title(prop, key):
         return prop.get(key, {}).get("title", [{}])[0].get("text", {}).get("content", "") if prop.get(key) else ""
