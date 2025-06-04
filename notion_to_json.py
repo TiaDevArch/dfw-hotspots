@@ -14,9 +14,10 @@ url = f"https://api.notion.com/v1/databases/{DATABASE_ID}/query"
 
 response = requests.post(url, headers=headers)
 data = response.json()
-with open("notion_raw.json", "w") as f:
-    json.dump(data, f, indent=2)
-print("📄 Saved raw Notion response to notion_raw.json")
+print("🔍 Raw structure preview:")
+for result in data.get("results", []):
+    print(result["properties"].keys())
+
 
 output = []
 
