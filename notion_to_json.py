@@ -11,14 +11,16 @@ headers = {
 }
 
 url = f"https://api.notion.com/v1/databases/{DATABASE_ID}/query"
-
 response = requests.post(url, headers=headers)
 data = response.json()
 
-print("🔍 Raw Notion structure preview:")
+# Save raw Notion response for debugging
+with open("notion_raw.json", "w") as f:
+    json.dump(data, f, indent=2)
+
+print("🔍 Raw structure preview:")
 if data.get("results"):
-    first = data["results"][0]
-    print(json.dumps(first["properties"], indent=2))
+    print(json.dumps(data["results"][0]["properties"], indent=2))
 else:
     print("⚠️ No results returned.")
 
