@@ -14,19 +14,13 @@ url = f"https://api.notion.com/v1/databases/{DATABASE_ID}/query"
 
 response = requests.post(url, headers=headers)
 data = response.json()
-<<<<<<< HEAD
-print("🔍 Raw structure preview:")
-for result in data.get("results", []):
-    print(result["properties"].keys())
 
-=======
 print("🔍 Raw Notion structure preview:")
 if data.get("results"):
     first = data["results"][0]
     print(json.dumps(first["properties"], indent=2))
 else:
     print("⚠️ No results returned.")
->>>>>>> 1bd6fff (🔁 Sync updated Notion data and script)
 
 output = []
 
@@ -51,14 +45,10 @@ for result in data.get("results", []):
     output.append({
         "name": get_title(props, "Destination/Event Name"),
         "dateTime": get_text(props, "Date/Time"),
-<<<<<<< HEAD
-        "category": get_select(props, "Category"),
-=======
         "category": get_multi(props, "Category"),
->>>>>>> 1bd6fff (🔁 Sync updated Notion data and script)
         "description": get_text(props, "Description"),
         "location": get_text(props, "Location"),
-        "cost": get_text(props, "Cost"),
+        "cost": get_select(props, "Cost"),
         "tags": get_multi(props, "Tags/Vibes"),
         "maps": get_url(props, "Google Maps Link"),
         "link": get_url(props, "Event Page/Info Link")
@@ -67,8 +57,4 @@ for result in data.get("results", []):
 with open("data.json", "w") as f:
     json.dump(output, f, indent=2)
 
-<<<<<<< HEAD
 print("✅ data.json has been created.")
-=======
-print("✅ data.json has been created.")
->>>>>>> 1bd6fff (🔁 Sync updated Notion data and script)
