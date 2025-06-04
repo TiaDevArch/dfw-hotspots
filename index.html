@@ -46,6 +46,11 @@
       color: #666;
       margin-top: 0.5rem;
     }
+    .date-time {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #444;
+    }
   </style>
 </head>
 <body>
@@ -61,40 +66,35 @@
   <div class="card-grid" id="grid"></div>
 
   <script>
-    const data = [
-      {
-        name: "Happiest Hour",
-        description: "Rooftop views, cocktails, and big summer energy.",
-        category: "Happy Hour",
-        location: "Dallas",
-        cost: "$$",
-        tags: ["Rooftop", "Happy Hour", "Grown & Sexy"],
-        maps: "https://www.google.com/maps/place/Happiest+Hour/@32.7911,-96.8067,17z",
-        link: "https://happiesthourdallas.com/"
-      },
-      {
-        name: "Lava Cantina",
-        description: "Live music, food, and high-energy vibes in The Colony.",
-        category: "Live Music",
-        location: "The Colony",
-        cost: "$$$",
-        tags: ["Live Music", "Turn Up", "Outdoor"],
-        maps: "https://www.google.com/maps/place/Lava+Cantina/@33.0735,-96.8291,17z",
-        link: "https://lavacantina.com/"
-      }
-      // Add more listings here
-    ];
+    let data = [];
+
+    async function fetchData() {
+      const response = await fetch('data.json');
+      data = await response.json();
+      populateFilters();
+      renderGrid();
+    }
 
     const grid = document.getElementById('grid');
     const categoryFilter = document.getElementById('categoryFilter');
     const locationFilter = document.getElementById('locationFilter');
 
-    const renderOptions = (select, values) => {
-      [...new Set(values)].sort().forEach(value => {
+    const populateFilters = () => {
+      const categories = [...new Set(data.map(d => d.category).filter(Boolean))].sort();
+      const locations = [...new Set(data.map(d => d.location).filter(Boolean))].sort();
+
+      categories.forEach(value => {
         const opt = document.createElement('option');
         opt.value = value;
         opt.textContent = value;
-        select.appendChild(opt);
+        categoryFilter.appendChild(opt);
+      });
+
+      locations.forEach(value => {
+        const opt = document.createElement('option');
+        opt.value = value;
+        opt.textContent = value;
+        locationFilter.appendChild(opt);
       });
     };
 
@@ -110,22 +110,25 @@
         card.className = 'card';
         card.innerHTML = `
           <h3>${item.name}</h3>
-          <p>${item.description}</p>
-          <p><strong>Cost:</strong> ${item.cost}</p>
-          <p><a href="${item.link}" target="_blank">More Info</a> | <a href="${item.maps}" target="_blank">Map</a></p>
-          <div class="tags">${item.tags.join(', ')}</div>
+${item.dateTime ? `<p><strong>Date/Time:</strong> ${item.dateTime}</p>` : ''}
+${item.category ? `<p><strong>Category:</strong> ${item.category}</p>` : ''}
+${item.description ? `<p>${item.description}</p>` : ''}
+${item.location ? `<p><strong>Location:</strong> ${item.location}</p>` : ''}
+${item.cost ? `<p><strong>Cost:</strong> ${item.cost}</p>` : ''}
+<p>
+  ${item.link ? `<a href="${item.link}" target="_blank">Event Info</a>` : ''}
+  ${item.maps ? ` | <a href="${item.maps}" target="_blank">Map</a>` : ''}
+</p>
+${item.tags && item.tags.length ? `<div class="tags"><strong>Tags:</strong> ${item.tags.join(', ')}</div>` : ''}</div>
         `;
         grid.appendChild(card);
       });
     };
 
-    renderOptions(categoryFilter, data.map(d => d.category));
-    renderOptions(locationFilter, data.map(d => d.location));
-
     categoryFilter.onchange = renderGrid;
     locationFilter.onchange = renderGrid;
 
-    renderGrid();
+    fetchData();
   </script>
 </body>
 </html>
