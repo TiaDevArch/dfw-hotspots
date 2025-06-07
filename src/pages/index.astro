@@ -83,6 +83,8 @@ import venues from '../data/venues.json';
   data-vibes={(venue.Vibe ?? "").toLowerCase()}
   data-audience={(venue.Audience ?? "").toLowerCase()}
   data-atmosphere={(venue.Atmosphere ?? "").toLowerCase()}
+data-when={(venue["When to Go"] ?? "").toLowerCase()}
+
 >
 
       <h2>{venue.Venue}</h2>
@@ -92,6 +94,11 @@ import venues from '../data/venues.json';
         <strong>Area:</strong> {venue.Area ?? ''}<br />
         <strong>Category:</strong> {venue.Category}
       </p>
+
+{venue["When to Go"] && (
+  <p class="when-to-go"><strong>When to Go:</strong> {venue["When to Go"]}</p>
+)}
+
       <p class="cost">💰 Cost: {venue.Cost}</p>
       <div class="links">
         {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
@@ -103,7 +110,7 @@ import venues from '../data/venues.json';
 
 <!-- 👥 Audience Filters -->
 <div id="audienceFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-  {["Couples", "Singles", "Family", "30+", "40+", "Adults Only"].map((tag) => (
+  {["Couples", "Singles", "Family"].map((tag) => (
     <button
       class="audience-btn"
       data-tag={tag}
