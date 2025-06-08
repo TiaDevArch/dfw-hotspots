@@ -62,9 +62,10 @@ import venues from '../data/venues.json';
       style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"
     />
 
+<h3>Filter by Vibe</h3>
     <!-- 🔖 Vibe Filters -->
     <div id="vibeFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {["Chill Vibes", "Grown & Sexy", "Lit", "Turn Up", "Romantic", "Classy", "Trendy", "Bougie", "Laid Back", "Date Night", "Black-Owned"].map((tag) => (
+      {["Chill Vibes", "Grown & Sexy", "Lit", "Turn Up", "Romantic", "Classy", "Trendy", "Bougie", "Laid Back", "Date Night", "Black-Owned", "Networking"].map((tag) => (
         <button
           class="vibe-btn"
           data-tag={tag}
@@ -74,10 +75,10 @@ import venues from '../data/venues.json';
         </button>
       ))}
     </div>
-
+<h3>Filter by Audience</h3>
     <!-- 👥 Audience Filters -->
     <div id="audienceFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {["Couples", "Singles", "Family", "Small Groups"].map((tag) => (
+      {["Couples", "Singles", "Small Groups"].map((tag) => (
         <button
           class="audience-btn"
           data-tag={tag}
@@ -88,9 +89,11 @@ import venues from '../data/venues.json';
       ))}
     </div>
 
+
+<h3>Filter by Atmosphere</h3>
     <!-- 🎵 Atmosphere Filters -->
     <div id="atmosphereFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {["Live DJ", "Live Band", "Games", "Hookah", "Karaoke", "Patio", "Rooftop", "Indoor/AC", "Dancing", "Kid Friendly"].map((tag) => (
+      {["Live DJ", "Live Band", "Game Night", "Comedy", "Hookah", "Karaoke", "Patio", "Rooftop", "Outdoors", "Dancing"].map((tag) => (
         <button
           class="atmosphere-btn"
           data-tag={tag}
@@ -210,11 +213,36 @@ import venues from '../data/venues.json';
       setupButtonFilters(whenButtons, selectedWhen);
     </script>
 
+<!-- ✍️ Submit a Venue Button -->
+<div style="margin-top: 3rem; text-align: center;">
+  <a 
+    href="https://form.typeform.com/to/rs9RZozE" 
+    target="_blank" 
+    style="
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #0077cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    "
+    onmouseover="this.style.backgroundColor='#005fa3'"
+    onmouseout="this.style.backgroundColor='#0077cc'"
+  >
+    ➕ Submit a Venue
+  </a>
+</div>
+
+
     <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.9rem; color: #555;">
-      <a href="https://tiaross.net/w/wp-content/uploads/Tia-Ross-Cartagena-Getsemani-rooftop.jpg" target="_blank">
-        <img src="https://tiaross.net/w/wp-content/uploads/Tia-Ross-Cartagena-Getsemani-rooftop.jpg" alt="Tia Ross" style="width: 50px; height: 50px; border-radius: 50%; margin-top: 0.5rem;" />
+      <a href="https://tiaross.net/w/wp-content/uploads/TiaRossDev.png" target="_blank">
+        <img src="https://tiaross.net/w/wp-content/uploads/TiaRossDev-rs.png" alt="Tia Ross" style="width: 50px; height: 50px; border-radius: 50%; margin-top: 0.5rem;" />
       </a><br />
-      Built by <a href="https://tiaross.com/links/" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: bold;">Tia Ross</a><br />
+      Built by <a href="https://tiaross.com/links/" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: bold;">Tia</a><br />
       <span style="font-style: italic;">Technocrat. Explorer. Connector.</span>
     </footer>
   </body>
