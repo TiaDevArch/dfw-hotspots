@@ -224,18 +224,20 @@ font-family: Bebas Neue, serif;
     justify-content: flex-start;
   }
 }
+
 #filterPanel {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease, padding 0.3s ease;
+  transition: max-height 0.4s ease, padding 0.3s ease;
   padding: 0 1rem;
   border: 1px solid #ddd;
   border-radius: 12px;
   background: #fff;
 }
 
+/* When toggled open */
 #filterPanel.open {
-  max-height: 800px; /* Adjust based on your content */
+  max-height: 1200px; /* big enough to show all content */
   padding: 1rem;
 }
 
@@ -283,7 +285,7 @@ font-family: Bebas Neue, serif;
 
 
 <!-- Filter Panel -->
-<div id="filterPanel" style="display: none; border: 1px solid #ddd; padding: 1rem; border-radius: 12px; background: #fff;" class="collapsed">
+<div id="filterPanel" class="">
   <!-- Filter Groups -->
 
 
@@ -478,10 +480,14 @@ font-family: Bebas Neue, serif;
     setupButtonFilters(audienceButtons, selectedAudience);
     setupButtonFilters(atmosphereButtons, selectedAtmosphere);
 
-    toggleBtn.addEventListener("click", () => {
-      filterPanel.style.display = filterPanel.style.display === "none" ? "block" : "none";
-      toggleBtn.textContent = filterPanel.style.display === "block" ? "❌ Close Filters" : "🔍 Show Filters";
-    });
+toggleBtn.addEventListener("click", () => {
+  filterPanel.classList.toggle("open");
+
+  toggleBtn.textContent = filterPanel.classList.contains("open")
+    ? "❌ Close Filters"
+    : "🔍 Show Filters";
+});
+
 
     clearBtn.addEventListener("click", () => {
       selectedCategories = [];
