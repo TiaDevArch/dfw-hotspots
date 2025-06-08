@@ -4,53 +4,172 @@ import venues from '../data/venues.json';
 
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>DFW Hotspot Vibes</title>
-    <style>
-      body {
-        font-family: sans-serif;
-        padding: 2rem;
-        background: #f9f9f9;
-      }
-      h1 {
-        text-align: center;
-        color: #333;
-      }
-      .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2rem;
-      }
-      .card {
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .card h2 {
-        margin: 0 0 0.5rem 0;
-        font-size: 1.2rem;
-        color: #222;
-      }
-      .meta {
-        font-size: 0.9rem;
-        color: #666;
-      }
-      .cost {
-        font-weight: bold;
-        margin-top: 0.5rem;
-      }
-      .links a {
-        font-size: 0.85rem;
-        margin-right: 10px;
-        color: #0077cc;
-        text-decoration: none;
-      }
-    </style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DFW Hotspots | Best Places to Go Out in Dallas-Fort Worth</title>
+  <meta name="description" content="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres." />
+  <meta name="keywords" content="Dallas nightlife, DFW hotspots, brunch in Dallas, date spots DFW, live music Dallas, black-owned venues Dallas, chill bars Fort Worth, where to go out in DFW" />
+  <meta name="author" content="Tia Ross" />
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="DFW Hotspot Vibes" />
+  <meta property="og:description" content="Find your vibe in Dallas-Fort Worth — Brunch, date nights, happy hours, lounges, Black-owned gems and more." />
+  <meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png" />
+  <meta property="og:url" content="https://dfw-hotspot-vibes.netlify.app/" />
+  <meta property="og:type" content="website" />
+
+</head>
+
+    <title>DFW Hotspots</title>
+ <style>
+  body {
+    font-family: Calibri, sans-serif;
+    padding: 2rem;
+    background: #f9f9f9;
+    margin: 0;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  .filters h3 {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: #444;
+  }
+
+  .filters div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .filters button {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background: #eee;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    color: #222;
+  }
+
+  .meta {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .cost {
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
+
+  .links a {
+    font-size: 0.85rem;
+    margin-right: 10px;
+    color: #0077cc;
+    text-decoration: none;
+  }
+
+  .cta-buttons {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .cta-buttons a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-color: #524776;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease;
+  }
+
+  .cta-buttons a:hover {
+    background-color: #3f3861;
+  }
+
+  footer {
+    margin-top: 4rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  footer img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 0.5rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    .filters div {
+      flex-direction: column;
+    }
+
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .cta-buttons a {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    input[type="text"] {
+      font-size: 0.95rem;
+    }
+  }
+</style>
   </head>
   <body>
     <h1>DFW Hotspots & Vibes</h1>
@@ -61,6 +180,13 @@ import venues from '../data/venues.json';
       placeholder="Search venues, cities, categories..."
       style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"
     />
+
+<div style="display: flex; gap: 2rem;">
+  <div style="width: 250px;">
+<img src="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png">
+
+
+    <h3>Filters</h3>
 
 <h3>Filter by Category</h3>
 <!-- 🔖 Category Filters -->
@@ -133,6 +259,11 @@ import venues from '../data/venues.json';
       ))}
     </div>
 
+
+  </div>
+  <div class="card-grid">
+
+
     <div class="card-grid" id="venueList">
       {venues.map((venue, index) => (
         <div
@@ -141,7 +272,7 @@ import venues from '../data/venues.json';
           data-vibes={(venue.Vibe ?? "").toLowerCase()}
           data-audience={(venue.Audience ?? "").toLowerCase()}
           data-atmosphere={(venue.Atmosphere ?? "").toLowerCase()}
-          data-when={(venue["When to Go"] ?? "").toLowerCase()}
+          data-whentogo={(venue["When to Go"] ?? "").toLowerCase()}
  	  data-category={(venue.Category ?? "").toLowerCase()}
         >
           <h2>{venue.Venue}</h2>
@@ -164,6 +295,8 @@ import venues from '../data/venues.json';
         </div>
       ))}
     </div>
+  </div>
+</div>
 
 
 <script type="module">
@@ -191,7 +324,7 @@ import venues from '../data/venues.json';
       const vibes = card.dataset.vibes;
       const audience = card.dataset.audience;
       const atmosphere = card.dataset.atmosphere;
-      const when = card.dataset.when;
+      const when = card.dataset.whentogo;
 
       const matchesSearch = text.includes(searchQuery);
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
@@ -235,7 +368,6 @@ import venues from '../data/venues.json';
   setupButtonFilters(atmosphereButtons, selectedAtmosphere);
   setupButtonFilters(whenButtons, selectedWhen);
 </script>
-
 
 
 <!-- ✍️ Suggest an Edit + Submit a Venue Buttons -->
@@ -288,9 +420,11 @@ import venues from '../data/venues.json';
     <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.9rem; color: #555;">
       <a href="https://tiaross.net/w/wp-content/uploads/TiaRossDev.png" target="_blank">
         <img src="https://tiaross.net/w/wp-content/uploads/TiaRossDev-rs.png" alt="Tia Ross" style="width: 50px; height: 50px; border-radius: 50%; margin-top: 0.5rem;" />
-      </a><br />
-      Built by <a href="https://tiaross.com/links/" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: bold;">Tia</a><br />
-      <span style="font-style: italic;">Technocrat. Explorer. Connector.</span>
+      </a><br />📍 DFW Hotspots: No more ‘I don’t know where to go’ nights.<br />
+      By Tia Ross – Explorer. Developer. Technocrat.
+Let’s connect: <a href="https://tiaross.com/links/" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: bold;">Explore My Links</a><br />
+DM me: <a href="https://t.me/@MsTRoss">MsTRoss</a>
+      <span style="font-style: italic;"></span>
     </footer>
   </body>
 </html>
