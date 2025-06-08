@@ -66,7 +66,7 @@ import venues from '../data/venues.json';
 <div id="categoryFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
       {["Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival", "Foodie Event", "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up", "Mixed-Use", "Networking Mixer", "Nightlife/Lounge", "Outdoor Event", "Restaurant/Bar", "Rooftop Bar", "Sports Bar", "Speakeasy", "Theater/Spoken Word", "Wellness/Fitness"].map((tag) => (
         <button
-          class="categories-btn"
+          class="category-btn"
           data-tag={tag}
           style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;"
         >
@@ -233,8 +233,8 @@ const showCard = matchesSearch && matchesVibes && matchesAudience && matchesAtmo
       setupButtonFilters(whenButtons, selectedWhen);
     </script>
 
-<!-- ✍️ Suggest an Edit Button -->
-<div style="margin-top: 3rem; text-align: center;">
+<!-- ✍️ Suggest an Edit + Submit a Venue Buttons -->
+<div style="margin-top: 3rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
   <a 
     href="https://form.typeform.com/to/rs9RZozE" 
     target="_blank" 
@@ -242,7 +242,7 @@ const showCard = matchesSearch && matchesVibes && matchesAudience && matchesAtmo
       display: inline-block;
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
-      background-color: #0077cc;
+      background-color: #524776;
       color: white;
       text-decoration: none;
       border-radius: 25px;
@@ -250,12 +250,34 @@ const showCard = matchesSearch && matchesVibes && matchesAudience && matchesAtmo
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       transition: background-color 0.3s ease;
     "
-    onmouseover="this.style.backgroundColor='#005fa3'"
-    onmouseout="this.style.backgroundColor='#0077cc'"
+    onmouseover="this.style.backgroundColor='#3f3861'"
+    onmouseout="this.style.backgroundColor='#524776'"
   >
-    ➕ Submit a Venue
+    ➕ Suggest an Edit
+  </a>
+
+  <a 
+    href="https://form.typeform.com/to/yLG4QA9L" 
+    target="_blank" 
+    style="
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #524776;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    "
+    onmouseover="this.style.backgroundColor='#3f3861'"
+    onmouseout="this.style.backgroundColor='#524776'"
+  >
+    📍 Submit a Venue
   </a>
 </div>
+
 
 
     <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.9rem; color: #555;">
