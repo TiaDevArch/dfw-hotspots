@@ -178,6 +178,20 @@ import venues from '../data/venues.json';
   color: #555;
   margin-top: 0.5rem;
 }
+#filterPanel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.3s ease;
+  padding: 0 1rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+}
+
+#filterPanel.expanded {
+  max-height: 2000px; /* large enough to fit all filter buttons */
+  padding: 1rem;
+}
 
   }
 </style>
@@ -189,14 +203,16 @@ import venues from '../data/venues.json';
     <input
       type="text"
       id="searchInput"
-      placeholder="Search venues, cities, categories..."
+      placeholder="Search venues, cities, atmosphere, categories..."
       style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"
     />
 
 
     <h3>Filters</h3>
 <button onclick="toggleFilters()" style="margin-bottom: 1rem;">🔍 Filter Options</button>
-<div id="filterPanel" style="display: none; border: 1px solid #ddd; padding: 1rem; border-radius: 12px; background: #fff;">
+
+<div id="filterPanel" class="collapsed">
+  <!-- All your filter groups (Category, Vibe, etc.) go inside here -->
 
 
 <h3>Filter by Category</h3>
@@ -269,18 +285,15 @@ import venues from '../data/venues.json';
         </button>
       ))}
     </div>
-
-
-
 </div>
 
 <script>
-  function toggleFilters() {
-    const panel = document.getElementById("filterPanel");
-    panel.style.display = panel.style.display === "none" ? "block" : "none";
-  }
+function toggleFilters() {
+  const panel = document.getElementById("filterPanel");
+  panel.classList.toggle("expanded");
+  panel.classList.toggle("collapsed");
+}
 </script>
-
 
 
     <div class="card-grid" id="venueList">
