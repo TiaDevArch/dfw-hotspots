@@ -216,7 +216,7 @@ import venues from '../data/venues.json';
 
 
 <!-- Filter Panel -->
-<div id="filterPanel" style="display: none; border: 1px solid #ddd; padding: 1rem; border-radius: 12px; background: #fff;" class="collapsed">>
+<div id="filterPanel" style="display: none; border: 1px solid #ddd; padding: 1rem; border-radius: 12px; background: #fff;" class="collapsed">
   <!-- Filter Groups -->
 
 
@@ -262,13 +262,6 @@ import venues from '../data/venues.json';
     ))}
     </div>
 
-    <!-- 🕒 When to Go Filters -->
-  <div id="whenFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-    {["Brunch", "Happy Hour", "Late Night", "Weekend", "Daytime", "Evening"].map((tag) => (
-      <button class="when-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
-        {tag}
-      </button>
-    ))}
   </div>
 </div>
 
@@ -311,9 +304,9 @@ import venues from '../data/venues.json';
             <strong>Category:</strong> {venue.Category}
           </p>
 
- {venue["When to Go"]?.trim() && (
-  <p class="when-to-go"><strong>When to Go:</strong> {venue["When to Go"]}</p>
-)}
+<p style="font-size: 0.9rem; color: #666;">
+  🕒 When to Go reflects lit nights or special events. If blank, no specific times are known.
+</p>
 
           <p class="cost">💰 Cost: {venue.Cost}</p>
           <div class="links">
@@ -334,13 +327,11 @@ import venues from '../data/venues.json';
   const vibeButtons = document.querySelectorAll(".vibe-btn");
   const audienceButtons = document.querySelectorAll(".audience-btn");
   const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
-  const whenButtons = document.querySelectorAll(".when-btn");
 
   let selectedCategories = [];
   let selectedVibes = [];
   let selectedAudience = [];
   let selectedAtmosphere = [];
-  let selectedWhen = [];
 
   function filterCards() {
     const searchQuery = searchInput.value.toLowerCase();
@@ -358,7 +349,6 @@ import venues from '../data/venues.json';
       const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
       const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
       const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
-      const matchesWhen = selectedWhen.length === 0 || selectedWhen.some(tag => when.includes(tag.toLowerCase()));
 
       const showCard = matchesSearch && matchesCategory && matchesVibes && matchesAudience && matchesAtmosphere && matchesWhen;
       card.style.display = showCard ? "block" : "none";
@@ -393,7 +383,6 @@ import venues from '../data/venues.json';
   setupButtonFilters(vibeButtons, selectedVibes);
   setupButtonFilters(audienceButtons, selectedAudience);
   setupButtonFilters(atmosphereButtons, selectedAtmosphere);
-  setupButtonFilters(whenButtons, selectedWhen);
 </script>
 
 
