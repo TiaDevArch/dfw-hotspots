@@ -66,12 +66,17 @@ import venues from '../data/venues.json';
     font-size: 0.9rem;
   }
 
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.card-grid-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
 
   .card {
     background: white;
@@ -172,6 +177,7 @@ import venues from '../data/venues.json';
 </style>
   </head>
   <body>
+<img src="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png">
     <h1>DFW Hotspots</h1>
 
     <input
@@ -180,16 +186,6 @@ import venues from '../data/venues.json';
       placeholder="Search venues, cities, categories..."
       style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"
     />
-
-
-
-
-
-
-
-
-
-<img src="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png">
 
 
     <h3>Filters</h3>
