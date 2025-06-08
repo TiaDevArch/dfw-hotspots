@@ -301,8 +301,9 @@ font-family: Bebas Neue, serif;
   padding: 1rem;
 }
 
-#filterPanel.expanded {
+#filterPanel.collapsed {
   max-height: 2000px; /* large enough to fit all filter buttons */
+  overflow: hidden;
   padding: 1rem;
 }
 
@@ -345,7 +346,7 @@ font-family: Bebas Neue, serif;
 
 
 <!-- Filter Panel -->
-<div id="filterPanel">
+<div id="filterPanel" class="collapsed">
   <!-- Filter Groups -->
 
 
@@ -549,7 +550,7 @@ font-family: Bebas Neue, serif;
 
 toggleBtn.addEventListener("click", () => {
   filterPanel.classList.toggle("open");
-
+  filterPanel.classList.toggle("collapsed");
   toggleBtn.textContent = filterPanel.classList.contains("open")
     ? "❌ Close Filters"
     : "🔍 Show Filters";
