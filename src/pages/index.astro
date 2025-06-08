@@ -61,6 +61,7 @@ import venues from '../data/venues.json';
       placeholder="Search venues, cities, categories..."
       style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"
     />
+
 <h3>Filter by Category</h3>
 <!-- 🔖 Category Filters -->
 <div id="categoryFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
@@ -164,74 +165,78 @@ import venues from '../data/venues.json';
       ))}
     </div>
 
-    <script type="module">
-      const searchInput = document.getElementById("searchInput");
-      const cards = document.querySelectorAll(".card");
 
-      const categoryButtons = document.querySelectorAll(".category-btn");
-      const vibeButtons = document.querySelectorAll(".vibe-btn");
-      const audienceButtons = document.querySelectorAll(".audience-btn");
-      const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
-      const whenButtons = document.querySelectorAll(".when-btn");
+<script type="module">
+  const searchInput = document.getElementById("searchInput");
+  const cards = document.querySelectorAll(".card");
 
-      let selectedCategories = [];
-      let selectedVibes = [];
-      let selectedAudience = [];
-      let selectedAtmosphere = [];
-      let selectedWhen = [];
+  const categoryButtons = document.querySelectorAll(".category-btn");
+  const vibeButtons = document.querySelectorAll(".vibe-btn");
+  const audienceButtons = document.querySelectorAll(".audience-btn");
+  const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
+  const whenButtons = document.querySelectorAll(".when-btn");
 
-      function filterCards() {
-        const searchQuery = searchInput.value.toLowerCase();
+  let selectedCategories = [];
+  let selectedVibes = [];
+  let selectedAudience = [];
+  let selectedAtmosphere = [];
+  let selectedWhen = [];
 
-        cards.forEach((card) => {
-          const text = card.textContent.toLowerCase();
-          const vibes = card.dataset.vibes;
-          const audience = card.dataset.audience;
-          const atmosphere = card.dataset.atmosphere;
-          const when = card.dataset.when;
+  function filterCards() {
+    const searchQuery = searchInput.value.toLowerCase();
 
-          const matchesSearch = text.includes(searchQuery);
-          const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
-          const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
-          const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
-          const matchesWhen = selectedWhen.length === 0 || selectedWhen.some(tag => when.includes(tag.toLowerCase()));
+    cards.forEach((card) => {
+      const text = card.textContent.toLowerCase();
+      const category = card.dataset.category;
+      const vibes = card.dataset.vibes;
+      const audience = card.dataset.audience;
+      const atmosphere = card.dataset.atmosphere;
+      const when = card.dataset.when;
 
-const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
-const showCard = matchesSearch && matchesVibes && matchesAudience && matchesAtmosphere && matchesWhen && matchesCategory;
-          card.style.display = showCard ? "block" : "none";
-        });
-      }
+      const matchesSearch = text.includes(searchQuery);
+      const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
+      const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
+      const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
+      const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
+      const matchesWhen = selectedWhen.length === 0 || selectedWhen.some(tag => when.includes(tag.toLowerCase()));
 
-      function setupButtonFilters(buttons, selectedArray) {
-        buttons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const tag = btn.dataset.tag;
-            const index = selectedArray.indexOf(tag);
+      const showCard = matchesSearch && matchesCategory && matchesVibes && matchesAudience && matchesAtmosphere && matchesWhen;
+      card.style.display = showCard ? "block" : "none";
+    });
+  }
 
-            if (index > -1) {
-              selectedArray.splice(index, 1);
-              btn.style.background = "#eee";
-              btn.style.color = "#000";
-              btn.style.borderColor = "#ccc";
-            } else {
-              selectedArray.push(tag);
-              btn.style.background = "#333";
-              btn.style.color = "#fff";
-              btn.style.borderColor = "#333";
-            }
+  function setupButtonFilters(buttons, selectedArray) {
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tag = btn.dataset.tag;
+        const index = selectedArray.indexOf(tag);
 
-            filterCards();
-          });
-        });
-      }
+        if (index > -1) {
+          selectedArray.splice(index, 1);
+          btn.style.background = "#eee";
+          btn.style.color = "#000";
+          btn.style.borderColor = "#ccc";
+        } else {
+          selectedArray.push(tag);
+          btn.style.background = "#333";
+          btn.style.color = "#fff";
+          btn.style.borderColor = "#333";
+        }
 
-      searchInput.addEventListener("input", filterCards);
-      setupButtonFilters(categoryButtons, selectedCategories);
-      setupButtonFilters(vibeButtons, selectedVibes);
-      setupButtonFilters(audienceButtons, selectedAudience);
-      setupButtonFilters(atmosphereButtons, selectedAtmosphere);
-      setupButtonFilters(whenButtons, selectedWhen);
-    </script>
+        filterCards();
+      });
+    });
+  }
+
+  searchInput.addEventListener("input", filterCards);
+  setupButtonFilters(categoryButtons, selectedCategories);
+  setupButtonFilters(vibeButtons, selectedVibes);
+  setupButtonFilters(audienceButtons, selectedAudience);
+  setupButtonFilters(atmosphereButtons, selectedAtmosphere);
+  setupButtonFilters(whenButtons, selectedWhen);
+</script>
+
+
 
 <!-- ✍️ Suggest an Edit + Submit a Venue Buttons -->
 <div style="margin-top: 3rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
