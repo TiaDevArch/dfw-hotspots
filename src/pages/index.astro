@@ -30,10 +30,32 @@ import venues from '../data/venues.json';
     margin: 0;
   }
 
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.header img {
+  max-width: 150px; /* or whatever size works best */
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
   h1 {
     text-align: center;
     color: #333;
     margin-bottom: 1rem;
+font-family: Bebas Neue, serif;
   }
 
   input[type="text"] {
@@ -65,6 +87,16 @@ import venues from '../data/venues.json';
     cursor: pointer;
     font-size: 0.9rem;
   }
+
+.toggle-button {
+  margin-bottom: 1rem;
+  background-color: #eee;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
 .card-grid {
   display: grid;
@@ -178,6 +210,20 @@ import venues from '../data/venues.json';
   color: #555;
   margin-top: 0.5rem;
 }
+
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  #filters {
+    justify-content: flex-start;
+  }
+}
 #filterPanel {
   max-height: 0;
   overflow: hidden;
@@ -188,18 +234,34 @@ import venues from '../data/venues.json';
   background: #fff;
 }
 
+#filterPanel.open {
+  max-height: 800px; /* Adjust based on your content */
+  padding: 1rem;
+}
+
 #filterPanel.expanded {
   max-height: 2000px; /* large enough to fit all filter buttons */
   padding: 1rem;
 }
 
-  }
+.clear-button {
+  background-color: #999;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+}
 </style>
   </head>
   <body>
-<img src="/public/Logo-DFWHotspots-s.png">
-    <h1>DFW Hotspots</h1>
-
+<div class="header">
+  <img src="/public/Logo-DFWHotspots-s.png" alt="DFW Hotspots Logo" />
+  <h1>DFW Hotspots</h1>
+</div>
     <input
       type="text"
       id="searchInput"
@@ -212,7 +274,12 @@ import venues from '../data/venues.json';
 <button id="toggleFilterBtn" style="margin-bottom: 1rem;">
   🔍 Show Filters
 </button>
-
+<button id="clearFiltersBtn" class="clear-button">
+  Clear All Filters
+</button>
+<p style="font-size: 0.9rem; color: #666;">
+  Note: 🕒 When to Go reflects lit nights or special events. If blank, no specific times are known.
+</p>
 
 
 <!-- Filter Panel -->
@@ -261,30 +328,10 @@ import venues from '../data/venues.json';
       </button>
     ))}
     </div>
-
   </div>
-</div>
 
 
-<!-- 🔁 Toggle Filter Panel Script -->
-<script>
-  function toggleFilters() {
-    const panel = document.getElementById("filterPanel");
-    const btn = document.getElementById("toggleFilterBtn");
-
-    if (panel.style.display === "none") {
-      panel.style.display = "block";
-      btn.textContent = "❌ Close Filters";
-    } else {
-      panel.style.display = "none";
-      btn.textContent = "🔍 Show Filters";
-    }
-  }
-
-  document.getElementById("toggleFilterBtn").addEventListener("click", toggleFilters);
-</script>
-
-
+<!-- Card Grid -->
     <div class="card-grid" id="venueList">
       {venues.map((venue, index) => (
         <div
@@ -303,11 +350,6 @@ import venues from '../data/venues.json';
             <strong>Area:</strong> {venue.Area ?? ''}<br />
             <strong>Category:</strong> {venue.Category}
           </p>
-
-<p style="font-size: 0.9rem; color: #666;">
-  🕒 When to Go reflects lit nights or special events. If blank, no specific times are known.
-</p>
-
           <p class="cost">💰 Cost: {venue.Cost}</p>
           <div class="links">
             {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
@@ -316,74 +358,6 @@ import venues from '../data/venues.json';
         </div>
       ))}
     </div>
-
-
-
-<script type="module">
-  const searchInput = document.getElementById("searchInput");
-  const cards = document.querySelectorAll(".card");
-
-  const categoryButtons = document.querySelectorAll(".category-btn");
-  const vibeButtons = document.querySelectorAll(".vibe-btn");
-  const audienceButtons = document.querySelectorAll(".audience-btn");
-  const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
-
-  let selectedCategories = [];
-  let selectedVibes = [];
-  let selectedAudience = [];
-  let selectedAtmosphere = [];
-
-  function filterCards() {
-    const searchQuery = searchInput.value.toLowerCase();
-
-    cards.forEach((card) => {
-      const text = card.textContent.toLowerCase();
-      const category = card.dataset.category;
-      const vibes = card.dataset.vibes;
-      const audience = card.dataset.audience;
-      const atmosphere = card.dataset.atmosphere;
-      const when = card.dataset.whentogo;
-
-      const matchesSearch = text.includes(searchQuery);
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
-      const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
-      const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
-      const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
-
-      const showCard = matchesSearch && matchesCategory && matchesVibes && matchesAudience && matchesAtmosphere && matchesWhen;
-      card.style.display = showCard ? "block" : "none";
-    });
-  }
-
-  function setupButtonFilters(buttons, selectedArray) {
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const tag = btn.dataset.tag;
-        const index = selectedArray.indexOf(tag);
-
-        if (index > -1) {
-          selectedArray.splice(index, 1);
-          btn.style.background = "#eee";
-          btn.style.color = "#000";
-          btn.style.borderColor = "#ccc";
-        } else {
-          selectedArray.push(tag);
-          btn.style.background = "#333";
-          btn.style.color = "#fff";
-          btn.style.borderColor = "#333";
-        }
-
-        filterCards();
-      });
-    });
-  }
-
-  searchInput.addEventListener("input", filterCards);
-  setupButtonFilters(categoryButtons, selectedCategories);
-  setupButtonFilters(vibeButtons, selectedVibes);
-  setupButtonFilters(audienceButtons, selectedAudience);
-  setupButtonFilters(atmosphereButtons, selectedAtmosphere);
-</script>
 
 
 <!-- ✍️ Suggest an Edit + Submit a Venue Buttons -->
@@ -433,11 +407,108 @@ import venues from '../data/venues.json';
 
 
 
+<!-- ✅ Filter, Toggle, and Clear Script -->
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll(".card");
+
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    const vibeButtons = document.querySelectorAll(".vibe-btn");
+    const audienceButtons = document.querySelectorAll(".audience-btn");
+    const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
+
+    const toggleBtn = document.getElementById("toggleFilterBtn");
+    const filterPanel = document.getElementById("filterPanel");
+    const clearBtn = document.getElementById("clearFiltersBtn");
+
+    let selectedCategories = [];
+    let selectedVibes = [];
+    let selectedAudience = [];
+    let selectedAtmosphere = [];
+
+    function filterCards() {
+      const searchQuery = searchInput.value.toLowerCase();
+
+      cards.forEach((card) => {
+        const text = card.textContent.toLowerCase();
+        const category = (card.dataset.category || "");
+        const vibes = (card.dataset.vibes || "");
+        const audience = (card.dataset.audience || "");
+        const atmosphere = (card.dataset.atmosphere || "");
+
+        const matchesSearch = text.includes(searchQuery);
+        const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
+        const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
+        const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
+        const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
+
+        const showCard = matchesSearch && matchesCategory && matchesVibes && matchesAudience && matchesAtmosphere;
+        card.style.display = showCard ? "block" : "none";
+      });
+    }
+
+    function setupButtonFilters(buttons, selectedArray) {
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const tag = btn.dataset.tag;
+          const index = selectedArray.indexOf(tag);
+
+          if (index > -1) {
+            selectedArray.splice(index, 1);
+            btn.style.background = "#eee";
+            btn.style.color = "#000";
+            btn.style.borderColor = "#ccc";
+          } else {
+            selectedArray.push(tag);
+            btn.style.background = "#333";
+            btn.style.color = "#fff";
+            btn.style.borderColor = "#333";
+          }
+
+          filterCards();
+        });
+      });
+    }
+
+    // Init
+    searchInput.addEventListener("input", filterCards);
+    setupButtonFilters(categoryButtons, selectedCategories);
+    setupButtonFilters(vibeButtons, selectedVibes);
+    setupButtonFilters(audienceButtons, selectedAudience);
+    setupButtonFilters(atmosphereButtons, selectedAtmosphere);
+
+    toggleBtn.addEventListener("click", () => {
+      filterPanel.style.display = filterPanel.style.display === "none" ? "block" : "none";
+      toggleBtn.textContent = filterPanel.style.display === "block" ? "❌ Close Filters" : "🔍 Show Filters";
+    });
+
+    clearBtn.addEventListener("click", () => {
+      selectedCategories = [];
+      selectedVibes = [];
+      selectedAudience = [];
+      selectedAtmosphere = [];
+
+      const allButtons = document.querySelectorAll(".category-btn, .vibe-btn, .audience-btn, .atmosphere-btn");
+      allButtons.forEach((btn) => {
+        btn.style.background = "#eee";
+        btn.style.color = "#000";
+        btn.style.borderColor = "#ccc";
+      });
+
+      searchInput.value = "";
+      filterCards();
+    });
+  });
+</script>
+
+
+<!-- Footer -->
     <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.9rem; color: #555;">
       <a href="https://tiaross.net/w/wp-content/uploads/TiaRossDev.png" target="_blank">
         <img src="https://tiaross.net/w/wp-content/uploads/TiaRossDev-rs.png" alt="Tia Ross" style="width: 50px; height: 50px; border-radius: 50%; margin-top: 0.5rem;" />
       </a><br />📍 DFW Hotspots: No more ‘I don’t know where to go’ nights.<br />
-      By Tia Ross – Explorer. Developer. Technocrat.
+      Made for Homebodies by Tia Ross – Explorer. Developer. Technocrat.
 Let’s connect: <a href="https://tiaross.com/links/" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: bold;">Explore My Links</a><br />
 DM me: <a href="https://t.me/MsTRoss">MsTRoss</a>
       <span style="font-style: italic;"></span>
