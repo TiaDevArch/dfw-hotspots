@@ -173,11 +173,17 @@ import venues from '../data/venues.json';
     input[type="text"] {
       font-size: 0.95rem;
     }
+.when-to-go {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
   }
 </style>
   </head>
   <body>
-<img src="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png">
+<img src="/public/Logo-DFWHotspots-s.png">
     <h1>DFW Hotspots</h1>
 
     <input
@@ -194,7 +200,7 @@ import venues from '../data/venues.json';
 
 
 <h3>Filter by Category</h3>
-<!-- 🔖 Category Filters -->
+<!-- 🔖 Category Filters -->s
 <div id="categoryFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
       {["Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival", "Foodie Event", "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up", "Mixed-Use", "Networking Mixer", "Nightlife/Lounge", "Outdoor Event", "Restaurant/Bar", "Rooftop Bar", "Sports Bar", "Speakeasy", "Theater/Spoken Word", "Wellness/Fitness"].map((tag) => (
         <button
@@ -296,9 +302,9 @@ import venues from '../data/venues.json';
             <strong>Category:</strong> {venue.Category}
           </p>
 
-          {venue["When to Go"] && (
-            <p class="when-to-go"><strong>When to Go:</strong> {venue["When to Go"]}</p>
-          )}
+ {venue["When to Go"]?.trim() && (
+  <p class="when-to-go"><strong>When to Go:</strong> {venue["When to Go"]}</p>
+)}
 
           <p class="cost">💰 Cost: {venue.Cost}</p>
           <div class="links">
