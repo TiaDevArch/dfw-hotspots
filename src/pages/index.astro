@@ -209,90 +209,86 @@ import venues from '../data/venues.json';
 
 
     <h3>Filters</h3>
-<button onclick="toggleFilters()" style="margin-bottom: 1rem;">🔍 Filter Options</button>
+<button id="toggleFilterBtn" style="margin-bottom: 1rem;">
+  🔍 Show Filters
+</button>
 
-<div id="filterPanel" class="collapsed">
-  <!-- All your filter groups (Category, Vibe, etc.) go inside here -->
+
+
+<!-- Filter Panel -->
+<div id="filterPanel" style="display: none; border: 1px solid #ddd; padding: 1rem; border-radius: 12px; background: #fff;" class="collapsed">>
+  <!-- Filter Groups -->
 
 
 <h3>Filter by Category</h3>
-<!-- 🔖 Category Filters -->s
-<div id="categoryFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {["Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival", "Foodie Event", "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up", "Mixed-Use", "Networking Mixer", "Nightlife/Lounge", "Outdoor Event", "Restaurant/Bar", "Rooftop Bar", "Sports Bar", "Speakeasy", "Theater/Spoken Word", "Wellness/Fitness"].map((tag) => (
-        <button
-          class="category-btn"
-          data-tag={tag}
-          style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;"
-        >
-          {tag}
-        </button>
-      ))}
+<!-- 🔖 Category Filters -->
+<div id="categoryFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+    {["Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival", "Foodie Event", "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up", "Mixed-Use", "Networking Mixer", "Nightlife/Lounge", "Outdoor Event", "Restaurant/Bar", "Rooftop Bar", "Sports Bar", "Speakeasy", "Theater/Spoken Word", "Wellness/Fitness"].map((tag) => (
+      <button class="category-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
+        {tag}
+      </button>
+    ))}
     </div>
 
 
 <h3>Filter by Vibe</h3>
     <!-- 🔖 Vibe Filters -->
-    <div id="vibeFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {["Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"].map((tag) => (
-        <button
-          class="vibe-btn"
-          data-tag={tag}
-          style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;"
-        >
-          {tag}
-        </button>
-      ))}
-    </div>
+<div id="vibeFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+    {["Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"].map((tag) => (
+      <button class="vibe-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
+        {tag}
+      </button>
+    ))}
+  </div>
 
 <h3>Filter by Audience</h3>
     <!-- 👥 Audience Filters -->
-    <div id="audienceFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {["Singles", "Couples", "Small Groups"].map((tag) => (
-        <button
-          class="audience-btn"
-          data-tag={tag}
-          style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;"
-        >
-          {tag}
-        </button>
-      ))}
-    </div>
+ <div id="audienceFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+    {["Singles", "Couples", "Small Groups"].map((tag) => (
+      <button class="audience-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
+        {tag}
+      </button>
+    ))}
+  </div>
 
 
 <h3>Filter by Atmosphere</h3>
     <!-- 🎵 Atmosphere Filters -->
-    <div id="atmosphereFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {["Dancing", "Game Night", "Comedy", "Hookah", "Live Band", "Live DJ", "Outdoors", "Patio", "Rooftop", "Karaoke"].map((tag) => (
-        <button
-          class="atmosphere-btn"
-          data-tag={tag}
-          style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;"
-        >
-          {tag}
-        </button>
-      ))}
+  <div id="atmosphereFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+    {["Dancing", "Game Night", "Comedy", "Hookah", "Live Band", "Live DJ", "Outdoors", "Patio", "Rooftop", "Karaoke"].map((tag) => (
+      <button class="atmosphere-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
+        {tag}
+      </button>
+    ))}
     </div>
 
     <!-- 🕒 When to Go Filters -->
-    <div id="whenFilters" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {["Brunch", "Happy Hour", "Late Night", "Weekend", "Daytime", "Evening"].map((tag) => (
-        <button
-          class="when-btn"
-          data-tag={tag}
-          style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;"
-        >
-          {tag}
-        </button>
-      ))}
-    </div>
+  <div id="whenFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+    {["Brunch", "Happy Hour", "Late Night", "Weekend", "Daytime", "Evening"].map((tag) => (
+      <button class="when-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
+        {tag}
+      </button>
+    ))}
+  </div>
 </div>
 
+
+<!-- 🔁 Toggle Filter Panel Script -->
 <script>
-function toggleFilters() {
-  const panel = document.getElementById("filterPanel");
-  panel.classList.toggle("expanded");
-  panel.classList.toggle("collapsed");
-}
+  function toggleFilters() {
+    const panel = document.getElementById("filterPanel");
+    const btn = document.getElementById("toggleFilterBtn");
+
+    if (panel.style.display === "none") {
+      panel.style.display = "block";
+      btn.textContent = "❌ Close Filters";
+    } else {
+      panel.style.display = "none";
+      btn.textContent = "🔍 Show Filters";
+    }
+  }
+
+  document.getElementById("toggleFilterBtn").addEventListener("click", toggleFilters);
 </script>
 
 
