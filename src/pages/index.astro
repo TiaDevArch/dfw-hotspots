@@ -20,8 +20,6 @@ import venues from '../data/venues.json';
   <meta property="og:type" content="website" />
 
 </head>
-
-    <title>DFW Hotspots</title>
  <style>
   body {
     font-family: Calibri, sans-serif;
@@ -46,7 +44,7 @@ import venues from '../data/venues.json';
 }
 
 .header h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   text-align: center;
 }
@@ -325,14 +323,18 @@ font-family: Bebas Neue, serif;
   <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Hotspots"/>
   <h1>DFW Hotspots</h1>
 </div>
+
     <input
       type="text"
       id="searchInput"
       placeholder="Search venues, cities, atmosphere, categories..."
       style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"
     />
+<p style="font-size: 0.9rem; color: #666;">
+  Enter location or part of town in the search field above to filter by area.  
+</p>
 
-
+<br>
     <h3>Filters</h3>
 <button id="toggleFilterBtn" style="margin-bottom: 1rem;">
   🔍 Show Filters
@@ -578,13 +580,15 @@ toggleBtn.addEventListener("click", () => {
 
 
 <!-- Footer -->
-    <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.9rem; color: #555;">
+
+
+    <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;">
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="tiaross" data-color="#BD5FFF" data-emoji="📖"  data-font="Bree" data-text="Buy me a book" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
       <a href="https://tiaross.net/w/wp-content/uploads/TiaRossDev.png" target="_blank">
         <img src="https://tiaross.net/w/wp-content/uploads/TiaRossDev-rs.png" alt="Tia Ross" style="width: 50px; height: 50px; border-radius: 50%; margin-top: 0.5rem;" />
       </a><br />📍 DFW Hotspots: No more ‘I don’t know where to go’ nights.<br />
-      Made for Homebodies by Tia Ross – Explorer. Developer. Technocrat.
 Let’s connect: <a href="https://tiaross.com/links/" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: bold;">Explore My Links</a><br />
-DM me: <a href="https://t.me/MsTRoss">MsTRoss</a>
+<a href="https://t.me/MsTRoss">&#xF5B3; DM me</a><br />
       <span style="font-style: italic;"></span>
     </footer>
   </body>
