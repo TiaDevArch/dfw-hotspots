@@ -18,271 +18,8 @@ import venues from '../data/venues.json';
   <meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png" />
   <meta property="og:url" content="https://dfwhotspots.netlify.app/" />
   <meta property="og:type" content="website" />
-
 </head>
-<style>
-  body {
-    font-family: Calibri, sans-serif;
-    padding: 2rem;
-    background: #f9f9f9;
-    margin: 0;
-  }
-
-  .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .header img {
-    max-width: 150px;
-    height: auto;
-    margin-bottom: 0.5rem;
-  }
-
-  .header h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  h1 {
-    text-align: center;
-    color: #333;
-    font-size: 22px;
-    margin-bottom: 1rem;
-    font-family: 'Bebas Neue', serif;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    margin: 1rem 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-  }
-
-  .filters h3,
-  .section-toggle {
-    margin-top: 2rem;
-    font-size: 1.1rem;
-    color: #444;
-    font-weight: bold;
-    cursor: pointer;
-      display: flex;
-  }
-
-.section-toggle .arrow {
-  margin-right: 8px;
-  font-size: 0.9em;
-  transition: transform 0.2s ease;
-}
-
-.section-toggle:hover {
-  color: #333;
-}
-  .filters div,
-  .filter-options.expanded {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .filters button,
-  .filter-options button {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    background: #eee;
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
-
-  .filter-options.collapsed {
-    display: none;
-  }
-
-  .toggle-button {
-    margin-bottom: 1rem;
-    background-color: #eee;
-    border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .clear-button {
-    background-color: #999;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 0;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
-
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .card-grid-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-
-  .card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .card h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.2rem;
-    color: #222;
-  }
-
-  .meta {
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  .cost {
-    font-weight: bold;
-    margin-top: 0.5rem;
-  }
-
-  .links a {
-    font-size: 0.85rem;
-    margin-right: 10px;
-    color: #0077cc;
-    text-decoration: none;
-  }
-
-  .cta-buttons {
-    margin-top: 3rem;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    text-align: center;
-  }
-
-  .cta-buttons a {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    background-color: #524776;
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    transition: background-color 0.3s ease;
-  }
-
-  .cta-buttons a:hover {
-    background-color: #3f3861;
-  }
-
-  footer {
-    margin-top: 4rem;
-    padding: 2rem 1rem;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #555;
-  }
-
-  footer img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-top: 0.5rem;
-  }
-
-  .when-to-go {
-    font-size: 0.9rem;
-    color: #555;
-    margin-top: 0.5rem;
-  }
-
-  #filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  @media (min-width: 640px) {
-    #filters {
-      justify-content: flex-start;
-    }
-  }
-
-  #filterPanel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
-    padding: 0 1rem;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    background: #fff;
-  }
-
-  #filterPanel.open {
-    max-height: 1200px;
-    padding: 1rem;
-  }
-
-  #filterPanel.collapsed {
-    max-height: 2000px;
-    overflow: hidden;
-    padding: 1rem;
-  }
-
-  @media screen and (max-width: 600px) {
-    .filters div,
-    .filter-options.expanded {
-      flex-direction: column;
-    }
-
-    .card-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .cta-buttons {
-      flex-direction: column;
-    }
-
-    .cta-buttons a {
-      width: 100%;
-      max-width: 300px;
-    }
-
-    input[type="text"] {
-      font-size: 0.95rem;
-    }
-  }
-
-.section-toggle .arrow {
-  margin-right: 0.5rem;
-}
-</style>
+<link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
   <script>
@@ -355,7 +92,7 @@ import venues from '../data/venues.json';
   <!-- Filter Groups -->
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('categoryOptions', this)">
-  <span class="arrow">▶</span> ▶ Filter by Category
+  <span class="arrow">▶</span> Filter by Category
 </h3>
   <div id="categoryOptions" class="filter-options collapsed">
     {[
@@ -374,7 +111,7 @@ import venues from '../data/venues.json';
 
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('vibeOptions', this)">
-  <span class="arrow">▶</span> ▶ Filter by Vibe
+  <span class="arrow">▶</span> Filter by Vibe
 </h3>
   <div id="vibeOptions" class="filter-options collapsed">
     {[
@@ -389,7 +126,7 @@ import venues from '../data/venues.json';
 
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('audienceOptions', this)">
-  <span class="arrow">▶</span> ▶ Filter by Audience
+  <span class="arrow">▶</span> Filter by Audience
 </h3>
   <div id="audienceOptions" class="filter-options collapsed">
     {["Singles", "Couples", "Small Groups"].map((tag) => (
@@ -402,7 +139,7 @@ import venues from '../data/venues.json';
 
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions', this)">
-  <span class="arrow">▶</span> ▶ Filter by Atmosphere
+  <span class="arrow">▶</span> Filter by Atmosphere
 </h3>
   <div id="atmosphereOptions" class="filter-options collapsed">
     {[
@@ -503,15 +240,18 @@ import venues from '../data/venues.json';
 <!-- ✅ Filter, Toggle, and Clear Script -->
 
 <script type="module">
-function toggleSection(sectionId) {
+function toggleSection(sectionId, toggleElement) {
   const section = document.getElementById(sectionId);
-  const toggle = section?.previousElementSibling;
+  if (!section) return;
 
-  if (section && toggle) {
-    const isCollapsed = section.classList.contains('collapsed');
-    section.classList.toggle('collapsed', !isCollapsed);
-    section.classList.toggle('expanded', isCollapsed);
-    toggle.innerHTML = `${isCollapsed ? "▼" : "▶"} ${toggle.textContent.slice(2)}`;
+  const isCollapsed = section.classList.contains('collapsed');
+  section.classList.toggle('collapsed', !isCollapsed);
+  section.classList.toggle('expanded', isCollapsed);
+
+  // Update arrow icon inside the clicked toggleElement
+  const arrow = toggleElement.querySelector('.arrow');
+  if (arrow) {
+    arrow.textContent = isCollapsed ? '▼' : '▶';
   }
 }
 
@@ -591,14 +331,6 @@ toggleBtn.addEventListener("click", () => {
     ? "❌ Close Filters"
     : "🔍 Show Filters";
 });
-
-<script>
-  function toggleSection(id) {
-    const section = document.getElementById(id);
-    section.classList.toggle("collapsed");
-    section.classList.toggle("expanded");
-  }
-</script>
 
 
     clearBtn.addEventListener("click", () => {
