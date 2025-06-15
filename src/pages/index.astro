@@ -7,16 +7,16 @@ import venues from '../data/venues.json';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DFW Hotspots | Best Places to Go Out in Dallas-Fort Worth</title>
+  <title>DFW Hotspots & Events | Best Places to Go Out in Dallas-Fort Worth</title>
   <meta name="description" content="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres." />
   <meta name="keywords" content="Dallas nightlife, DFW hotspots, brunch in Dallas, date spots DFW, live music Dallas, black-owned venues Dallas, chill bars Fort Worth, where to go out in DFW" />
   <meta name="author" content="Tia Ross" />
 
   <!-- Open Graph for social sharing -->
-  <meta property="og:title" content="DFW Hotspot Vibes" />
+  <meta property="og:title" content="DFW Hotspots & Events" />
   <meta property="og:description" content="Find your vibe in Dallas-Fort Worth — Brunch, date nights, happy hours, lounges, Black-owned gems and more." />
   <meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png" />
-  <meta property="og:url" content="https://dfw-hotspot-vibes.netlify.app/" />
+  <meta property="og:url" content="https://dfwhotspots.netlify.app/" />
   <meta property="og:type" content="website" />
 
 </head>
@@ -52,6 +52,7 @@ import venues from '../data/venues.json';
   h1 {
     text-align: center;
     color: #333;
+    font-size: 22px;
     margin-bottom: 1rem;
     font-family: 'Bebas Neue', serif;
   }
@@ -267,13 +268,18 @@ import venues from '../data/venues.json';
       font-size: 0.95rem;
     }
   }
+
+.section-toggle .arrow {
+  margin-right: 0.5rem;
+}
+
 </style>
 
   </head>
   <body>
 <div class="header">
   <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Hotspots"/>
-  <h1>DFW Hotspots & Events</h1>
+  <h1>DFW Hotspots & Special Events</h1>
 </div>
 
     <input
@@ -301,7 +307,9 @@ import venues from '../data/venues.json';
 <div id="filterPanel" class="collapsed">
   <!-- Filter Groups -->
 <div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('categoryOptions')">▶ Filter by Category</h3>
+  <h3 class="section-toggle" onclick="toggleSection('categoryOptions', this)">
+  <span class="arrow">▶</span> ▶ Filter by Category
+</h3>
   <div id="categoryOptions" class="filter-options collapsed">
     {[
       "Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival",
@@ -318,7 +326,9 @@ import venues from '../data/venues.json';
 </div>
 
 <div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('vibeOptions')">▶ Filter by Vibe</h3>
+  <h3 class="section-toggle" onclick="toggleSection('vibeOptions', this)">
+  <span class="arrow">▶</span> ▶ Filter by Vibe
+</h3>
   <div id="vibeOptions" class="filter-options collapsed">
     {[
       "Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"
@@ -331,7 +341,9 @@ import venues from '../data/venues.json';
 </div>
 
 <div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('audienceOptions')">▶ Filter by Audience</h3>
+  <h3 class="section-toggle" onclick="toggleSection('audienceOptions', this)">
+  <span class="arrow">▶</span> ▶ Filter by Audience
+</h3>
   <div id="audienceOptions" class="filter-options collapsed">
     {["Singles", "Couples", "Small Groups"].map((tag) => (
       <button class="audience-btn" data-tag={tag}>
@@ -342,7 +354,9 @@ import venues from '../data/venues.json';
 </div>
 
 <div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions')">▶ Filter by Atmosphere</h3>
+  <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions', this)">
+  <span class="arrow">▶</span> ▶ Filter by Atmosphere
+</h3>
   <div id="atmosphereOptions" class="filter-options collapsed">
     {[
       "Dancing", "Game Night", "Comedy", "Hookah", "Live Band",
