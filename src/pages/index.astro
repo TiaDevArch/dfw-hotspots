@@ -300,64 +300,61 @@ import venues from '../data/venues.json';
 <!-- Filter Panel -->
 <div id="filterPanel" class="collapsed">
   <!-- Filter Groups -->
-
 <div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('categoryFilters')">▶ Filter by Category</h3>
-  <div id="categoryFilters" class="filter-options collapsed">
-<!-- 🔖 Category Filters -->
-<div id="categoryFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-    {["Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival", "Foodie Event", "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up", "Mixed-Use", "Networking Mixer", "Nightlife/Lounge", "Outdoor Event", "Restaurant/Bar", "Rooftop Bar", "Sports Bar", "Speakeasy", "Theater/Spoken Word", "Wellness/Fitness"].map((tag) => (
-      <button class="category-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
-        {tag}
-      </button>
-    ))}
-    </div>
-  </div>
-</div>
-
-<div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('vibeFilters')">▶ Filter by Vibe</h3>
-  <div id="vibeFilters" class="filter-options collapsed">
-    <!-- 🔖 Vibe Filters -->
-<div id="vibeFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-    {["Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"].map((tag) => (
-      <button class="vibe-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
+  <h3 class="section-toggle" onclick="toggleSection('categoryOptions')">▶ Filter by Category</h3>
+  <div id="categoryOptions" class="filter-options collapsed">
+    {[
+      "Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival",
+      "Foodie Event", "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up",
+      "Mixed-Use", "Networking Mixer", "Nightlife/Lounge", "Outdoor Event",
+      "Restaurant/Bar", "Rooftop Bar", "Sports Bar", "Speakeasy",
+      "Theater/Spoken Word", "Wellness/Fitness"
+    ].map((tag) => (
+      <button class="category-btn" data-tag={tag}>
         {tag}
       </button>
     ))}
   </div>
- </div>
 </div>
 
 <div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('AudienceFilters')">▶ Filter by Audience</h3>
-  <div id="AudienceFilters" class="filter-options collapsed">
-    <!-- 👥 Audience Filters -->
- <div id="audienceFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+  <h3 class="section-toggle" onclick="toggleSection('vibeOptions')">▶ Filter by Vibe</h3>
+  <div id="vibeOptions" class="filter-options collapsed">
+    {[
+      "Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"
+    ].map((tag) => (
+      <button class="vibe-btn" data-tag={tag}>
+        {tag}
+      </button>
+    ))}
+  </div>
+</div>
+
+<div class="filter-section">
+  <h3 class="section-toggle" onclick="toggleSection('audienceOptions')">▶ Filter by Audience</h3>
+  <div id="audienceOptions" class="filter-options collapsed">
     {["Singles", "Couples", "Small Groups"].map((tag) => (
-      <button class="audience-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
+      <button class="audience-btn" data-tag={tag}>
         {tag}
       </button>
     ))}
   </div>
-  </div>
 </div>
-
 
 <div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('atmosphereFilters')">▶ Filter by Atmosphere</h3>
-  <div id="atmosphereFilters" class="filter-options collapsed">
-    <!-- 🎵 Atmosphere Filters -->
-  <div id="atmosphereFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-    {["Dancing", "Game Night", "Comedy", "Hookah", "Live Band", "Live DJ", "Outdoors", "Patio", "Rooftop", "Karaoke"].map((tag) => (
-      <button class="atmosphere-btn" data-tag={tag} style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #ccc; background: #eee; cursor: pointer;">
+  <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions')">▶ Filter by Atmosphere</h3>
+  <div id="atmosphereOptions" class="filter-options collapsed">
+    {[
+      "Dancing", "Game Night", "Comedy", "Hookah", "Live Band",
+      "Live DJ", "Outdoors", "Patio", "Rooftop", "Karaoke"
+    ].map((tag) => (
+      <button class="atmosphere-btn" data-tag={tag}>
         {tag}
       </button>
     ))}
-    </div>
-  </div>
   </div>
 </div>
+
 
 <!-- Card Grid -->
     <div class="card-grid" id="venueList">
