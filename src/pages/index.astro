@@ -20,7 +20,7 @@ import venues from '../data/venues.json';
   <meta property="og:type" content="website" />
 
 </head>
- <style>
+<style>
   body {
     font-family: Calibri, sans-serif;
     padding: 2rem;
@@ -28,32 +28,32 @@ import venues from '../data/venues.json';
     margin: 0;
   }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 
-.header img {
-  max-width: 150px; /* or whatever size works best */
-  height: auto;
-  margin-bottom: 0.5rem;
-}
+  .header img {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
 
-.header h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-}
+  .header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+  }
 
   h1 {
     text-align: center;
     color: #333;
     margin-bottom: 1rem;
-font-family: Bebas Neue, serif;
+    font-family: 'Bebas Neue', serif;
   }
 
   input[type="text"] {
@@ -65,19 +65,24 @@ font-family: Bebas Neue, serif;
     border: 1px solid #ccc;
   }
 
-  .filters h3 {
+  .filters h3,
+  .section-toggle {
     margin-top: 2rem;
     font-size: 1.1rem;
     color: #444;
+    font-weight: bold;
+    cursor: pointer;
   }
 
-  .filters div {
+  .filters div,
+  .filter-options.expanded {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
 
-  .filters button {
+  .filters button,
+  .filter-options button {
     padding: 0.5rem 1rem;
     border-radius: 20px;
     border: 1px solid #ccc;
@@ -86,27 +91,43 @@ font-family: Bebas Neue, serif;
     font-size: 0.9rem;
   }
 
-.toggle-button {
-  margin-bottom: 1rem;
-  background-color: #eee;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
+  .filter-options.collapsed {
+    display: none;
+  }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-.card-grid-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
+  .toggle-button {
+    margin-bottom: 1rem;
+    background-color: #eee;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .clear-button {
+    background-color: #999;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .card-grid-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
 
   .card {
     background: white;
@@ -182,141 +203,72 @@ font-family: Bebas Neue, serif;
     margin-top: 0.5rem;
   }
 
- @media screen and (max-width: 600px) {
-  .filters div {
-    flex-direction: column;
+  .when-to-go {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 0.5rem;
   }
 
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-  }
-
-  .cta-buttons a {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  input[type="text"] {
-    font-size: 0.95rem;
-  }
-}
-
-/* These should be OUTSIDE the media query */
-.when-to-go {
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 0.5rem;
-}
-
-#filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-@media (min-width: 640px) {
   #filters {
-    justify-content: flex-start;
-  }
-}
-
-#filterPanel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
-  padding: 0 1rem;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #fff;
-}
-
-#filterPanel.open {
-  max-height: 1200px;
-  padding: 1rem;
-}@media screen and (max-width: 600px) {
-  .filters div {
-    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
   }
 
-  .card-grid {
-    grid-template-columns: 1fr;
+  @media (min-width: 640px) {
+    #filters {
+      justify-content: flex-start;
+    }
   }
 
-  .cta-buttons {
-    flex-direction: column;
+  #filterPanel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 1rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #fff;
   }
 
-  .cta-buttons a {
-    width: 100%;
-    max-width: 300px;
+  #filterPanel.open {
+    max-height: 1200px;
+    padding: 1rem;
   }
 
-  input[type="text"] {
-    font-size: 0.95rem;
+  #filterPanel.collapsed {
+    max-height: 2000px;
+    overflow: hidden;
+    padding: 1rem;
   }
-}
 
-/* These should be OUTSIDE the media query */
-.when-to-go {
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 0.5rem;
-}
+  @media screen and (max-width: 600px) {
+    .filters div,
+    .filter-options.expanded {
+      flex-direction: column;
+    }
 
-#filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
 
-@media (min-width: 640px) {
-  #filters {
-    justify-content: flex-start;
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .cta-buttons a {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    input[type="text"] {
+      font-size: 0.95rem;
+    }
   }
-}
-
-#filterPanel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
-  padding: 0 1rem;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #fff;
-}
-
-/* When toggled open */
-#filterPanel.open {
-  max-height: 1200px; /* big enough to show all content */
-  padding: 1rem;
-}
-
-#filterPanel.collapsed {
-  max-height: 2000px; /* large enough to fit all filter buttons */
-  overflow: hidden;
-  padding: 1rem;
-}
-
-.clear-button {
-  background-color: #999;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem 0;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-}
 </style>
+
   </head>
   <body>
 <div class="header">
@@ -349,8 +301,9 @@ font-family: Bebas Neue, serif;
 <div id="filterPanel" class="collapsed">
   <!-- Filter Groups -->
 
-
-<h3>Filter by Category</h3>
+<div class="filter-section">
+  <h3 class="section-toggle" onclick="toggleSection('categoryFilters')">▶ Filter by Category</h3>
+  <div id="categoryFilters" class="filter-options collapsed">
 <!-- 🔖 Category Filters -->
 <div id="categoryFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
     {["Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival", "Foodie Event", "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up", "Mixed-Use", "Networking Mixer", "Nightlife/Lounge", "Outdoor Event", "Restaurant/Bar", "Rooftop Bar", "Sports Bar", "Speakeasy", "Theater/Spoken Word", "Wellness/Fitness"].map((tag) => (
@@ -359,9 +312,12 @@ font-family: Bebas Neue, serif;
       </button>
     ))}
     </div>
+  </div>
+</div>
 
-
-<h3>Filter by Vibe</h3>
+<div class="filter-section">
+  <h3 class="section-toggle" onclick="toggleSection('vibeFilters')">▶ Filter by Vibe</h3>
+  <div id="vibeFilters" class="filter-options collapsed">
     <!-- 🔖 Vibe Filters -->
 <div id="vibeFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
     {["Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"].map((tag) => (
@@ -370,8 +326,12 @@ font-family: Bebas Neue, serif;
       </button>
     ))}
   </div>
+ </div>
+</div>
 
-<h3>Filter by Audience</h3>
+<div class="filter-section">
+  <h3 class="section-toggle" onclick="toggleSection('AudienceFilters')">▶ Filter by Audience</h3>
+  <div id="AudienceFilters" class="filter-options collapsed">
     <!-- 👥 Audience Filters -->
  <div id="audienceFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
     {["Singles", "Couples", "Small Groups"].map((tag) => (
@@ -380,9 +340,13 @@ font-family: Bebas Neue, serif;
       </button>
     ))}
   </div>
+  </div>
+</div>
 
 
-<h3>Filter by Atmosphere</h3>
+<div class="filter-section">
+  <h3 class="section-toggle" onclick="toggleSection('atmosphereFilters')">▶ Filter by Atmosphere</h3>
+  <div id="atmosphereFilters" class="filter-options collapsed">
     <!-- 🎵 Atmosphere Filters -->
   <div id="atmosphereFilters" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
     {["Dancing", "Game Night", "Comedy", "Hookah", "Live Band", "Live DJ", "Outdoors", "Patio", "Rooftop", "Karaoke"].map((tag) => (
@@ -392,7 +356,8 @@ font-family: Bebas Neue, serif;
     ))}
     </div>
   </div>
-
+  </div>
+</div>
 
 <!-- Card Grid -->
     <div class="card-grid" id="venueList">
@@ -574,6 +539,20 @@ toggleBtn.addEventListener("click", () => {
       filterCards();
     });
   });
+</script>
+
+
+<script>
+  function toggleSection(id) {
+    const section = document.getElementById(id);
+    if (section.classList.contains("collapsed")) {
+      section.classList.remove("collapsed");
+      section.classList.add("expanded");
+    } else {
+      section.classList.remove("expanded");
+      section.classList.add("collapsed");
+    }
+  }
 </script>
 
 
