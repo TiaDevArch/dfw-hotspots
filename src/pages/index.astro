@@ -43,18 +43,18 @@ import venues from '../data/venues.json';
 
   // Toggle section function
   function toggleSection(sectionId, toggleElement) {
-    const section = document.getElementById(sectionId);
-    if (!section) return;
-    
-    const isCollapsing = !section.classList.contains('collapsed');
-    section.classList.toggle('collapsed', !isCollapsing);
-    section.classList.toggle('expanded', isCollapsing);
-    
-    // Update the arrow icon
-    const arrow = toggleElement.querySelector('.arrow');
-    if (arrow) {
-      arrow.textContent = isCollapsing ? '▶' : '▼';
-    }
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const isCollapsed = section.classList.contains('collapsed');
+  section.classList.toggle('collapsed', !isCollapsed);
+  section.classList.toggle('expanded', isCollapsed);
+
+  const arrow = toggleElement.querySelector('.arrow');
+  if (arrow) {
+    arrow.textContent = isCollapsed ? '▼' : '▶';
+  }
+}
   }
 </script>
 
@@ -92,7 +92,7 @@ import venues from '../data/venues.json';
   <!-- Filter Groups -->
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('categoryOptions', this)">
-  <span class="arrow">▶</span> Filter by Category
+  <span class=\"arrow\">▶</span> Filter by Category
 </h3>
   <div id="categoryOptions" class="filter-options collapsed">
     {[
@@ -111,7 +111,7 @@ import venues from '../data/venues.json';
 
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('vibeOptions', this)">
-  <span class="arrow">▶</span> Filter by Vibe
+  <span class=\"arrow\">▶</span> Filter by Vibe
 </h3>
   <div id="vibeOptions" class="filter-options collapsed">
     {[
@@ -126,7 +126,7 @@ import venues from '../data/venues.json';
 
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('audienceOptions', this)">
-  <span class="arrow">▶</span> Filter by Audience
+  <span class=\"arrow\">▶</span> Filter by Audience
 </h3>
   <div id="audienceOptions" class="filter-options collapsed">
     {["Singles", "Couples", "Small Groups"].map((tag) => (
@@ -139,7 +139,7 @@ import venues from '../data/venues.json';
 
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions', this)">
-  <span class="arrow">▶</span> Filter by Atmosphere
+  <span class=\"arrow\">▶</span> Filter by Atmosphere
 </h3>
   <div id="atmosphereOptions" class="filter-options collapsed">
     {[
@@ -248,10 +248,11 @@ function toggleSection(sectionId, toggleElement) {
   section.classList.toggle('collapsed', !isCollapsed);
   section.classList.toggle('expanded', isCollapsed);
 
-  // Update arrow icon inside the clicked toggleElement
   const arrow = toggleElement.querySelector('.arrow');
   if (arrow) {
     arrow.textContent = isCollapsed ? '▼' : '▶';
+  }
+} ${toggle.textContent.slice(2)}`;
   }
 }
 
@@ -333,6 +334,8 @@ toggleBtn.addEventListener("click", () => {
 });
 
 
+
+
     clearBtn.addEventListener("click", () => {
       selectedCategories = [];
       selectedVibes = [];
@@ -354,12 +357,19 @@ toggleBtn.addEventListener("click", () => {
 
 
 <script>
-  function toggleSection(id) {
-    const section = document.getElementById(id);
-    if (section.classList.contains("collapsed")) {
-      section.classList.remove("collapsed");
-      section.classList.add("expanded");
-    } else {
+  function toggleSection(sectionId, toggleElement) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const isCollapsed = section.classList.contains('collapsed');
+  section.classList.toggle('collapsed', !isCollapsed);
+  section.classList.toggle('expanded', isCollapsed);
+
+  const arrow = toggleElement.querySelector('.arrow');
+  if (arrow) {
+    arrow.textContent = isCollapsed ? '▼' : '▶';
+  }
+} else {
       section.classList.remove("expanded");
       section.classList.add("collapsed");
     }
