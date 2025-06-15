@@ -275,6 +275,34 @@ import venues from '../data/venues.json';
 </style>
   </head>
   <body>
+  <script>
+  // Collapse all filter sections on page load
+  document.addEventListener("DOMContentLoaded", function() {
+    const filterSections = ['categoryOptions', 'vibeOptions', 'audienceOptions', 'atmosphereOptions'];
+    filterSections.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.classList.add('collapsed');
+        section.classList.remove('expanded');
+      }
+    });
+  });
+
+  function toggleSection(sectionId, element) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const isCollapsed = section.classList.contains('collapsed');
+      section.classList.toggle('collapsed', !isCollapsed);
+      section.classList.toggle('expanded', isCollapsed);
+      
+      // Update the arrow icon
+      const arrow = element.querySelector('.arrow');
+      if (arrow) {
+        arrow.textContent = isCollapsed ? '▼' : '▶';
+      }
+    }
+  }
+</script>
 <div class="header">
   <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Hotspots"/>
   <h1>DFW Hotspots & Special Events</h1>
