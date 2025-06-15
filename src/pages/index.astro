@@ -73,8 +73,18 @@ import venues from '../data/venues.json';
     color: #444;
     font-weight: bold;
     cursor: pointer;
+      display: flex;
   }
 
+.section-toggle .arrow {
+  margin-right: 8px;
+  font-size: 0.9em;
+  transition: transform 0.2s ease;
+}
+
+.section-toggle:hover {
+  color: #333;
+}
   .filters div,
   .filter-options.expanded {
     display: flex;
@@ -276,10 +286,16 @@ import venues from '../data/venues.json';
   </head>
   <body>
   <script>
-  // Collapse all filter sections on page load
-  document.addEventListener("DOMContentLoaded", function() {
-    const filterSections = ['categoryOptions', 'vibeOptions', 'audienceOptions', 'atmosphereOptions'];
-    filterSections.forEach(sectionId => {
+  // Initialize all sections as collapsed on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const sections = [
+      'categoryOptions',
+      'vibeOptions', 
+      'audienceOptions',
+      'atmosphereOptions'
+    ];
+    
+    sections.forEach(sectionId => {
       const section = document.getElementById(sectionId);
       if (section) {
         section.classList.add('collapsed');
@@ -288,21 +304,23 @@ import venues from '../data/venues.json';
     });
   });
 
-  function toggleSection(sectionId, element) {
+  // Toggle section function
+  function toggleSection(sectionId, toggleElement) {
     const section = document.getElementById(sectionId);
-    if (section) {
-      const isCollapsed = section.classList.contains('collapsed');
-      section.classList.toggle('collapsed', !isCollapsed);
-      section.classList.toggle('expanded', isCollapsed);
-      
-      // Update the arrow icon
-      const arrow = element.querySelector('.arrow');
-      if (arrow) {
-        arrow.textContent = isCollapsed ? '▼' : '▶';
-      }
+    if (!section) return;
+    
+    const isCollapsing = !section.classList.contains('collapsed');
+    section.classList.toggle('collapsed', !isCollapsing);
+    section.classList.toggle('expanded', isCollapsing);
+    
+    // Update the arrow icon
+    const arrow = toggleElement.querySelector('.arrow');
+    if (arrow) {
+      arrow.textContent = isCollapsing ? '▶' : '▼';
     }
   }
 </script>
+
 <div class="header">
   <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Hotspots"/>
   <h1>DFW Hotspots & Special Events</h1>
@@ -315,6 +333,9 @@ import venues from '../data/venues.json';
       style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"
     />
 
+
+
+<!-- FILTERS -->
     <h3>Filters</h3>
 <button id="toggleFilterBtn" style="margin-bottom: 1rem;">
   🔍 Show Filters
@@ -323,8 +344,8 @@ import venues from '../data/venues.json';
   Clear All Filters
 </button>
 <p style="font-size: 0.8rem; color: #666;">
-<b>Search by Location</b>: Enter location/part of town in the search field above to filter by area.<br />
-<b>Multi-search</b>: Enter <em>any</em> keyword (e.g. cigar, brunch, Thursday) in the search field above or click the buttons below to filter by category, vibe, atmosphere, or audience.<br />
+<b>Search by Location</b>: Enter location/part of town in the search field above to filter by area.<br>
+<b>Multi-search</b>: Enter <em>any</em> keyword (e.g. cigar, brunch, Thursday) in the search field above or click below to filter by category, vibe, atmosphere, or audience.<br>
   Note: 🕒 When to Go reflects lit nights or special events. If blank, no specific times are known.
 </p>
 
