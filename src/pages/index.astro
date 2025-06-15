@@ -452,7 +452,20 @@ import venues from '../data/venues.json';
 
 
 <!-- ✅ Filter, Toggle, and Clear Script -->
+
 <script type="module">
+function toggleSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  const toggle = section?.previousElementSibling;
+
+  if (section && toggle) {
+    const isCollapsed = section.classList.contains('collapsed');
+    section.classList.toggle('collapsed', !isCollapsed);
+    section.classList.toggle('expanded', isCollapsed);
+    toggle.innerHTML = `${isCollapsed ? "▼" : "▶"} ${toggle.textContent.slice(2)}`;
+  }
+}
+
   document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchInput");
     const cards = document.querySelectorAll(".card");
@@ -577,7 +590,7 @@ toggleBtn.addEventListener("click", () => {
 
 
     <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;">
-<div style="transform: scale(0.5); transform-origin: top left;">
+<div style="transform: scale(0.3); transform-origin: top left;">
   <script type="text/javascript" 
     src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
     data-name="bmc-button" 
