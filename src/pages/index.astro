@@ -87,15 +87,15 @@ import venues from '../data/venues.json';
 
     <div class="card-grid" id="venueList">
       {venues.map((venue, index) => (
-        <div
-          class="card"
-          data-index={index}
-          data-vibes={(venue.Vibe ?? "").toLowerCase()}
-          data-audience={(venue.Audience ?? "").toLowerCase()}
-          data-atmosphere={(venue.Atmosphere ?? "").toLowerCase()}
-          data-whentogo={(venue["When to Go"] ?? "").toLowerCase()}
-          data-category={(venue.Category ?? "").toLowerCase()}
-        >
+<div
+  class="card"
+  data-index={index}
+  data-vibes={(venue.Vibe || "").toLowerCase()}
+  data-audience={(venue.Audience || "").toLowerCase()}
+  data-atmosphere={(venue.Atmosphere || "").toLowerCase()}
+  data-whentogo={(venue["When to Go"] || "").toLowerCase()}
+  data-category={(venue.Category || "").toLowerCase()}
+>
           <h2>{venue.Venue}</h2>
           <p>{venue.Description}</p>
           <p class="meta">
