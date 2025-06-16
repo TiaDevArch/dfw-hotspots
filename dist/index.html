@@ -70,21 +70,19 @@ Note: 🕒 When to Go reflects lit nights or special events. If blank, no specif
     " onmouseover="this.style.backgroundColor='#3f3861'" onmouseout="this.style.backgroundColor='#524776'">
 📍 Submit a Venue
 </a> </div> <!-- ✅ Filter, Toggle, and Clear Script --> <script type="module">
-function toggleSection(sectionId, toggleElement) {
-  const section = document.getElementById(sectionId);
-  if (!section) return;
+  function toggleSection(sectionId, toggleElement) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
 
-  const isCollapsed = section.classList.contains('collapsed');
-  section.classList.toggle('collapsed', !isCollapsed);
-  section.classList.toggle('expanded', isCollapsed);
+    const isCollapsed = section.classList.contains('collapsed');
+    section.classList.toggle('collapsed', !isCollapsed);
+    section.classList.toggle('expanded', isCollapsed);
 
-  const arrow = toggleElement.querySelector('.arrow');
-  if (arrow) {
-    arrow.textContent = isCollapsed ? '▼' : '▶';
+    const arrow = toggleElement.querySelector('.arrow');
+    if (arrow) {
+      arrow.textContent = isCollapsed ? '▼' : '▶';
+    }
   }
-} ${toggle.textContent.slice(2)}`;
-  }
-}
 
   document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchInput");
@@ -109,10 +107,10 @@ function toggleSection(sectionId, toggleElement) {
 
       cards.forEach((card) => {
         const text = card.textContent.toLowerCase();
-        const category = (card.dataset.category || "");
-        const vibes = (card.dataset.vibes || "");
-        const audience = (card.dataset.audience || "");
-        const atmosphere = (card.dataset.atmosphere || "");
+        const category = card.dataset.category || "";
+        const vibes = card.dataset.vibes || "";
+        const audience = card.dataset.audience || "";
+        const atmosphere = card.dataset.atmosphere || "";
 
         const matchesSearch = text.includes(searchQuery);
         const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
@@ -155,16 +153,13 @@ function toggleSection(sectionId, toggleElement) {
     setupButtonFilters(audienceButtons, selectedAudience);
     setupButtonFilters(atmosphereButtons, selectedAtmosphere);
 
-toggleBtn.addEventListener("click", () => {
-  filterPanel.classList.toggle("open");
-  filterPanel.classList.toggle("collapsed");
-  toggleBtn.textContent = filterPanel.classList.contains("open")
-    ? "❌ Close Filters"
-    : "🔍 Show Filters";
-});
-
-
-
+    toggleBtn.addEventListener("click", () => {
+      filterPanel.classList.toggle("open");
+      filterPanel.classList.toggle("collapsed");
+      toggleBtn.textContent = filterPanel.classList.contains("open")
+        ? "❌ Close Filters"
+        : "🔍 Show Filters";
+    });
 
     clearBtn.addEventListener("click", () => {
       selectedCategories = [];
@@ -181,6 +176,21 @@ toggleBtn.addEventListener("click", () => {
 
       searchInput.value = "";
       filterCards();
+    });
+
+    // Collapse all filter sections on load
+    const sections = [
+      'categoryOptions',
+      'vibeOptions', 
+      'audienceOptions',
+      'atmosphereOptions'
+    ];
+    sections.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.classList.add('collapsed');
+        section.classList.remove('expanded');
+      }
     });
   });
 </script> <!-- Footer --> <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;"> <div style="transform: scale(0.3); transform-origin: top left;"> <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="tiaross" data-color="#BD5FFF" data-emoji="📖" data-font="Bree" data-text="Buy me a book" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00">
