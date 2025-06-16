@@ -85,28 +85,76 @@ import venues from '../data/venues.json';
       </div>
     </div>
 
-    <div class="card-grid" id="venueList">
-      {venues.map((venue, index) => (
-<div
-  class="card">
-          <h2>{venue.Venue}</h2>
-          <p>{venue.Description}</p>
-          <p class="meta">
-            <strong>City:</strong> {venue.City}<br />
-            <strong>Area:</strong> {venue.Area}<br />
-            <strong>Category:</strong> {venue.Category}
-          </p>
-          <p class="when-to-go"><i>{venue["When to Go"]}</i></p>
-          <p class="cost">💰 Cost: {venue.Cost}</p>
-          <div class="links">
-            {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
-            {venue["Google Maps URL"] && <a href={venue["Google Maps URL"]} target="_blank">Map</a>}
-          </div>
-        </div>
-      ))}
-    </div>
+{venues.map((venue, index) => {
+  const vibes = (venue.Vibe || "").toLowerCase();
+  const audience = (venue.Audience || "").toLowerCase();
+  const atmosphere = (venue.Atmosphere || "").toLowerCase();
+  const whenToGo = (venue["When to Go"] || "").toLowerCase();
+  const category = (venue.Category || "").toLowerCase();
 
-    
+  return (
+    <div
+      class="card"
+      data-index={index}
+      data-vibes={vibes}
+      data-audience={audience}
+      data-atmosphere={atmosphere}
+      data-whentogo={whenToGo}
+      data-category={category}
+    >
+      <h2>{venue.Venue}</h2>
+      <p>{venue.Description}</p>
+      <p class="meta">
+        <strong>City:</strong> {venue.City}<br />
+        <strong>Area:</strong> {venue.Area}<br />
+        <strong>Category:</strong> {venue.Category}
+      </p>
+      <p class="when-to-go"><i>{venue["When to Go"]}</i></p>
+      <p class="cost">💰 Cost: {venue.Cost}</p>
+      <div class="links">
+        {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
+        {venue["Google Maps URL"] && <a href={venue["Google Maps URL"]} target="_blank">Map</a>}
+      </div>
+    </div>
+  );
+})}
+
+
+<div class="card-grid" id="venueList">
+ {venues.map((venue, index) => {
+  const vibes = (venue.Vibe || "").toLowerCase();
+  const audience = (venue.Audience || "").toLowerCase();
+  const atmosphere = (venue.Atmosphere || "").toLowerCase();
+  const whenToGo = (venue["When to Go"] || "").toLowerCase();
+  const category = (venue.Category || "").toLowerCase();
+
+  return (
+    <div
+      class="card"
+      data-index={index}
+      data-vibes={vibes}
+      data-audience={audience}
+      data-atmosphere={atmosphere}
+      data-whentogo={whenToGo}
+      data-category={category}
+    >
+      <h2>{venue.Venue}</h2>
+      <p>{venue.Description}</p>
+      <p class="meta">
+        <strong>City:</strong> {venue.City}<br />
+        <strong>Area:</strong> {venue.Area}<br />
+        <strong>Category:</strong> {venue.Category}
+      </p>
+      <p class="when-to-go"><i>{venue["When to Go"]}</i></p>
+      <p class="cost">💰 Cost: {venue.Cost}</p>
+      <div class="links">
+        {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
+        {venue["Google Maps URL"] && <a href={venue["Google Maps URL"]} target="_blank">Map</a>}
+      </div>
+    </div>
+  );
+})}
+</div>
 
 <!-- ✍️ Suggest an Edit + Submit a Venue Buttons -->
 <div style="margin-top: 3rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
