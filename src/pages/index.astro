@@ -110,7 +110,6 @@ import venues from '../data/venues.json';
       </button>
     ))}
   </div>
-</div>
 
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('vibeOptions', this)">
@@ -125,7 +124,6 @@ import venues from '../data/venues.json';
       </button>
     ))}
   </div>
-</div>
 
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('audienceOptions', this)">
@@ -138,7 +136,6 @@ import venues from '../data/venues.json';
       </button>
     ))}
   </div>
-</div>
 
 <div class="filter-section">
   <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions', this)">
@@ -154,7 +151,6 @@ import venues from '../data/venues.json';
       </button>
     ))}
   </div>
-</div>
 
 
 <!-- Card Grid -->
@@ -255,6 +251,7 @@ function toggleSection(sectionId, toggleElement) {
   if (arrow) {
     arrow.textContent = isCollapsed ? '▼' : '▶';
   }
+} ${toggle.textContent.slice(2)}`;
 
   document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchInput");
