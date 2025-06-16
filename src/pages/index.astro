@@ -23,7 +23,7 @@ import venues from '../data/venues.json';
 <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div class="header">
+    <div class="header" style="center">
       <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" />
       <h1>DFW Hotspots & Events</h1>
     </div>
@@ -205,7 +205,7 @@ function toggleSection(sectionId, toggleElement) {
   if (arrow) {
     arrow.textContent = isCollapsed ? '▼' : '▶';
   }
-} ${toggle.textContent.slice(2)}`;
+}
 
   document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchInput");
