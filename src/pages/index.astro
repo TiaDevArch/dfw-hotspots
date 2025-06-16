@@ -113,6 +113,7 @@ import venues from '../data/venues.json';
       ))}
     </div>
 
+    
 
 <!-- ✍️ Suggest an Edit + Submit a Venue Buttons -->
 <div style="margin-top: 3rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
@@ -164,7 +165,7 @@ import venues from '../data/venues.json';
 
 
     <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;">
-<div style="transform: scale(0.5); transform-origin: top left;">
+<div style="transform: scale(0.5); transform-origin: top center;">
   <script type="text/javascript" 
     src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
     data-name="bmc-button" 
@@ -186,10 +187,124 @@ Let’s connect: <a href="https://tiaross.com/links/" target="_blank" style="col
 <a href="https://t.me/MsTRoss">DM me</a><br />
       <span style="font-style: italic;"></span>
     </footer>
-  </body>
-</html>
-    <script src="/script.js" type="module"></script>
-
+   
     
+
+<!-- ✅ Filter, Toggle, and Clear Script -->
+
+<script type="module">
+function toggleSection(sectionId, toggleElement) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const isCollapsed = section.classList.contains('collapsed');
+  section.classList.toggle('collapsed', !isCollapsed);
+  section.classList.toggle('expanded', isCollapsed);
+
+  const arrow = toggleElement.querySelector('.arrow');
+  if (arrow) {
+    arrow.textContent = isCollapsed ? '▼' : '▶';
+  }
+} ${toggle.textContent.slice(2)}`;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll(".card");
+
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    const vibeButtons = document.querySelectorAll(".vibe-btn");
+    const audienceButtons = document.querySelectorAll(".audience-btn");
+    const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
+
+    const toggleBtn = document.getElementById("toggleFilterBtn");
+    const filterPanel = document.getElementById("filterPanel");
+    const clearBtn = document.getElementById("clearFiltersBtn");
+
+    let selectedCategories = [];
+    let selectedVibes = [];
+    let selectedAudience = [];
+    let selectedAtmosphere = [];
+
+    function filterCards() {
+      const searchQuery = searchInput.value.toLowerCase();
+
+      cards.forEach((card) => {
+        const text = card.textContent.toLowerCase();
+        const category = (card.dataset.category || "");
+        const vibes = (card.dataset.vibes || "");
+        const audience = (card.dataset.audience || "");
+        const atmosphere = (card.dataset.atmosphere || "");
+
+        const matchesSearch = text.includes(searchQuery);
+        const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
+        const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
+        const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
+        const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
+
+        const showCard = matchesSearch && matchesCategory && matchesVibes && matchesAudience && matchesAtmosphere;
+        card.style.display = showCard ? "block" : "none";
+      });
+    }
+
+    function setupButtonFilters(buttons, selectedArray) {
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const tag = btn.dataset.tag;
+          const index = selectedArray.indexOf(tag);
+
+          if (index > -1) {
+            selectedArray.splice(index, 1);
+            btn.style.background = "#eee";
+            btn.style.color = "#000";
+            btn.style.borderColor = "#ccc";
+          } else {
+            selectedArray.push(tag);
+            btn.style.background = "#333";
+            btn.style.color = "#fff";
+            btn.style.borderColor = "#333";
+          }
+
+          filterCards();
+        });
+      });
+    }
+
+    // Init
+    searchInput.addEventListener("input", filterCards);
+    setupButtonFilters(categoryButtons, selectedCategories);
+    setupButtonFilters(vibeButtons, selectedVibes);
+    setupButtonFilters(audienceButtons, selectedAudience);
+    setupButtonFilters(atmosphereButtons, selectedAtmosphere);
+
+toggleBtn.addEventListener("click", () => {
+  filterPanel.classList.toggle("open");
+  filterPanel.classList.toggle("collapsed");
+  toggleBtn.textContent = filterPanel.classList.contains("open")
+    ? "❌ Close Filters"
+    : "🔍 Show Filters";
+});
+
+
+
+
+    clearBtn.addEventListener("click", () => {
+      selectedCategories = [];
+      selectedVibes = [];
+      selectedAudience = [];
+      selectedAtmosphere = [];
+
+      const allButtons = document.querySelectorAll(".category-btn, .vibe-btn, .audience-btn, .atmosphere-btn");
+      allButtons.forEach((btn) => {
+        btn.style.background = "#eee";
+        btn.style.color = "#000";
+        btn.style.borderColor = "#ccc";
+      });
+
+      searchInput.value = "";
+      filterCards();
+    });
+  });
+</script>
+
   </body>
 </html>
