@@ -3,107 +3,384 @@ import venues from '../data/venues.json';
 ---
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>DFW Hotspots & Events | Best Places to Go Out in Dallas-Fort Worth</title>
-    <meta name="description" content="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres." />
-    <meta name="keywords" content="Dallas nightlife, DFW hotspots, brunch in Dallas, date spots DFW, live music Dallas, black-owned venues Dallas, chill bars Fort Worth, where to go out in DFW" />
-    <meta name="author" content="Tia Ross" />
-    <meta property="og:title" content="DFW Hotspots & Events" />
-    <meta property="og:description" content="Find your vibe in Dallas-Fort Worth — Brunch, date nights, happy hours, lounges, Black-owned gems and more." />
-    <meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png" />
-    <meta property="og:url" content="https://dfwhotspots.netlify.app/" />
-    <meta property="og:type" content="website" />
-    <link rel="stylesheet" href="/styles.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+  <title>DFW Hotspots & Events | Best Places to Go Out in Dallas-Fort Worth</title>
+  <meta name="description" content="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres." />
+  <meta name="keywords" content="Dallas nightlife, DFW hotspots, brunch in Dallas, date spots DFW, live music Dallas, black-owned venues Dallas, chill bars Fort Worth, where to go out in DFW" />
+  <meta name="author" content="Tia Ross" />
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="DFW Hotspots & Events" />
+  <meta property="og:description" content="Find your vibe in Dallas-Fort Worth — Brunch, date nights, happy hours, lounges, Black-owned gems and more." />
+  <meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png" />
+  <meta property="og:url" content="https://dfwhotspots.netlify.app/" />
+  <meta property="og:type" content="website" />
+</head>
+<link rel="stylesheet" href="/styles.css" />
   </head>
-
   <body>
-    <header>
-      <h1>DFW Hotspots</h1>
-      <input type="text" id="searchInput" placeholder="Search by name or keyword..." />
-    </header>
+  <script>
+  // Initialize all sections as collapsed on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const sections = [
+      'categoryOptions',
+      'vibeOptions', 
+      'audienceOptions',
+      'atmosphereOptions'
+    ];
+    
+    sections.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.classList.add('collapsed');
+        section.classList.remove('expanded');
+      }
+    });
+  });
 
-    <section class="filters">
-      <h3 onclick="toggleSection('categoryOptions', this)">Category <span class="arrow">▶</span></h3>
-      <div id="categoryOptions" class="collapsed">
-        <!-- buttons inserted by script -->
-      </div>
+  // Toggle section function
+  function toggleSection(sectionId, toggleElement) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
 
-      <h3 onclick="toggleSection('vibeOptions', this)">Vibe <span class="arrow">▶</span></h3>
-      <div id="vibeOptions" class="collapsed"></div>
+  const isCollapsed = section.classList.contains('collapsed');
+  section.classList.toggle('collapsed', !isCollapsed);
+  section.classList.toggle('expanded', isCollapsed);
 
-      <h3 onclick="toggleSection('audienceOptions', this)">Audience <span class="arrow">▶</span></h3>
-      <div id="audienceOptions" class="collapsed"></div>
+  const arrow = toggleElement.querySelector('.arrow');
+  if (arrow) {
+    arrow.textContent = isCollapsed ? '▼' : '▶';
+  }
+}
+  }
+</script>
 
-      <h3 onclick="toggleSection('atmosphereOptions', this)">Atmosphere <span class="arrow">▶</span></h3>
-      <div id="atmosphereOptions" class="collapsed"></div>
-    </section>
+<div class="header">
+  <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Hotspots"/>
+  <h1>DFW Hotspots & Special Events</h1>
+</div>
 
-    <div id="cardContainer" class="cards">
-      {venues.map((venue, index) => {
-        return (
-          <div class="card"
-            data-index={index}
-            data-vibes={(venue.Vibe ?? "").toLowerCase()}
-            data-audience={(venue.Audience ?? "").toLowerCase()}
-            data-atmosphere={(venue.Atmosphere ?? "").toLowerCase()}
-            data-whentogo={(venue["When to Go"] ?? "").toLowerCase()}
-            data-category={(venue.Category ?? "").toLowerCase()}
-          >
-            <h2>{venue.Venue}</h2>
-            <p>{venue.Description}</p>
-            <p class="meta">
-              <strong>City:</strong> {venue.City ?? ''}<br />
-              <strong>Area:</strong> {venue.Area ?? ''}<br />
-              <strong>Category:</strong> {venue.Category}
-            </p>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search venues, cities, atmosphere, categories..."
+      style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"
+    />
 
-            {venue["When to Go"] && (
-              <p class="meta">
-                🕒 <strong>When to Go:</strong> {venue["When to Go"]}
-              </p>
-            )}
 
-            <p class="cost">💰 Cost: {venue.Cost}</p>
-            <div class="links">
-              {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
-              {venue["Google Maps URL"] && <a href={venue["Google Maps URL"]} target="_blank">Map</a>}
-            </div>
+
+<!-- FILTERS -->
+    <h3>Filters</h3>
+<button id="toggleFilterBtn" style="margin-bottom: 1rem;">
+  🔍 Show Filters
+</button>
+<button id="clearFiltersBtn" class="clear-button">
+  Clear All Filters
+</button>
+<p style="font-size: 0.8rem; color: #666;">
+<b>Search by Location</b>: Enter location/part of town in the search field above to filter by area.<br>
+<b>Multi-search</b>: Enter <em>any</em> keyword (e.g. cigar, brunch, Thursday) in the search field above or click below to filter by category, vibe, atmosphere, or audience.<br>
+  Note: 🕒 When to Go reflects lit nights or special events. If blank, no specific times are known.
+</p>
+
+
+<!-- Filter Panel -->
+<div id="filterPanel" class="collapsed">
+  <!-- Filter Groups -->
+<div class="filter-section">
+  <h3 class="section-toggle" onclick="toggleSection('categoryOptions', this)">
+  <span class="arrow">▶</span> Filter by Category
+</h3>
+  <div id="categoryOptions" class="filter-options collapsed">
+    {[
+      "Brunch", "Cocktail Bar", "Cultural Event", "Date Spot", "Day Party", "Festival",
+      "Foodie Event", "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up",
+      "Mixed-Use", "Networking Mixer", "Nightlife/Lounge", "Outdoor Event",
+      "Restaurant/Bar", "Rooftop Bar", "Sports Bar", "Speakeasy",
+      "Theater/Spoken Word", "Wellness/Fitness"
+    ].map((tag) => (
+      <button class="category-btn" data-tag={tag}>
+        {tag}
+      </button>
+    ))}
+  </div>
+</div>
+
+<div class="filter-section">
+  <h3 class="section-toggle" onclick="toggleSection('vibeOptions', this)">
+  <span class="arrow">▶</span> Filter by Vibe
+</h3>
+  <div id="vibeOptions" class="filter-options collapsed">
+    {[
+      "Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"
+    ].map((tag) => (
+      <button class="vibe-btn" data-tag={tag}>
+        {tag}
+      </button>
+    ))}
+  </div>
+</div>
+
+<div class="filter-section">
+  <h3 class="section-toggle" onclick="toggleSection('audienceOptions', this)">
+  <span class="arrow">▶</span> Filter by Audience
+</h3>
+  <div id="audienceOptions" class="filter-options collapsed">
+    {["Singles", "Couples", "Small Groups"].map((tag) => (
+      <button class="audience-btn" data-tag={tag}>
+        {tag}
+      </button>
+    ))}
+  </div>
+</div>
+
+<div class="filter-section">
+  <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions', this)">
+  <span class="arrow">▶</span> Filter by Atmosphere
+</h3>
+  <div id="atmosphereOptions" class="filter-options collapsed">
+    {[
+      "Dancing", "Game Night", "Comedy", "Hookah", "Live Band",
+      "Live DJ", "Outdoors", "Patio", "Rooftop", "Karaoke"
+    ].map((tag) => (
+      <button class="atmosphere-btn" data-tag={tag}>
+        {tag}
+      </button>
+    ))}
+  </div>
+</div>
+
+
+<!-- Card Grid -->
+    <div class="card-grid" id="venueList">
+      {venues.map((venue, index) => (
+        <div
+          class="card"
+          data-index={index}
+          data-vibes={(venue.Vibe ?? "").toLowerCase()}
+          data-audience={(venue.Audience ?? "").toLowerCase()}
+          data-atmosphere={(venue.Atmosphere ?? "").toLowerCase()}
+          data-whentogo={(venue["When to Go"] ?? "").toLowerCase()}
+ 	  data-category={(venue.Category ?? "").toLowerCase()}
+        >
+          <h2>{venue.Venue}</h2>
+          <p>{venue.Description}</p>
+          <p class="meta">
+            <strong>City:</strong> {venue.City ?? ''}<br />
+            <strong>Area:</strong> {venue.Area ?? ''}<br />
+            <strong>Category:</strong> {venue.Category}
+          </p>
+
+{venue["When to Go"] && (
+  <p class="meta">
+    🕒 <strong>When to Go:</strong> {venue["When to Go"]}
+  </p>
+)}
+
+          <p class="cost">💰 Cost: {venue.Cost}</p>
+          <div class="links">
+            {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
+            {venue["Google Maps URL"] && <a href={venue["Google Maps URL"]} target="_blank">Map</a>}
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const sections = ['categoryOptions', 'vibeOptions', 'audienceOptions', 'atmosphereOptions'];
-        sections.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) {
-            el.classList.add('collapsed');
-            el.classList.remove('expanded');
+
+<!-- ✍️ Suggest an Edit + Submit a Venue Buttons -->
+<div style="margin-top: 3rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+  <a 
+    href="https://form.typeform.com/to/rs9RZozE" 
+    target="_blank" 
+    style="
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #524776;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    "
+    onmouseover="this.style.backgroundColor='#3f3861'"
+    onmouseout="this.style.backgroundColor='#524776'"
+  >
+    ➕ Suggest an Edit
+  </a>
+
+  <a 
+    href="https://form.typeform.com/to/yLG4QA9L" 
+    target="_blank" 
+    style="
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #524776;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    "
+    onmouseover="this.style.backgroundColor='#3f3861'"
+    onmouseout="this.style.backgroundColor='#524776'"
+  >
+    📍 Submit a Venue
+  </a>
+</div>
+
+
+
+<!-- ✅ Filter, Toggle, and Clear Script -->
+
+<script type="module">
+function toggleSection(sectionId, toggleElement) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const isCollapsed = section.classList.contains('collapsed');
+  section.classList.toggle('collapsed', !isCollapsed);
+  section.classList.toggle('expanded', isCollapsed);
+
+  const arrow = toggleElement.querySelector('.arrow');
+  if (arrow) {
+    arrow.textContent = isCollapsed ? '▼' : '▶';
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll(".card");
+
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    const vibeButtons = document.querySelectorAll(".vibe-btn");
+    const audienceButtons = document.querySelectorAll(".audience-btn");
+    const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
+
+    const toggleBtn = document.getElementById("toggleFilterBtn");
+    const filterPanel = document.getElementById("filterPanel");
+    const clearBtn = document.getElementById("clearFiltersBtn");
+
+    let selectedCategories = [];
+    let selectedVibes = [];
+    let selectedAudience = [];
+    let selectedAtmosphere = [];
+
+    function filterCards() {
+      const searchQuery = searchInput.value.toLowerCase();
+
+      cards.forEach((card) => {
+        const text = card.textContent.toLowerCase();
+        const category = (card.dataset.category || "");
+        const vibes = (card.dataset.vibes || "");
+        const audience = (card.dataset.audience || "");
+        const atmosphere = (card.dataset.atmosphere || "");
+
+        const matchesSearch = text.includes(searchQuery);
+        const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
+        const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
+        const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
+        const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
+
+        const showCard = matchesSearch && matchesCategory && matchesVibes && matchesAudience && matchesAtmosphere;
+        card.style.display = showCard ? "block" : "none";
+      });
+    }
+
+    function setupButtonFilters(buttons, selectedArray) {
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const tag = btn.dataset.tag;
+          const index = selectedArray.indexOf(tag);
+
+          if (index > -1) {
+            selectedArray.splice(index, 1);
+            btn.style.background = "#eee";
+            btn.style.color = "#000";
+            btn.style.borderColor = "#ccc";
+          } else {
+            selectedArray.push(tag);
+            btn.style.background = "#333";
+            btn.style.color = "#fff";
+            btn.style.borderColor = "#333";
           }
+
+          filterCards();
         });
       });
+    }
 
-      function toggleSection(sectionId, toggleElement) {
-        const section = document.getElementById(sectionId);
-        if (!section) return;
+    // Init
+    searchInput.addEventListener("input", filterCards);
+    setupButtonFilters(categoryButtons, selectedCategories);
+    setupButtonFilters(vibeButtons, selectedVibes);
+    setupButtonFilters(audienceButtons, selectedAudience);
+    setupButtonFilters(atmosphereButtons, selectedAtmosphere);
 
-        const isCollapsed = section.classList.contains('collapsed');
-        section.classList.toggle('collapsed', !isCollapsed);
-        section.classList.toggle('expanded', isCollapsed);
+toggleBtn.addEventListener("click", () => {
+  filterPanel.classList.toggle("open");
+  filterPanel.classList.toggle("collapsed");
+  toggleBtn.textContent = filterPanel.classList.contains("open")
+    ? "❌ Close Filters"
+    : "🔍 Show Filters";
+});
 
-        const arrow = toggleElement.querySelector('.arrow');
-        if (arrow) {
-          arrow.textContent = isCollapsed ? '▼' : '▶';
-        }
-      }
-    </script>
-    <script type="module" src="/scripts/filter.js"></script>
+
+
+
+    clearBtn.addEventListener("click", () => {
+      selectedCategories = [];
+      selectedVibes = [];
+      selectedAudience = [];
+      selectedAtmosphere = [];
+
+      const allButtons = document.querySelectorAll(".category-btn, .vibe-btn, .audience-btn, .atmosphere-btn");
+      allButtons.forEach((btn) => {
+        btn.style.background = "#eee";
+        btn.style.color = "#000";
+        btn.style.borderColor = "#ccc";
+      });
+
+      searchInput.value = "";
+      filterCards();
+    });
+  });
+</script>
+
+
+<!-- Footer -->
+
+
+    <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;">
+<div style="transform: scale(0.3); transform-origin: top left;">
+  <script type="text/javascript" 
+    src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
+    data-name="bmc-button" 
+    data-slug="tiaross" 
+    data-color="#BD5FFF" 
+    data-emoji="📖"  
+    data-font="Bree" 
+    data-text="Buy me a book" 
+    data-outline-color="#000000" 
+    data-font-color="#ffffff" 
+    data-coffee-color="#FFDD00">
+  </script>
+</div>
+
+      <a href="https://tiaross.net/w/wp-content/uploads/TiaRossDev.png" target="_blank">
+        <img src="https://tiaross.net/w/wp-content/uploads/TiaRossDev-rs.png" alt="Digital nomad Tia Ross @ a Getsemani, Cartagena, rooftop pool with Bocagrande in the background" style="width: 50px; height: 50px; border-radius: 50%; margin-top: 0.5rem;" />
+      </a><br />📍 DFW Hotspots & Events: No more ‘I don’t know where to go’ nights.<br />
+Let’s connect: <a href="https://tiaross.com/links/" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: bold;">Explore My Links</a><br />
+<a href="https://t.me/MsTRoss">DM me</a><br />
+      <span style="font-style: italic;"></span>
+    </footer>
   </body>
 </html>
