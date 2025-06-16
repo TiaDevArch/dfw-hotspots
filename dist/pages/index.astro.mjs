@@ -1,0 +1,376 @@
+import { c as createComponent, r as renderTemplate, a as renderScript, b as addAttribute, d as renderHead } from '../chunks/astro/server_DcbIjLjj.mjs';
+import 'kleur/colors';
+import 'html-escaper';
+import 'clsx';
+export { renderers } from '../renderers.mjs';
+
+const venues = /* #__PURE__ */ JSON.parse("[{\"Venue\":\"Pure Social\",\"City\":\"Richardson\",\"Area\":\"East Richardson\",\"Category\":\"Black-Owned, Brunch, Live DJ, Lounge, Restaurant & Bar, Happy Hour\",\"Description\":\"An upscale dining and nightlife venue and lounge offering a fusion menu, handcrafted cocktails, weekend brunch, and live DJs for R&B nights and poetry slams.\",\"Atmosphere\":\"Dancing, Hookah, Live DJ, Patio\",\"Audience\":\"Adults Only\",\"Vibe\":\"Trendy, Turn Up, Chill Vibes, Networking\",\"Access/Entry\":\"RSVP Required, Ticketed\",\"Cost\":\"$$\",\"Website\":\"puresocialdallas.com\",\"When to Go\":\"Wed-Sun evenings (4_pm-2_am) & weekend brunch\",\"Google Maps URL\":\"Google Maps\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Chicken & Pickle\",\"City\":\"Grand Prairie\",\"Area\":\"Central\",\"Category\":\"Restaurant & Bar, Sports Bar\",\"Description\":\"Chicken N Pickle is a unique indoor/outdoor entertainment complex combining a casual, chef-driven restaurant with pickleball courts, yard games, and spaces for live entertainment.\",\"Atmosphere\":\"Games, Kid Friendly, Patio, Outdoors\",\"Audience\":\"Adults Only\",\"Vibe\":\"Laid Back, Chill Vibes, Family-Friendly, Networking\",\"Access/Entry\":\"Budget Friendly, Free Entry\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"\",\"Google Maps URL\":\"https://www.google.com/maps/place/Chicken+%26+Pickle+Grand+Prairie\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Chocolate Secrets\",\"City\":\"Dallas\",\"Area\":\"Oak Lawn\",\"Category\":\"Black-Owned, Live Music Venue, Spoken Word\",\"Description\":\"Chocolate Secrets is a Black-owned gourmet chocolate and fine wine boutique cafe offering artisanal chocolates, truffles, and desserts. Guests can enjoy live jazz performances, art exhibits, and an elegant atmosphere that makes it a perfect spot for indulgence and relaxation.\",\"Atmosphere\":\"Live Band, Indoor/AC, Kid Friendly\",\"Audience\":\"Singles, Adults, Couples\",\"Vibe\":\"Romantic, Classy, Bougie, Chill Vibes\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"Live music Thursdays 7:30-1130p, spoken word Tuesdays\",\"Google Maps URL\":\"https://www.google.com/maps/place/Chocolate+Secrets+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Cigars International\",\"City\":\"The Colony\",\"Area\":\"\",\"Category\":\"Cigar Lounge\",\"Description\":\"Cigars International in The Colony is a 6,000+ square foot cigar superstore offering over 1,300 cigar brands, a full-service bar, and spacious indoor and outdoor lounges, providing a premier destination for cigar enthusiasts.\",\"Atmosphere\":\"Indoor/AC, Patio, Hookah\",\"Audience\":\"Adults Only\",\"Vibe\":\"Grown & Sexy, Laid Back, Bougie, Chill Vibes\",\"Access/Entry\":\"Free Entry, BYOB\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"\",\"Google Maps URL\":\"https://www.google.com/maps/place/Cigars+International+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"People's Last Stand\",\"City\":\"Dallas\",\"Area\":\"Mockingbird Station\",\"Category\":\"Cocktail Bar, Lounge, Live DJ\",\"Description\":\"Craft cocktail bar featuring handcrafted drinks, craft beers, and a menu of bar fare with live DJs on Sundays after 3.\",\"Atmosphere\":\"Live DJ, Indoor/AC, Outdoors, Patio, Dancing\",\"Audience\":\"Singles, Couples, Adults Only\",\"Vibe\":\"Grown & Sexy, Chill Vibes\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$\",\"Website\":\"https://peopleslaststand.com\",\"When to Go\":\"Sundays\",\"Google Maps URL\":\"\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"GVO\",\"City\":\"Dallas\",\"Area\":\"Far North Dallas\",\"Category\":\"Lounge\",\"Description\":\"GVO Lounge & Bistro offers a vibrant atmosphere with hookah, cigars, soul food, and cocktails. Known for its lively music and weekend brunches.\",\"Atmosphere\":\"Live DJ, Hookah, Indoor/AC, Dancing\",\"Audience\":\"Couples, Singles\",\"Vibe\":\"Grown & Sexy, Turn Up, Lit, Chill Vibes\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"\",\"Website\":\"https://www.gvodallas.com/\",\"When to Go\":\"Tuesdays, Thursdays\",\"Google Maps URL\":\"https://www.google.com/maps/place/3940+Rosemeade+Pkwy+%23170,+Dallas,+TX+75287\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Soiree Coffee Bar\",\"City\":\"Dallas/Trinity Groves\",\"Area\":\"Trinity Groves\",\"Category\":\"Cafe/Live Music Spot\",\"Description\":\"Black-owned cafe with weekend live jazz brunch & community wine_down events\",\"Atmosphere\":\"Live Music\",\"Audience\":\"Singles, Couples, Small Groups\",\"Vibe\":\"Classy, Chill, Cultural\",\"Access/Entry\":\"RSVP for special events; free entry for brunch\",\"Cost\":\"$,$$\",\"Website\":\"https://soireecoffeebar.com\",\"When to Go\":\"Saturdays and Sundays 10-3; first Wednesdays Sip Noir wine_down nights\",\"Google Maps URL\":\"https://maps.google.com/?q=Soiree+Coffee+Bar\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Gigi's Bar & Lounge\",\"City\":\"Plano\",\"Area\":\"Legacy North\",\"Category\":\"Restaurant/Bar\",\"Description\":\"Chic Mexican bar/lounge with cocktails, live music, and a lively atmosphere. Late night happy hour.\",\"Atmosphere\":\"Patio\",\"Audience\":\"Small Groups\",\"Vibe\":\"Grown & Sexy\",\"Access/Entry\":\"Budget Friendly\",\"Cost\":\"$$\",\"Website\":\"https://www.gigis.bar/\",\"When to Go\":\"Brunch, late night\",\"Google Maps URL\":\"\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"The Charlotte American Bistro\",\"City\":\"Dallas\",\"Area\":\"Lower Greenville\",\"Category\":\"Brunch\",\"Description\":\"Modern American bistro with craft cocktails and a cozy vibe.\",\"Atmosphere\":\"\",\"Audience\":\"Small Groups\",\"Vibe\":\"Black-Owned\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"Brunch, happy hour\",\"Google Maps URL\":\"\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Parliament\",\"City\":\"Dallas\",\"Area\":\"Uptown\",\"Category\":\"Nightlife/Lounge\",\"Description\":\"Uptown craft cocktail bar with cozy patio and happy hour specials\",\"Atmosphere\":\"Patio\",\"Audience\":\"Couples\",\"Vibe\":\"Classy\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$$\",\"Website\":\"https://parliamentdallas.com\",\"When to Go\":\"Daily 5_pm-2_am\",\"Google Maps URL\":\"https://maps.google.com/?q=Parliament+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"The Henry\",\"City\":\"Dallas\",\"Area\":\"Uptown\",\"Category\":\"Happy Hour, Restaurant & Bar\",\"Description\":\"The Henry is a stylish neighborhood restaurant serving American cuisine with a modern twist. Featuring a rooftop bar, coffee shop, and inviting dining spaces, it's perfect for brunch, dinner, or cocktails with friends.\",\"Atmosphere\":\"Rooftop, Indoor/AC, Patio\",\"Audience\":\"Adults Only\",\"Vibe\":\"Classy, Date Night, Bougie\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"HH 3-6pm\",\"Google Maps URL\":\"https://www.google.com/maps/place/The+Henry+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Jamaica Gates Caribbean Cuisine\",\"City\":\"Arlington\",\"Area\":\"Arkansas & Cooper\",\"Category\":\"Black-Owned, Restaurant/Bar\",\"Description\":\"Caribbean restaurant with authentic cuisine and live reggae band on Saturdays.\",\"Atmosphere\":\"Live Band\",\"Audience\":\"Small Groups\",\"Vibe\":\"Black-Owned\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$$\",\"Website\":\"https://www.jamaicagates.com\",\"When to Go\":\"Saturday nights for live reggae\",\"Google Maps URL\":\"https://maps.google.com/?q=Jamaica+Gates+Caribbean+Cuisine+Arlington\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Common Table\",\"City\":\"Frisco\",\"Area\":\"Star District\",\"Category\":\"Restaurant/Bar\",\"Description\":\"American restaurant with weekend brunch, happy hour, and patio DJ sets\",\"Atmosphere\":\"Live Band\",\"Audience\":\"Small Groups\",\"Vibe\":\"Chill Vibes\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$,$$\",\"Website\":\"https://thecommontable.com\",\"When to Go\":\"Fridays, Saturdays, brunch & live music\",\"Google Maps URL\":\"https://maps.google.com/?q=Common+Table+Frisco\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Spatch\",\"City\":\"Addison\",\"Area\":\"Addison\",\"Category\":\"Restaurant/Bar\",\"Description\":\"Modern American eatery with a lively bar and small plates\",\"Atmosphere\":\"Patio\",\"Audience\":\"Small Groups\",\"Vibe\":\"Chill Vibes\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$$\",\"Website\":\"https://spatchaddison.com\",\"When to Go\":\"\",\"Google Maps URL\":\"https://maps.google.com/?q=Spatch+Addison\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Mr. X\",\"City\":\"Dallas\",\"Area\":\"Ross Avenue\",\"Category\":\"Speakeasy\",\"Description\":\"Hidden speakeasy inside XOXO with velvet booths, moody lighting, cocktails. Secret entrance and VIP energy.\",\"Atmosphere\":\"Live DJ, Indoor/AC, Dancing\",\"Audience\":\"\",\"Vibe\":\"Trendy, Bougie, Grown & Sexy, Classy, Lit, Turn Up\",\"Access/Entry\":\"Ticketed\",\"Cost\":\"\",\"Website\":\"https://www.xoxodallas.com/\",\"When to Go\":\"Thursdays\",\"Google Maps URL\":\"https://www.google.com/maps/place/3121+Ross+Ave,+Dallas,+TX+75204\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Ladylove Lounge\",\"City\":\"Dallas\",\"Area\":\"Bishop Arts District\",\"Category\":\"Lounge, Live Music Venue, Cocktail Bar\",\"Description\":\"Ladylove Lounge & Sound is a vinyl record listening lounge and live music venue that offers quality cocktails and bites. With its warm red lighting and intimate seating, it encourages conversation and celebrates diversity through eclectic music programming.\",\"Atmosphere\":\"Live Band, Indoor/AC, Dancing, Live DJ\",\"Audience\":\"Singles, Couples\",\"Vibe\":\"Romantic, Classy, Bougie, Grown & Sexy, Lit\",\"Access/Entry\":\"Ticketed, VIP Available\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"Tuesdays\",\"Google Maps URL\":\"https://www.google.com/maps/place/Ladylove+Lounge+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Izkina\",\"City\":\"Dallas\",\"Area\":\"Deep Ellum\",\"Category\":\"Black-Owned, Restaurant & Bar\",\"Description\":\"A speakeasy-style restaurant and lounge in South Dallas offering soul food with a Cajun twist, live DJs, and a vibrant nightlife.\",\"Atmosphere\":\"Live DJ, Indoor/AC, Dancing\",\"Audience\":\"Singles\",\"Vibe\":\"Trendy, Lit, Grown & Sexy, Bougie, Turn Up\",\"Access/Entry\":\"VIP Available, Ticketed\",\"Cost\":\"$$\",\"Website\":\"https://izkinadallas.com\",\"When to Go\":\"Tuesdays, Thursdays\",\"Google Maps URL\":\"https://www.google.com/maps/search/?api=1&query=Izkina+Dallas+TX\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"PM Lounge\",\"City\":\"Dallas\",\"Area\":\"Knox/Henderson\",\"Category\":\"Lounge\",\"Description\":\"High-end cocktails, big DJ nights, sometimes has bottle service and celebrity sightings. Stylish setting popular with Dallas nightlife insiders.\",\"Atmosphere\":\"Live DJ, Indoor/AC, Dancing\",\"Audience\":\"Couples, Singles, Small Groups\",\"Vibe\":\"Romantic, Classy, Intimate, Date Night, Bougie\",\"Access/Entry\":\"Ticketed\",\"Cost\":\"\",\"Website\":\"https://pm-lounge.com\",\"When to Go\":\"Wednesdays\",\"Google Maps URL\":\"https://www.google.com/maps/place/2918+N+Henderson+Ave,+Dallas,+TX+75206\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Seek\",\"City\":\"Dallas\",\"Area\":\"Downtown Dallas\",\"Category\":\"Restaurant & Bar, Lounge, Southern Restaurant\",\"Description\":\"Seek is a modern restaurant and bar offering a lounge ambiance that blends contemporary elegance with Louisiana's rich, bold flavors. Each dish celebrates authentic Southern heritage, providing a unique dining experience.\",\"Atmosphere\":\"Live DJ, Hookah, Indoor/AC, Dancing\",\"Audience\":\"Singles, Couples, Small Groups\",\"Vibe\":\"Grown & Sexy, Chill Vibes, Trendy, Bougie, Turn Up\",\"Access/Entry\":\"VIP Available, Ticketed\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"Wednesdays\",\"Google Maps URL\":\"https://www.google.com/maps/place/Seek+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Double D's\",\"City\":\"Frisco\",\"Area\":\"Frisco\",\"Category\":\"Restaurant/Bar\",\"Description\":\"Classic American diner/bar known for nostalgic vibe and weekend brunch\",\"Atmosphere\":\"Patio\",\"Audience\":\"Small Groups\",\"Vibe\":\"Chill Vibes\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"Weekends\",\"Google Maps URL\":\"https://maps.google.com/?q=Double+D's+Frisco\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Hearsay Arlington\",\"City\":\"Arlington\",\"Area\":\"Entertainment District\",\"Category\":\"Lounge/Speakeasy\",\"Description\":\"Upscale cocktail lounge with weekend live music and cigar patio\",\"Atmosphere\":\"Patio\",\"Audience\":\"Couples, Groups\",\"Vibe\":\"Classy, Romantic\",\"Access/Entry\":\"Free entry; ticket for events\",\"Cost\":\"$$,$$$\",\"Website\":\"https://hearsayarlington.com\",\"When to Go\":\"Wednesdays, Thursdays, Fridays, Saturdays (evenings)\",\"Google Maps URL\":\"\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"The Addy Lounge\",\"City\":\"Arlington\",\"Area\":\"Matlock Rd\",\"Category\":\"Sports Bar\",\"Description\":\"Black-owned daiquiri lounge with upbeat vibe, 13 TVs, full bar\",\"Atmosphere\":\"Live DJ, Indoor/AC, Dancing\",\"Audience\":\"Singles\",\"Vibe\":\"Trendy, Lit, Grown & Sexy, Bougie\",\"Access/Entry\":\"Walk-in\",\"Cost\":\"$$\",\"Website\":\"https://droptheaddy.com\",\"When to Go\":\"Evenings\",\"Google Maps URL\":\"https://www.google.com/maps/search/?api=1&query=The+Addy+Arlington+TX\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Caves Lounge\",\"City\":\"Arlington\",\"Area\":\"Downtown\",\"Category\":\"Nightlife/Lounge\",\"Description\":\"Low-key dive with jukebox, graffiti walls, and patio seating.\",\"Atmosphere\":\"Patio\",\"Audience\":\"Small Groups\",\"Vibe\":\"Laid Back, Lit\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$,$$\",\"Website\":\"\",\"When to Go\":\"Evenings\",\"Google Maps URL\":\"https://maps.google.com/?q=Caves+Lounge+Arlington\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Icon Bar & Lounge\",\"City\":\"Richardson\",\"Area\":\"Richardson\",\"Category\":\"Nightlife/Lounge\",\"Description\":\"Upscale lounge with cocktails and occasional live music (info sparse)\",\"Atmosphere\":\"\",\"Audience\":\"Couples\",\"Vibe\":\"Classy\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$$\",\"Website\":\"\",\"When to Go\":\"Evenings\",\"Google Maps URL\":\"https://maps.google.com/?q=Icon+Bar+Lounge+Richardson\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Paradise\",\"City\":\"Dallas\",\"Area\":\"The Cedars\",\"Category\":\"Cocktail Bar, Lounge, Outdoor Bar\",\"Description\":\"Paradise is a cocktail bar in Dallas offering both indoor and outdoor vibes. It's a lively spot for enjoying drinks and music in a vibrant atmosphere.\",\"Atmosphere\":\"Live DJ, Hookah, Indoor/AC\",\"Audience\":\"Adults Only\",\"Vibe\":\"Trendy, Lit, Grown & Sexy, Chill Vibes\",\"Access/Entry\":\"Free Entry, BYOB\",\"Cost\":\"$$\",\"Website\":\"\",\"When to Go\":\"Fridays\",\"Google Maps URL\":\"https://www.google.com/maps/place/Paradise+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"The Reserve\",\"City\":\"Irving\",\"Area\":\"Las Colinas\",\"Category\":\"Mexican Restaurant, Upscale Dining, Restaurant & Bar\",\"Description\":\"The Reserve offers exquisite Mexican cuisine in an elegant setting, with locations in Euless and Las Colinas. Guests can enjoy fresh ingredients, bold flavors, and a memorable dining atmosphere.\",\"Atmosphere\":\"Patio, Indoor/AC, Live DJ, Live Band\",\"Audience\":\"Singles\",\"Vibe\":\"Romantic, Trendy, Date Night, Classy\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"Fridays\",\"Google Maps URL\":\"https://www.google.com/maps/place/The+Reserve+Irving\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Tequila Social\",\"City\":\"Dallas\",\"Area\":\"Harwood District\",\"Category\":\"Happy Hour, Restaurant & Bar\",\"Description\":\"Tequila Social is a lively Tex-Mex restaurant and tequila garden located on the Katy Trail. Guests can enjoy sizzling fajitas, tacos, and a variety of tequila-based cocktails in a casual, dog-friendly setting.\",\"Atmosphere\":\"Patio, Indoor/AC, Dancing, Live DJ\",\"Audience\":\"Adults Only\",\"Vibe\":\"Laid Back, Chill Vibes, Trendy, Turn Up, Lit\",\"Access/Entry\":\"Ticketed\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"4-6 pm\",\"Google Maps URL\":\"https://www.google.com/maps/place/Tequila+Social+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Vice Park\",\"City\":\"Dallas\",\"Area\":\"Baylor\",\"Category\":\"Live DJ, Live Music Venue, Day Party\",\"Description\":\"Vice Park is a dynamic entertainment venue in the heart of Dallas, offering a unique blend of day and night experiences. With its rooftop setting, guests can enjoy panoramic views of the city skyline while dancing to music from renowned DJs. The venue features multiple themed areas, including the Sky Club and Beach Club, each providing a distinct ambiance for patrons.\",\"Atmosphere\":\"Live DJ, Indoor/AC, Outdoors, Food Trucks\",\"Audience\":\"Adults Only\",\"Vibe\":\"Trendy, Lit, Grown & Sexy, Chill Vibes, Networking\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"\",\"Website\":\"https://viceparkdallas.com\",\"When to Go\":\"June 18-7p-12a\",\"Google Maps URL\":\"https://www.google.com/maps/place/Vice+Park+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Palmer's Hot Chicken\",\"City\":\"Dallas\",\"Area\":\"Lakewood\",\"Category\":\"Happy Hour, Restaurant & Bar\",\"Description\":\"Palmer's Hot Chicken brings authentic Nashville hot chicken to Dallas, offering a range of heat levels alongside catfish, shrimp, and Southern sides. Known for its vibrant atmosphere and featured on \\\"Diners, Drive-Ins and Dives,\\\" it's a must-visit for spicy food lovers.\",\"Atmosphere\":\"Indoor/AC, Patio, Food Trucks\",\"Audience\":\"Adults Only\",\"Vibe\":\"Laid Back, Chill Vibes, Family-Friendly, Networking\",\"Access/Entry\":\"Budget Friendly, Free Entry\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"Mondays, Tuesdays, Wednesdays, Thursdays, HH 3-6pm\",\"Google Maps URL\":\"https://www.google.com/maps/place/Palmer's+Hot+Chicken+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Parliament\",\"City\":\"Dallas\",\"Area\":\"Uptown\",\"Category\":\"Cocktail Bar, Rooftop Bar, Lounge\",\"Description\":\"A cozy cocktail bar in Uptown offering an extensive and creative drink menu, ideal for date nights and social gatherings.\",\"Atmosphere\":\"Indoor/AC, Patio, Dancing\",\"Audience\":\"Singles\",\"Vibe\":\"Classy, Date Night, Bougie, Turn Up\",\"Access/Entry\":\"VIP Available, Ticketed\",\"Cost\":\"$$\",\"Website\":\"https://parliamentdallas.com\",\"When to Go\":\"Mondays\",\"Google Maps URL\":\"https://www.google.com/maps/search/?api=1&query=Parliament+Dallas+TX\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Mila\",\"City\":\"Dallas\",\"Area\":\"Uptown\",\"Category\":\"Lounge\",\"Description\":\"Mila Uptown is a luxury nightlife venue featuring artisanal cocktails, premium hookah, and exclusive bottle service in a sophisticated setting.\",\"Atmosphere\":\"Live DJ, Indoor/AC, Dancing\",\"Audience\":\"\",\"Vibe\":\"Bougie, Trendy, Classy, Grown & Sexy, Date Night\",\"Access/Entry\":\"Ticketed\",\"Cost\":\"\",\"Website\":\"https://www.milauptown.com/\",\"When to Go\":\"Mondays\",\"Google Maps URL\":\"https://www.google.com/maps/place/2723+McKinney+Ave,+Dallas,+TX+75204\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Stirr\",\"City\":\"Addison\",\"Area\":\"Addison\",\"Category\":\"Restaurant/Bar\",\"Description\":\"High-energy American restaurant/bar with rooftop patio and DJ on weekends\",\"Atmosphere\":\"Rooftop\",\"Audience\":\"Singles\",\"Vibe\":\"Lit\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$$,$$$\",\"Website\":\"https://stirrrestaurants.com\",\"When to Go\":\"Rooftop Fridays and Saturdays / evenings\",\"Google Maps URL\":\"https://maps.google.com/?q=Stirr+Addison\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"The 2nd Floor Experience\",\"City\":\"Fort Worth\",\"Area\":\"West 7th\",\"Category\":\"Lounge/Bar w/ DJ\",\"Description\":\"Multi_level patio club with live DJs, mirror hallway, slide from 2nd level\",\"Atmosphere\":\"Live DJ\",\"Audience\":\"Singles, Small Groups\",\"Vibe\":\"Lit, Turn Up\",\"Access/Entry\":\"Walk_in; VIP available 10_pm+\",\"Cost\":\"$,$$\",\"Website\":\"https://pourdecisionsftw.com\",\"When to Go\":\"Thursdays, Fridays, Saturdays from 10_pm; Sundays from 3_pm\",\"Google Maps URL\":\"\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Scat Jazz Lounge\",\"City\":\"Fort Worth\",\"Area\":\"Downtown\",\"Category\":\"Jazz/Lounge\",\"Description\":\"Basement speakeasy inside Woolworth Bldg, intimate long-running jazz sets\",\"Atmosphere\":\"\",\"Audience\":\"Grown & Sexy, Singles, Couples\",\"Vibe\":\"Classy, Romantic, Trendy\",\"Access/Entry\":\"Free entry; drink minimum\",\"Cost\":\"$$,$$$\",\"Website\":\"\",\"When to Go\":\"Thursdays, Fridays, Saturdays, Sundays / evenings\",\"Google Maps URL\":\"https://maps.google.com/?q=Scat+Jazz+Lounge\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"The Alley Music House\",\"City\":\"Addison\",\"Area\":\"Addison\",\"Category\":\"Live DJ, Live Music Venue\",\"Description\":\"The Alley Music House is a speakeasy-style venue offering exceptional cocktails and unforgettable live performances. It's a hidden gem in Addison, perfect for music lovers and night owls.\",\"Atmosphere\":\"Live Band, Indoor/AC, Dancing\",\"Audience\":\"Adults Only\",\"Vibe\":\"Grown & Sexy, Chill Vibes, Laid Back, Turn Up, Lit\",\"Access/Entry\":\"Ticketed\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"Thursdays\",\"Google Maps URL\":\"https://www.google.com/maps/place/The+Alley+Music+House+Addison\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Babous\",\"City\":\"Dallas\",\"Area\":\"Uptown\",\"Category\":\"Live Music Venue, Happy Hour, Restaurant & Bar\",\"Description\":\"Babou's is a luxurious, subterranean cocktail lounge located beneath Hotel Swexan. Inspired by Salvador Dale's pet ocelot, the venue offers a surreal, art-infused atmosphere with live jazz, inventive cocktails, and an opulent setting that invites guests to drink, dance, and discover.\",\"Atmosphere\":\"Indoor/AC, Live Band, Dancing, Hookah, Patio\",\"Audience\":\"Singles, Adults, Couples\",\"Vibe\":\"Grown & Sexy, Bougie, Date Night, Chill Vibes, Laid Back\",\"Access/Entry\":\"Free Entry, BYOB\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"Thursdays\",\"Google Maps URL\":\"https://www.google.com/maps/place/Babous+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Temptations Lounge\",\"City\":\"Arlington\",\"Area\":\"South Cooper\",\"Category\":\"Nightlife/Lounge, Cultural Event\",\"Description\":\"Black-owned Caribbean lounge with DJs and Latin night Wednesdays.\",\"Atmosphere\":\"Live DJ\",\"Audience\":\"Small Groups\",\"Vibe\":\"Black-Owned, Chill, Cultural\",\"Access/Entry\":\"Free Entry; VIP available\",\"Cost\":\"$$\",\"Website\":\"\",\"When to Go\":\"Wednesdays (Latin), Saturdays / evenings\",\"Google Maps URL\":\"https://maps.google.com/?q=Temptations+Lounge+Arlington\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Thompson's Bookstore Cocktail Bar\",\"City\":\"Fort Worth\",\"Area\":\"Downtown\",\"Category\":\"Speakeasy/Cocktail Bar\",\"Description\":\"Hidden cocktail lounge beneath bookstore, password entry, creative cocktails, speakeasy downstairs\",\"Atmosphere\":\"\",\"Audience\":\"Couples, Singles\",\"Vibe\":\"Classy, Trendy\",\"Access/Entry\":\"Free Entry\",\"Cost\":\"$$,$$$\",\"Website\":\"\",\"When to Go\":\"Wednesdays, Thursdays, Fridays, Saturdays / evenings\",\"Google Maps URL\":\"https://maps.google.com/?q=Thompson%E2%80%99s+Bookstore+Bar\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"Double D's\",\"City\":\"Dallas\",\"Area\":\"Design District\",\"Category\":\"Nightlife/Lounge, Date Spot, Day Party\",\"Description\":\"Double D's is a retro-inspired bar featuring 1970s-era decor, including wood paneling and vintage furnishings. It offers an upscale yet laid-back cocktail menu, creating a nostalgic atmosphere that transforms into a lively dance party as the night progresses.\",\"Atmosphere\":\"Dancing, Indoor/AC, Live DJ\",\"Audience\":\"Singles, Adults Only\",\"Vibe\":\"Grown & Sexy, Lit, Turn Up\",\"Access/Entry\":\"Ticketed\",\"Cost\":\"$$\",\"Website\":\"\",\"When to Go\":\"\",\"Google Maps URL\":\"https://www.google.com/maps/place/Double+D's+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"},{\"Venue\":\"HIDE\",\"City\":\"Dallas\",\"Area\":\"Lowest Greenville\",\"Category\":\"Cocktail Bar, Rooftop Bar, Restaurant & Bar\",\"Description\":\"HIDE is an award-winning bar known for its unique signature cocktails and outstanding food. With a spacious rooftop patio offering downtown views, it's a go-to spot for craft drinks and elevated bar fare in a vibrant setting.\",\"Atmosphere\":\"Rooftop, Live DJ, Indoor/AC, Dancing\",\"Audience\":\"Adults Only\",\"Vibe\":\"Trendy, Lit, Date Night, Grown & Sexy, Bougie\",\"Access/Entry\":\"VIP Available\",\"Cost\":\"$\",\"Website\":\"\",\"When to Go\":\"\",\"Google Maps URL\":\"https://www.google.com/maps/place/HIDE+Dallas\",\"\":\"\",\"__1\":\"\",\"__2\":\"\"}]");
+
+var __freeze = Object.freeze;
+var __defProp = Object.defineProperty;
+var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
+var _a;
+const $$Index = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate(_a || (_a = __template(['<html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>DFW Hotspots & Events | Best Places to Go Out in Dallas-Fort Worth</title><meta name="description" content="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres."><meta name="keywords" content="Dallas nightlife, DFW hotspots, brunch in Dallas, date spots DFW, live music Dallas, black-owned venues Dallas, chill bars Fort Worth, where to go out in DFW"><meta name="author" content="Tia Ross"><!-- Open Graph for social sharing --><meta property="og:title" content="DFW Hotspots & Events"><meta property="og:description" content="Find your vibe in Dallas-Fort Worth \u2014 Brunch, date nights, happy hours, lounges, Black-owned gems and more."><meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png"><meta property="og:url" content="https://dfwhotspots.netlify.app/"><meta property="og:type" content="website"><link rel="stylesheet" href="/styles.css">', "</head> <body> ", ` <div class="header"> <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Hotspots"> <h1>DFW Hotspots & Special Events</h1> </div> <input type="text" id="searchInput" placeholder="Search venues, cities, atmosphere, categories..." style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"> <!-- FILTERS --> <h3>Filters</h3> <button id="toggleFilterBtn" style="margin-bottom: 1rem;">
+\u{1F50D} Show Filters
+</button> <button id="clearFiltersBtn" class="clear-button">
+Clear All Filters
+</button> <p style="font-size: 0.8rem; color: #666;"> <b>Search by Location</b>: Enter location/part of town in the search field above to filter by area.<br> <b>Multi-search</b>: Enter <em>any</em> keyword (e.g. cigar, brunch, Thursday) in the search field above or click below to filter by category, vibe, atmosphere, or audience.<br>
+Note: \u{1F552} When to Go reflects lit nights or special events. If blank, no specific times are known.
+</p> <!-- Filter Panel --> <div id="filterPanel" class="collapsed"> <!-- Filter Groups --> <div class="filter-section"> <h3 class="section-toggle" onclick="toggleSection('categoryOptions', this)"> <span class="&quot;arrow&quot;">\u25B6</span> Filter by Category
+</h3> <div id="categoryOptions" class="filter-options collapsed"> `, ` </div> </div> <div class="filter-section"> <h3 class="section-toggle" onclick="toggleSection('vibeOptions', this)"> <span class="&quot;arrow&quot;">\u25B6</span> Filter by Vibe
+</h3> <div id="vibeOptions" class="filter-options collapsed"> `, ` </div> </div> <div class="filter-section"> <h3 class="section-toggle" onclick="toggleSection('audienceOptions', this)"> <span class="&quot;arrow&quot;">\u25B6</span> Filter by Audience
+</h3> <div id="audienceOptions" class="filter-options collapsed"> `, ` </div> </div> <div class="filter-section"> <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions', this)"> <span class="&quot;arrow&quot;">\u25B6</span> Filter by Atmosphere
+</h3> <div id="atmosphereOptions" class="filter-options collapsed"> `, ' </div> </div> <!-- Card Grid --> <div class="card-grid" id="venueList"> ', ` </div> <!-- \u270D\uFE0F Suggest an Edit + Submit a Venue Buttons --> <div style="margin-top: 3rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;"> <a href="https://form.typeform.com/to/rs9RZozE" target="_blank" style="
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #524776;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#3f3861'" onmouseout="this.style.backgroundColor='#524776'">
+\u2795 Suggest an Edit
+</a> <a href="https://form.typeform.com/to/yLG4QA9L" target="_blank" style="
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #524776;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#3f3861'" onmouseout="this.style.backgroundColor='#524776'">
+\u{1F4CD} Submit a Venue
+</a> </div> <!-- \u2705 Filter, Toggle, and Clear Script --> <script type="module">
+function toggleSection(sectionId, toggleElement) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const isCollapsed = section.classList.contains('collapsed');
+  section.classList.toggle('collapsed', !isCollapsed);
+  section.classList.toggle('expanded', isCollapsed);
+
+  const arrow = toggleElement.querySelector('.arrow');
+  if (arrow) {
+    arrow.textContent = isCollapsed ? '\u25BC' : '\u25B6';
+  }
+} \${toggle.textContent.slice(2)}\`;
+  }
+}
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll(".card");
+
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    const vibeButtons = document.querySelectorAll(".vibe-btn");
+    const audienceButtons = document.querySelectorAll(".audience-btn");
+    const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
+
+    const toggleBtn = document.getElementById("toggleFilterBtn");
+    const filterPanel = document.getElementById("filterPanel");
+    const clearBtn = document.getElementById("clearFiltersBtn");
+
+    let selectedCategories = [];
+    let selectedVibes = [];
+    let selectedAudience = [];
+    let selectedAtmosphere = [];
+
+    function filterCards() {
+      const searchQuery = searchInput.value.toLowerCase();
+
+      cards.forEach((card) => {
+        const text = card.textContent.toLowerCase();
+        const category = (card.dataset.category || "");
+        const vibes = (card.dataset.vibes || "");
+        const audience = (card.dataset.audience || "");
+        const atmosphere = (card.dataset.atmosphere || "");
+
+        const matchesSearch = text.includes(searchQuery);
+        const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
+        const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
+        const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
+        const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
+
+        const showCard = matchesSearch && matchesCategory && matchesVibes && matchesAudience && matchesAtmosphere;
+        card.style.display = showCard ? "block" : "none";
+      });
+    }
+
+    function setupButtonFilters(buttons, selectedArray) {
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const tag = btn.dataset.tag;
+          const index = selectedArray.indexOf(tag);
+
+          if (index > -1) {
+            selectedArray.splice(index, 1);
+            btn.style.background = "#eee";
+            btn.style.color = "#000";
+            btn.style.borderColor = "#ccc";
+          } else {
+            selectedArray.push(tag);
+            btn.style.background = "#333";
+            btn.style.color = "#fff";
+            btn.style.borderColor = "#333";
+          }
+
+          filterCards();
+        });
+      });
+    }
+
+    // Init
+    searchInput.addEventListener("input", filterCards);
+    setupButtonFilters(categoryButtons, selectedCategories);
+    setupButtonFilters(vibeButtons, selectedVibes);
+    setupButtonFilters(audienceButtons, selectedAudience);
+    setupButtonFilters(atmosphereButtons, selectedAtmosphere);
+
+toggleBtn.addEventListener("click", () => {
+  filterPanel.classList.toggle("open");
+  filterPanel.classList.toggle("collapsed");
+  toggleBtn.textContent = filterPanel.classList.contains("open")
+    ? "\u274C Close Filters"
+    : "\u{1F50D} Show Filters";
+});
+
+
+
+
+    clearBtn.addEventListener("click", () => {
+      selectedCategories = [];
+      selectedVibes = [];
+      selectedAudience = [];
+      selectedAtmosphere = [];
+
+      const allButtons = document.querySelectorAll(".category-btn, .vibe-btn, .audience-btn, .atmosphere-btn");
+      allButtons.forEach((btn) => {
+        btn.style.background = "#eee";
+        btn.style.color = "#000";
+        btn.style.borderColor = "#ccc";
+      });
+
+      searchInput.value = "";
+      filterCards();
+    });
+  });
+<\/script> `, ' <!-- Footer --> <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;"> <div style="transform: scale(0.3); transform-origin: top left;"> <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="tiaross" data-color="#BD5FFF" data-emoji="\u{1F4D6}" data-font="Bree" data-text="Buy me a book" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00">\n  <\/script> </div> <a href="https://tiaross.net/w/wp-content/uploads/TiaRossDev.png" target="_blank"> <img src="https://tiaross.net/w/wp-content/uploads/TiaRossDev-rs.png" alt="Digital nomad Tia Ross @ a Getsemani, Cartagena, rooftop pool with Bocagrande in the background" style="width: 50px; height: 50px; border-radius: 50%; margin-top: 0.5rem;"> </a><br>\u{1F4CD} DFW Hotspots & Events: No more \u2018I don\u2019t know where to go\u2019 nights.<br>\nLet\u2019s connect: <a href="https://tiaross.com/links/" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: bold;">Explore My Links</a><br> <a href="https://t.me/MsTRoss">DM me</a><br> <span style="font-style: italic;"></span> </footer> </div></body></html>'], ['<html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>DFW Hotspots & Events | Best Places to Go Out in Dallas-Fort Worth</title><meta name="description" content="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres."><meta name="keywords" content="Dallas nightlife, DFW hotspots, brunch in Dallas, date spots DFW, live music Dallas, black-owned venues Dallas, chill bars Fort Worth, where to go out in DFW"><meta name="author" content="Tia Ross"><!-- Open Graph for social sharing --><meta property="og:title" content="DFW Hotspots & Events"><meta property="og:description" content="Find your vibe in Dallas-Fort Worth \u2014 Brunch, date nights, happy hours, lounges, Black-owned gems and more."><meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png"><meta property="og:url" content="https://dfwhotspots.netlify.app/"><meta property="og:type" content="website"><link rel="stylesheet" href="/styles.css">', "</head> <body> ", ` <div class="header"> <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Hotspots"> <h1>DFW Hotspots & Special Events</h1> </div> <input type="text" id="searchInput" placeholder="Search venues, cities, atmosphere, categories..." style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"> <!-- FILTERS --> <h3>Filters</h3> <button id="toggleFilterBtn" style="margin-bottom: 1rem;">
+\u{1F50D} Show Filters
+</button> <button id="clearFiltersBtn" class="clear-button">
+Clear All Filters
+</button> <p style="font-size: 0.8rem; color: #666;"> <b>Search by Location</b>: Enter location/part of town in the search field above to filter by area.<br> <b>Multi-search</b>: Enter <em>any</em> keyword (e.g. cigar, brunch, Thursday) in the search field above or click below to filter by category, vibe, atmosphere, or audience.<br>
+Note: \u{1F552} When to Go reflects lit nights or special events. If blank, no specific times are known.
+</p> <!-- Filter Panel --> <div id="filterPanel" class="collapsed"> <!-- Filter Groups --> <div class="filter-section"> <h3 class="section-toggle" onclick="toggleSection('categoryOptions', this)"> <span class="\\&quot;arrow\\&quot;">\u25B6</span> Filter by Category
+</h3> <div id="categoryOptions" class="filter-options collapsed"> `, ` </div> </div> <div class="filter-section"> <h3 class="section-toggle" onclick="toggleSection('vibeOptions', this)"> <span class="\\&quot;arrow\\&quot;">\u25B6</span> Filter by Vibe
+</h3> <div id="vibeOptions" class="filter-options collapsed"> `, ` </div> </div> <div class="filter-section"> <h3 class="section-toggle" onclick="toggleSection('audienceOptions', this)"> <span class="\\&quot;arrow\\&quot;">\u25B6</span> Filter by Audience
+</h3> <div id="audienceOptions" class="filter-options collapsed"> `, ` </div> </div> <div class="filter-section"> <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions', this)"> <span class="\\&quot;arrow\\&quot;">\u25B6</span> Filter by Atmosphere
+</h3> <div id="atmosphereOptions" class="filter-options collapsed"> `, ' </div> </div> <!-- Card Grid --> <div class="card-grid" id="venueList"> ', ` </div> <!-- \u270D\uFE0F Suggest an Edit + Submit a Venue Buttons --> <div style="margin-top: 3rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;"> <a href="https://form.typeform.com/to/rs9RZozE" target="_blank" style="
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #524776;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#3f3861'" onmouseout="this.style.backgroundColor='#524776'">
+\u2795 Suggest an Edit
+</a> <a href="https://form.typeform.com/to/yLG4QA9L" target="_blank" style="
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #524776;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#3f3861'" onmouseout="this.style.backgroundColor='#524776'">
+\u{1F4CD} Submit a Venue
+</a> </div> <!-- \u2705 Filter, Toggle, and Clear Script --> <script type="module">
+function toggleSection(sectionId, toggleElement) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const isCollapsed = section.classList.contains('collapsed');
+  section.classList.toggle('collapsed', !isCollapsed);
+  section.classList.toggle('expanded', isCollapsed);
+
+  const arrow = toggleElement.querySelector('.arrow');
+  if (arrow) {
+    arrow.textContent = isCollapsed ? '\u25BC' : '\u25B6';
+  }
+} \\\${toggle.textContent.slice(2)}\\\`;
+  }
+}
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll(".card");
+
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    const vibeButtons = document.querySelectorAll(".vibe-btn");
+    const audienceButtons = document.querySelectorAll(".audience-btn");
+    const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
+
+    const toggleBtn = document.getElementById("toggleFilterBtn");
+    const filterPanel = document.getElementById("filterPanel");
+    const clearBtn = document.getElementById("clearFiltersBtn");
+
+    let selectedCategories = [];
+    let selectedVibes = [];
+    let selectedAudience = [];
+    let selectedAtmosphere = [];
+
+    function filterCards() {
+      const searchQuery = searchInput.value.toLowerCase();
+
+      cards.forEach((card) => {
+        const text = card.textContent.toLowerCase();
+        const category = (card.dataset.category || "");
+        const vibes = (card.dataset.vibes || "");
+        const audience = (card.dataset.audience || "");
+        const atmosphere = (card.dataset.atmosphere || "");
+
+        const matchesSearch = text.includes(searchQuery);
+        const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
+        const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
+        const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
+        const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
+
+        const showCard = matchesSearch && matchesCategory && matchesVibes && matchesAudience && matchesAtmosphere;
+        card.style.display = showCard ? "block" : "none";
+      });
+    }
+
+    function setupButtonFilters(buttons, selectedArray) {
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const tag = btn.dataset.tag;
+          const index = selectedArray.indexOf(tag);
+
+          if (index > -1) {
+            selectedArray.splice(index, 1);
+            btn.style.background = "#eee";
+            btn.style.color = "#000";
+            btn.style.borderColor = "#ccc";
+          } else {
+            selectedArray.push(tag);
+            btn.style.background = "#333";
+            btn.style.color = "#fff";
+            btn.style.borderColor = "#333";
+          }
+
+          filterCards();
+        });
+      });
+    }
+
+    // Init
+    searchInput.addEventListener("input", filterCards);
+    setupButtonFilters(categoryButtons, selectedCategories);
+    setupButtonFilters(vibeButtons, selectedVibes);
+    setupButtonFilters(audienceButtons, selectedAudience);
+    setupButtonFilters(atmosphereButtons, selectedAtmosphere);
+
+toggleBtn.addEventListener("click", () => {
+  filterPanel.classList.toggle("open");
+  filterPanel.classList.toggle("collapsed");
+  toggleBtn.textContent = filterPanel.classList.contains("open")
+    ? "\u274C Close Filters"
+    : "\u{1F50D} Show Filters";
+});
+
+
+
+
+    clearBtn.addEventListener("click", () => {
+      selectedCategories = [];
+      selectedVibes = [];
+      selectedAudience = [];
+      selectedAtmosphere = [];
+
+      const allButtons = document.querySelectorAll(".category-btn, .vibe-btn, .audience-btn, .atmosphere-btn");
+      allButtons.forEach((btn) => {
+        btn.style.background = "#eee";
+        btn.style.color = "#000";
+        btn.style.borderColor = "#ccc";
+      });
+
+      searchInput.value = "";
+      filterCards();
+    });
+  });
+<\/script> `, ' <!-- Footer --> <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;"> <div style="transform: scale(0.3); transform-origin: top left;"> <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="tiaross" data-color="#BD5FFF" data-emoji="\u{1F4D6}" data-font="Bree" data-text="Buy me a book" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00">\n  <\/script> </div> <a href="https://tiaross.net/w/wp-content/uploads/TiaRossDev.png" target="_blank"> <img src="https://tiaross.net/w/wp-content/uploads/TiaRossDev-rs.png" alt="Digital nomad Tia Ross @ a Getsemani, Cartagena, rooftop pool with Bocagrande in the background" style="width: 50px; height: 50px; border-radius: 50%; margin-top: 0.5rem;"> </a><br>\u{1F4CD} DFW Hotspots & Events: No more \u2018I don\u2019t know where to go\u2019 nights.<br>\nLet\u2019s connect: <a href="https://tiaross.com/links/" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: bold;">Explore My Links</a><br> <a href="https://t.me/MsTRoss">DM me</a><br> <span style="font-style: italic;"></span> </footer> </div></body></html>'])), renderHead(), renderScript($$result, "/Users/tiaross/Projects/dfw-hotspots/src/pages/index.astro?astro&type=script&index=0&lang.ts"), [
+    "Brunch",
+    "Cocktail Bar",
+    "Cultural Event",
+    "Date Spot",
+    "Day Party",
+    "Festival",
+    "Foodie Event",
+    "Free Event",
+    "Happy Hour",
+    "Live Music",
+    "Market/Pop-Up",
+    "Mixed-Use",
+    "Networking Mixer",
+    "Nightlife/Lounge",
+    "Outdoor Event",
+    "Restaurant/Bar",
+    "Rooftop Bar",
+    "Sports Bar",
+    "Speakeasy",
+    "Theater/Spoken Word",
+    "Wellness/Fitness"
+  ].map((tag) => renderTemplate`<button class="category-btn"${addAttribute(tag, "data-tag")}> ${tag} </button>`), [
+    "Bougie",
+    "Chill Vibes",
+    "Classy",
+    "Date Night",
+    "Grown & Sexy",
+    "Laid Back",
+    "Lit",
+    "Networking",
+    "Romantic",
+    "Trendy",
+    "Turn Up",
+    "Black-Owned"
+  ].map((tag) => renderTemplate`<button class="vibe-btn"${addAttribute(tag, "data-tag")}> ${tag} </button>`), ["Singles", "Couples", "Small Groups"].map((tag) => renderTemplate`<button class="audience-btn"${addAttribute(tag, "data-tag")}> ${tag} </button>`), [
+    "Dancing",
+    "Game Night",
+    "Comedy",
+    "Hookah",
+    "Live Band",
+    "Live DJ",
+    "Outdoors",
+    "Patio",
+    "Rooftop",
+    "Karaoke"
+  ].map((tag) => renderTemplate`<button class="atmosphere-btn"${addAttribute(tag, "data-tag")}> ${tag} </button>`), venues.map((venue, index) => renderTemplate`<div class="card"${addAttribute(index, "data-index")}${addAttribute((venue.Vibe ?? "").toLowerCase(), "data-vibes")}${addAttribute((venue.Audience ?? "").toLowerCase(), "data-audience")}${addAttribute((venue.Atmosphere ?? "").toLowerCase(), "data-atmosphere")}${addAttribute((venue["When to Go"] ?? "").toLowerCase(), "data-whentogo")}${addAttribute((venue.Category ?? "").toLowerCase(), "data-category")}> <h2>${venue.Venue}</h2> <p>${venue.Description}</p> <p class="meta"> <strong>City:</strong> ${venue.City ?? ""}<br> <strong>Area:</strong> ${venue.Area ?? ""}<br> <strong>Category:</strong> ${venue.Category} </p> ${venue["When to Go"] && renderTemplate`<p class="meta">
+🕒 <strong>When to Go:</strong> ${venue["When to Go"]} </p>`} <p class="cost">💰 Cost: ${venue.Cost}</p> <div class="links"> ${venue.Website && renderTemplate`<a${addAttribute(venue.Website, "href")} target="_blank">Website</a>`} ${venue["Google Maps URL"] && renderTemplate`<a${addAttribute(venue["Google Maps URL"], "href")} target="_blank">Map</a>`} </div> </div>`), renderScript($$result, "/Users/tiaross/Projects/dfw-hotspots/src/pages/index.astro?astro&type=script&index=1&lang.ts"));
+}, "/Users/tiaross/Projects/dfw-hotspots/src/pages/index.astro", void 0);
+
+const $$file = "/Users/tiaross/Projects/dfw-hotspots/src/pages/index.astro";
+const $$url = "";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$Index,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };
