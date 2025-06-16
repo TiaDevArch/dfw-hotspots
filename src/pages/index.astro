@@ -23,134 +23,68 @@ import venues from '../data/venues.json';
 <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-  <script>
-  // Initialize all sections as collapsed on page load
-  document.addEventListener('DOMContentLoaded', function() {
-    const sections = [
-      'categoryOptions',
-      'vibeOptions', 
-      'audienceOptions',
-      'atmosphereOptions'
-    ];
-    
-    sections.forEach(sectionId => {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.classList.add('collapsed');
-        section.classList.remove('expanded');
-      }
-    });
-  });
-
-  // Toggle section function
-  function toggleSection(sectionId, toggleElement) {
-  const section = document.getElementById(sectionId);
-  if (!section) return;
-
-  const isCollapsed = section.classList.contains('collapsed');
-  section.classList.toggle('collapsed', !isCollapsed);
-  section.classList.toggle('expanded', isCollapsed);
-
-  const arrow = toggleElement.querySelector('.arrow');
-  if (arrow) {
-    arrow.textContent = isCollapsed ? '▼' : '▶';
-  }
-}
-</script>
-
-<div class="header">
-  <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Hotspots"/>
-  <h1>DFW Hotspots & Special Events</h1>
-</div>
+    <div class="header">
+      <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" />
+      <h1>DFW Hotspots & Events</h1>
+    </div>
 
     <input
       type="text"
       id="searchInput"
       placeholder="Search venues, cities, atmosphere, categories..."
-      style="width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #ccc;"
     />
 
+    <div class="filter-controls">
+      <button id="toggleFilterBtn">🔍 Show Filters</button>
+      <button id="clearFiltersBtn" class="clear-button">Clear All Filters</button>
+      <p class="instructions">
+        <b>Search by Location</b>: Enter location/part of town in the search field above.<br />
+        <b>Multi-search</b>: Use keywords like "cigar," "brunch," or "Thursday."<br />
+        🕒 <i>When to Go reflects lit nights or specials. Blank = unknown times.</i>
+      </p>
+    </div>
 
+    <div id="filterPanel" class="collapsed">
+      <!-- Filter Section Template -->
+      <div class="filter-section">
+        <h3 class="section-toggle" onclick="toggleSection('categoryFilters')">▶ Filter by Category</h3>
+        <div id="categoryFilters" class="filter-options collapsed">
+          {[
+            "Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival", "Foodie Event",
+            "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up", "Mixed-Use",
+            "Networking Mixer", "Nightlife/Lounge", "Outdoor Event", "Restaurant/Bar",
+            "Rooftop Bar", "Sports Bar", "Speakeasy", "Theater/Spoken Word", "Wellness/Fitness"
+          ].map(tag => <button class="category-btn" data-tag={tag}>{tag}</button>)}
+        </div>
+      </div>
 
-<!-- FILTERS -->
-    <h3>Filters</h3>
-<button id="toggleFilterBtn" style="margin-bottom: 1rem;">
-  🔍 Show Filters
-</button>
-<button id="clearFiltersBtn" class="clear-button">
-  Clear All Filters
-</button>
-<p style="font-size: 0.8rem; color: #666;">
-<b>Search by Location</b>: Enter location/part of town in the search field above to filter by area.<br>
-<b>Multi-search</b>: Enter <em>any</em> keyword (e.g. cigar, brunch, Thursday) in the search field above or click below to filter by category, vibe, atmosphere, or audience.<br>
-  Note: 🕒 When to Go reflects lit nights or special events. If blank, no specific times are known.
-</p>
+      <div class="filter-section">
+        <h3 class="section-toggle" onclick="toggleSection('vibeFilters')">▶ Filter by Vibe</h3>
+        <div id="vibeFilters" class="filter-options collapsed">
+          {["Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit",
+            "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"]
+            .map(tag => <button class="vibe-btn" data-tag={tag}>{tag}</button>)}
+        </div>
+      </div>
 
+      <div class="filter-section">
+        <h3 class="section-toggle" onclick="toggleSection('audienceFilters')">▶ Filter by Audience</h3>
+        <div id="audienceFilters" class="filter-options collapsed">
+          {["Singles", "Couples", "Small Groups"]
+            .map(tag => <button class="audience-btn" data-tag={tag}>{tag}</button>)}
+        </div>
+      </div>
 
-<!-- Filter Panel -->
-<div id="filterPanel" class="collapsed">
-  <!-- Filter Groups -->
-<div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('categoryOptions', this)">
-  <span class="arrow">▶</span> Filter by Category
-</h3>
-  <div id="categoryOptions" class="filter-options collapsed">
-    {[
-      "Brunch", "Cocktail Bar", "Cultural Event", "Date Spot", "Day Party", "Festival",
-      "Foodie Event", "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up",
-      "Mixed-Use", "Networking Mixer", "Nightlife/Lounge", "Outdoor Event",
-      "Restaurant/Bar", "Rooftop Bar", "Sports Bar", "Speakeasy",
-      "Theater/Spoken Word", "Wellness/Fitness"
-    ].map((tag) => (
-      <button class="category-btn" data-tag={tag}>
-        {tag}
-      </button>
-    ))}
-  </div>
+      <div class="filter-section">
+        <h3 class="section-toggle" onclick="toggleSection('atmosphereFilters')">▶ Filter by Atmosphere</h3>
+        <div id="atmosphereFilters" class="filter-options collapsed">
+          {["Dancing", "Game Night", "Comedy", "Hookah", "Live Band", "Live DJ", "Outdoors",
+            "Patio", "Rooftop", "Karaoke"]
+            .map(tag => <button class="atmosphere-btn" data-tag={tag}>{tag}</button>)}
+        </div>
+      </div>
+    </div>
 
-<div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('vibeOptions', this)">
-  <span class="arrow">▶</span> Filter by Vibe
-</h3>
-  <div id="vibeOptions" class="filter-options collapsed">
-    {[
-      "Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"
-    ].map((tag) => (
-      <button class="vibe-btn" data-tag={tag}>
-        {tag}
-      </button>
-    ))}
-  </div>
-
-<div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('audienceOptions', this)">
-  <span class="arrow">▶</span> Filter by Audience
-</h3>
-  <div id="audienceOptions" class="filter-options collapsed">
-    {["Singles", "Couples", "Small Groups"].map((tag) => (
-      <button class="audience-btn" data-tag={tag}>
-        {tag}
-      </button>
-    ))}
-  </div>
-
-<div class="filter-section">
-  <h3 class="section-toggle" onclick="toggleSection('atmosphereOptions', this)">
-  <span class="arrow">▶</span> Filter by Atmosphere
-</h3>
-  <div id="atmosphereOptions" class="filter-options collapsed">
-    {[
-      "Dancing", "Game Night", "Comedy", "Hookah", "Live Band",
-      "Live DJ", "Outdoors", "Patio", "Rooftop", "Karaoke"
-    ].map((tag) => (
-      <button class="atmosphere-btn" data-tag={tag}>
-        {tag}
-      </button>
-    ))}
-  </div>
-
-
-<!-- Card Grid -->
     <div class="card-grid" id="venueList">
       {venues.map((venue, index) => (
         <div
@@ -160,22 +94,16 @@ import venues from '../data/venues.json';
           data-audience={(venue.Audience ?? "").toLowerCase()}
           data-atmosphere={(venue.Atmosphere ?? "").toLowerCase()}
           data-whentogo={(venue["When to Go"] ?? "").toLowerCase()}
- 	  data-category={(venue.Category ?? "").toLowerCase()}
+          data-category={(venue.Category ?? "").toLowerCase()}
         >
           <h2>{venue.Venue}</h2>
           <p>{venue.Description}</p>
           <p class="meta">
-            <strong>City:</strong> {venue.City ?? ''}<br />
-            <strong>Area:</strong> {venue.Area ?? ''}<br />
+            <strong>City:</strong> {venue.City}<br />
+            <strong>Area:</strong> {venue.Area}<br />
             <strong>Category:</strong> {venue.Category}
           </p>
-
-{venue["When to Go"] && (
-  <p class="meta">
-    🕒 <strong>When to Go:</strong> {venue["When to Go"]}
-  </p>
-)}
-
+          <p class="when-to-go"><i>{venue["When to Go"]}</i></p>
           <p class="cost">💰 Cost: {venue.Cost}</p>
           <div class="links">
             {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
@@ -232,124 +160,6 @@ import venues from '../data/venues.json';
 </div>
 
 
-
-<!-- ✅ Filter, Toggle, and Clear Script -->
-
-<script type="module">
-function toggleSection(sectionId, toggleElement) {
-  const section = document.getElementById(sectionId);
-  if (!section) return;
-
-  const isCollapsed = section.classList.contains('collapsed');
-  section.classList.toggle('collapsed', !isCollapsed);
-  section.classList.toggle('expanded', isCollapsed);
-
-  const arrow = toggleElement.querySelector('.arrow');
-  if (arrow) {
-    arrow.textContent = isCollapsed ? '▼' : '▶';
-  }
-} ${toggle.textContent.slice(2)}`;
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById("searchInput");
-    const cards = document.querySelectorAll(".card");
-
-    const categoryButtons = document.querySelectorAll(".category-btn");
-    const vibeButtons = document.querySelectorAll(".vibe-btn");
-    const audienceButtons = document.querySelectorAll(".audience-btn");
-    const atmosphereButtons = document.querySelectorAll(".atmosphere-btn");
-
-    const toggleBtn = document.getElementById("toggleFilterBtn");
-    const filterPanel = document.getElementById("filterPanel");
-    const clearBtn = document.getElementById("clearFiltersBtn");
-
-    let selectedCategories = [];
-    let selectedVibes = [];
-    let selectedAudience = [];
-    let selectedAtmosphere = [];
-
-    function filterCards() {
-      const searchQuery = searchInput.value.toLowerCase();
-
-      cards.forEach((card) => {
-        const text = card.textContent.toLowerCase();
-        const category = (card.dataset.category || "");
-        const vibes = (card.dataset.vibes || "");
-        const audience = (card.dataset.audience || "");
-        const atmosphere = (card.dataset.atmosphere || "");
-
-        const matchesSearch = text.includes(searchQuery);
-        const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(tag => category.includes(tag.toLowerCase()));
-        const matchesVibes = selectedVibes.length === 0 || selectedVibes.some(tag => vibes.includes(tag.toLowerCase()));
-        const matchesAudience = selectedAudience.length === 0 || selectedAudience.some(tag => audience.includes(tag.toLowerCase()));
-        const matchesAtmosphere = selectedAtmosphere.length === 0 || selectedAtmosphere.some(tag => atmosphere.includes(tag.toLowerCase()));
-
-        const showCard = matchesSearch && matchesCategory && matchesVibes && matchesAudience && matchesAtmosphere;
-        card.style.display = showCard ? "block" : "none";
-      });
-    }
-
-    function setupButtonFilters(buttons, selectedArray) {
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const tag = btn.dataset.tag;
-          const index = selectedArray.indexOf(tag);
-
-          if (index > -1) {
-            selectedArray.splice(index, 1);
-            btn.style.background = "#eee";
-            btn.style.color = "#000";
-            btn.style.borderColor = "#ccc";
-          } else {
-            selectedArray.push(tag);
-            btn.style.background = "#333";
-            btn.style.color = "#fff";
-            btn.style.borderColor = "#333";
-          }
-
-          filterCards();
-        });
-      });
-    }
-
-    // Init
-    searchInput.addEventListener("input", filterCards);
-    setupButtonFilters(categoryButtons, selectedCategories);
-    setupButtonFilters(vibeButtons, selectedVibes);
-    setupButtonFilters(audienceButtons, selectedAudience);
-    setupButtonFilters(atmosphereButtons, selectedAtmosphere);
-
-toggleBtn.addEventListener("click", () => {
-  filterPanel.classList.toggle("open");
-  filterPanel.classList.toggle("collapsed");
-  toggleBtn.textContent = filterPanel.classList.contains("open")
-    ? "❌ Close Filters"
-    : "🔍 Show Filters";
-});
-
-
-
-
-    clearBtn.addEventListener("click", () => {
-      selectedCategories = [];
-      selectedVibes = [];
-      selectedAudience = [];
-      selectedAtmosphere = [];
-
-      const allButtons = document.querySelectorAll(".category-btn, .vibe-btn, .audience-btn, .atmosphere-btn");
-      allButtons.forEach((btn) => {
-        btn.style.background = "#eee";
-        btn.style.color = "#000";
-        btn.style.borderColor = "#ccc";
-      });
-
-      searchInput.value = "";
-      filterCards();
-    });
-  });
-</script>
-
-
 <!-- Footer -->
 
 
@@ -376,5 +186,10 @@ Let’s connect: <a href="https://tiaross.com/links/" target="_blank" style="col
 <a href="https://t.me/MsTRoss">DM me</a><br />
       <span style="font-style: italic;"></span>
     </footer>
+  </body>
+</html>
+    <script src="/script.js" type="module"></script>
+
+    
   </body>
 </html>
