@@ -1,5 +1,23 @@
 [
-  {
+   {
+    "Venue": "Chocolate Secrets",
+    "City": "Dallas",
+    "Area": "Oak Lawn",
+    "Category": "Black-Owned, Live Music, Spoken Word",
+    "Description": "Chocolate Secrets is a Black-owned gourmet chocolate and fine wine boutique cafe offering artisanal chocolates, truffles, and desserts. Guests can enjoy live jazz performances, art exhibits, and an elegant atmosphere that makes it a perfect spot for indulgence and relaxation.",
+    "Atmosphere": "Live Band, Indoor/AC, Kid Friendly",
+    "Audience": "Singles, Adults, Couples",
+    "Vibe": "Romantic, Classy, Bougie, Chill Vibes",
+    "Access/Entry": "Free Entry",
+    "Cost": "$",
+    "Website": "",
+    "When to Go": "Live music Thursdays 7:30-1130p, spoken word Tuesdays",
+    "Google Maps URL": "https://www.google.com/maps/place/Chocolate+Secrets+Dallas",
+    "": "",
+    "__1": "",
+    "__2": ""
+  },
+   {
     "Venue": "Pure Social",
     "City": "Richardson",
     "Area": "East Richardson",
@@ -11,7 +29,7 @@
     "Access/Entry": "RSVP Required, Ticketed",
     "Cost": "$$",
     "Website": "puresocialdallas.com",
-    "When to Go": "Wed-Sun evenings (4_pm-2_am) & weekend brunch",
+    "When to Go": "Wednesdays, Thursdays, Fridays, Saturdays, Sundays (4pm-2am) & weekend brunch",
     "Google Maps URL": "Google Maps",
     "": "",
     "__1": "",
@@ -36,24 +54,6 @@
     "__2": ""
   },
   {
-    "Venue": "Chocolate Secrets",
-    "City": "Dallas",
-    "Area": "Oak Lawn",
-    "Category": "Black-Owned, Live Music Venue, Spoken Word",
-    "Description": "Chocolate Secrets is a Black-owned gourmet chocolate and fine wine boutique cafe offering artisanal chocolates, truffles, and desserts. Guests can enjoy live jazz performances, art exhibits, and an elegant atmosphere that makes it a perfect spot for indulgence and relaxation.",
-    "Atmosphere": "Live Band, Indoor/AC, Kid Friendly",
-    "Audience": "Singles, Adults, Couples",
-    "Vibe": "Romantic, Classy, Bougie, Chill Vibes",
-    "Access/Entry": "Free Entry",
-    "Cost": "$",
-    "Website": "",
-    "When to Go": "Live music Thursdays 7:30-1130p, spoken word Tuesdays",
-    "Google Maps URL": "https://www.google.com/maps/place/Chocolate+Secrets+Dallas",
-    "": "",
-    "__1": "",
-    "__2": ""
-  },
-  {
     "Venue": "Cigars International",
     "City": "The Colony",
     "Area": "",
@@ -65,8 +65,8 @@
     "Access/Entry": "Free Entry, BYOB",
     "Cost": "$",
     "Website": "",
-    "When to Go": "",
-    "Google Maps URL": "https://www.google.com/maps/place/Cigars+International+Dallas",
+    "When to Go": "Friday evenings, Saturdays",
+    "Google Maps URL": "https://www.google.com/maps/place/Cigars+International+The+Colony",
     "": "",
     "__1": "",
     "__2": ""
@@ -95,7 +95,7 @@
     "Area": "Far North Dallas",
     "Category": "Lounge",
     "Description": "GVO Lounge & Bistro offers a vibrant atmosphere with hookah, cigars, soul food, and cocktails. Known for its lively music and weekend brunches.",
-    "Atmosphere": "Live DJ, Hookah, Indoor/AC, Dancing",
+    "Atmosphere": "Live DJ, Hookah, Dancing",
     "Audience": "Couples, Singles",
     "Vibe": "Grown & Sexy, Turn Up, Lit, Chill Vibes",
     "Access/Entry": "Free Entry",

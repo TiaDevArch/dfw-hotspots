@@ -46,7 +46,7 @@ import venues from '../data/venues.json';
     <div id="filterPanel" class="collapsed">
       <!-- Filter Section Template -->
       <div class="filter-section">
-        <h3 class="section-toggle" onclick="toggleSection('categoryFilters')">▶ Filter by Category</h3>
+        <h3 class="section-toggle" onclick="toggleSection('categoryFilters', this)"><span class="arrow">▶</span> Filter by Category</h3>
         <div id="categoryFilters" class="filter-options collapsed">
           {[
             "Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival", "Foodie Event",
@@ -58,7 +58,7 @@ import venues from '../data/venues.json';
       </div>
 
       <div class="filter-section">
-        <h3 class="section-toggle" onclick="toggleSection('vibeFilters')">▶ Filter by Vibe</h3>
+        <h3 class="section-toggle" onclick="toggleSection('vibeFilters', this)"><span class="arrow">▶</span> Filter by Vibe</h3>
         <div id="vibeFilters" class="filter-options collapsed">
           {["Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit",
             "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"]
@@ -67,7 +67,7 @@ import venues from '../data/venues.json';
       </div>
 
       <div class="filter-section">
-        <h3 class="section-toggle" onclick="toggleSection('audienceFilters')">▶ Filter by Audience</h3>
+        <h3 class="section-toggle" onclick="toggleSection('audienceFilters', this)"><span class="arrow">▶</span> Filter by Audience</h3>
         <div id="audienceFilters" class="filter-options collapsed">
           {["Singles", "Couples", "Small Groups"]
             .map(tag => <button class="audience-btn" data-tag={tag}>{tag}</button>)}
@@ -75,7 +75,7 @@ import venues from '../data/venues.json';
       </div>
 
       <div class="filter-section">
-        <h3 class="section-toggle" onclick="toggleSection('atmosphereFilters')">▶ Filter by Atmosphere</h3>
+        <h3 class="section-toggle" onclick="toggleSection('atmosphereFilters', this)"><span class="arrow">▶</span> Filter by Atmosphere</h3>
         <div id="atmosphereFilters" class="filter-options collapsed">
           {["Dancing", "Game Night", "Comedy", "Hookah", "Live Band", "Live DJ", "Outdoors",
             "Patio", "Rooftop", "Karaoke"]
