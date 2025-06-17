@@ -209,6 +209,8 @@ function toggleSection(sectionId, toggleElement) {
     arrow.textContent = isCollapsed ? '▼' : '▶';
   }
 }
+// ✅ Make it accessible to inline HTML onclick handlers
+window.toggleSection = toggleSection;
 
   document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchInput");
