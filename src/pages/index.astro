@@ -1,6 +1,7 @@
 ---
 import '../styles/style.css';
-import venues from '../data/venues.json';
+import { getVenues } from '../lib/getVenues.ts';
+const venues = await getVenues();
 ---
 
 <html lang="en">
@@ -24,24 +25,31 @@ import venues from '../data/venues.json';
   <body>
     <div class="header">
       <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" />
-      <h1>DFW Hotspots & Events</h1>
+      <h2>DFW Hotspots & Events</h2>
     </div>
 
     <input
       type="text"
       id="searchInput"
-      placeholder="Search venues, cities, atmosphere, categories..."
+      placeholder="Search days, keywords, venues, cities, atmosphere, categories..."
     />
 
     <div class="filter-controls">
       <button id="toggleFilterBtn">🔍 Show Filters</button>
       <button id="clearFiltersBtn" class="clear-button">Clear All Filters</button>
       <p class="instructions">
-        <b>Search by Location</b>: Enter location/part of town in the search field above.<br />
-        <b>Multi-search</b>: Use keywords like "cigar," "brunch," or "Thursday."<br />
-        🕒 <i>When to Go reflects lit nights or specials. Blank = unknown times.</i>
       </p>
     </div>
+
+    <div id="dayFilters" class="filter-options">
+  <button class="day-btn" data-day="friday">Friday</button>
+  <button class="day-btn" data-day="saturday">Saturday</button>
+  <button class="day-btn" data-day="sunday">Sunday</button>
+  <button class="day-btn" data-day="monday">Monday</button>
+  <button class="day-btn" data-day="tuesday">Tuesday</button>
+  <button class="day-btn" data-day="wednesday">Wednesday</button>
+  <button class="day-btn" data-day="thursday">Thursday</button>
+  </div>
 
     <div id="filterPanel" class="collapsed">
       <!-- Filter Section Template -->
@@ -49,19 +57,14 @@ import venues from '../data/venues.json';
         <h3 class="section-toggle" onclick="toggleSection('categoryFilters', this)"><span class="arrow">▶</span> Filter by Category</h3>
         <div id="categoryFilters" class="filter-options collapsed">
           {[
-            "Brunch", "Cultural Event", "Date Spot", "Day Party", "Festival", "Foodie Event",
-            "Free Event", "Happy Hour", "Live Music", "Market/Pop-Up", "Mixed-Use",
-            "Networking Mixer", "Nightlife/Lounge", "Outdoor Event", "Restaurant/Bar",
-            "Rooftop Bar", "Sports Bar", "Speakeasy", "Theater/Spoken Word", "Wellness/Fitness"
-          ].map(tag => <button class="category-btn" data-tag={tag}>{tag}</button>)}
+            "Black-Owned", "Brunch", "Cafe", "Cigar Lounge", "Cocktail Bar", "Date Spot", "Day Party", "Happy Hour", "Lounge", "Mixed-Use District", "Mixer/Networking", "Nightclub", "Outdoor Bar", "Restaurant/Bar", "Sports Bar", "Speakeasy", "Spoken Word", "Wellness/Fitness"].map(tag => <button class="category-btn" data-tag={tag}>{tag}</button>)}
         </div>
       </div>
 
       <div class="filter-section">
         <h3 class="section-toggle" onclick="toggleSection('vibeFilters', this)"><span class="arrow">▶</span> Filter by Vibe</h3>
         <div id="vibeFilters" class="filter-options collapsed">
-          {["Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit",
-            "Networking", "Romantic", "Trendy", "Turn Up", "Black-Owned"]
+          {["Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Romantic", "Trendy", "Turn Up"]
             .map(tag => <button class="vibe-btn" data-tag={tag}>{tag}</button>)}
         </div>
       </div>
@@ -69,7 +72,7 @@ import venues from '../data/venues.json';
       <div class="filter-section">
         <h3 class="section-toggle" onclick="toggleSection('audienceFilters', this)"><span class="arrow">▶</span> Filter by Audience</h3>
         <div id="audienceFilters" class="filter-options collapsed">
-          {["Singles", "Couples", "Small Groups"]
+          {["Singles", "Couples", "Small Groups", "Larger Groups"]
             .map(tag => <button class="audience-btn" data-tag={tag}>{tag}</button>)}
         </div>
       </div>
@@ -77,8 +80,7 @@ import venues from '../data/venues.json';
       <div class="filter-section">
         <h3 class="section-toggle" onclick="toggleSection('atmosphereFilters', this)"><span class="arrow">▶</span> Filter by Atmosphere</h3>
         <div id="atmosphereFilters" class="filter-options collapsed">
-          {["Dancing", "Game Night", "Comedy", "Hookah", "Live Band", "Live DJ", "Outdoors",
-            "Patio", "Rooftop", "Karaoke"]
+          {["Dancing", "Game Night", "Comedy", "Hookah", "Live Music", "Live DJ", "Outdoors", "Patio", "Rooftop", "Karaoke", "Games", "Cigars"]
             .map(tag => <button class="atmosphere-btn" data-tag={tag}>{tag}</button>)}
         </div>
       </div>
@@ -90,29 +92,44 @@ import venues from '../data/venues.json';
     <div
       class="card"
       data-index={index}
-      data-vibes={(venue.Vibe ?? '').toLowerCase()}
-      data-audience={(venue.Audience ?? '').toLowerCase()}
-      data-atmosphere={(venue.Atmosphere ?? '').toLowerCase()}
+      data-days={(Array.isArray(venue.Days) ? venue.Days.join(',') : venue.Days ?? '').toLowerCase()}
+      data-vibes={(Array.isArray(venue.Vibe) ? venue.Vibe.join(', ') : venue.Vibe ?? '').toLowerCase()}
+      data-audience={(Array.isArray(venue.Audience) ? venue.Audience.join(', ') : venue.Audience ?? '').toLowerCase()}
+      data-atmosphere={(Array.isArray(venue.Atmosphere) ? venue.Atmosphere.join(', ') : venue.Atmosphere ?? '').toLowerCase()}
+      data-category={(Array.isArray(venue.Category) ? venue.Category.join(', ') : venue.Category ?? '').toLowerCase()}
       data-whentogo={(venue['When to Go'] ?? '').toLowerCase()}
-      data-category={(venue.Category ?? '').toLowerCase()}
-    >
+     >
+     
       <h2>{venue.Venue}</h2>
       <p>{venue.Description}</p>
-      <p class="meta">
-        <strong>City:</strong> {venue.City ?? ''}<br />
-        <strong>Area:</strong> {venue.Area ?? ''}<br />
-        <strong>Category:</strong> {venue.Category}
-      </p>
-      {venue['When to Go'] && (
-        <p class="meta">
-          🕒 <strong>When to Go:</strong> {venue['When to Go']}
-        </p>
-      )}
-      <p class="cost">💰 Cost: {venue.Cost}</p>
-      <div class="links">
-        {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
-        {venue['Google Maps URL'] && <a href={venue['Google Maps URL']} target="_blank">Map</a>}
-      </div>
+<div class="meta">
+  <div class="meta-line"><strong>City:</strong> {venue.City ?? ''}</div>
+  <div class="meta-line"><strong>Area:</strong> {venue.Area ?? ''}</div>
+  <div class="meta-line">
+  <strong>Category:</strong>{' '}
+  {Array.isArray(venue.Category) ? venue.Category.join(', ') : venue.Category}
+</div>
+  {venue['When to Go'] && (
+    <div class="meta-line">
+      🕒 <strong>When to Go:</strong> {venue['When to Go']}
+    </div>
+  )}
+  {venue.Days && venue.Days.length > 0 && (
+    <div class="meta-line">
+      📅 <strong>Days:</strong>{' '}
+      {Array.isArray(venue.Days)
+        ? venue.Days.map(day => day.charAt(0).toUpperCase() + day.slice(1)).join(', ')
+        : venue.Days}
+    </div>
+  )}
+</div>
+
+<div class="meta-line cost">💰 Cost: {venue.Cost}</div>
+
+<div class="links">
+  {venue.Website && <a href={venue.Website} target="_blank">Website</a>}
+  {venue['Google Maps URL'] && <a href={venue['Google Maps URL']} target="_blank">Map</a>}
+</div>
     </div>
   ))}
 </div>
@@ -167,7 +184,7 @@ import venues from '../data/venues.json';
 <!-- Footer -->
 
 
-    <footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;">
+<footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;">
 <div style="transform: scale(0.5); transform-origin: top center;">
   <script type="text/javascript" 
     src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
@@ -290,8 +307,6 @@ toggleBtn.addEventListener("click", () => {
 });
 
 
-
-
     clearBtn.addEventListener("click", () => {
       selectedCategories = [];
       selectedVibes = [];
@@ -308,8 +323,32 @@ toggleBtn.addEventListener("click", () => {
       searchInput.value = "";
       filterCards();
     });
-  });
-</script>
 
+    document.querySelectorAll('.day-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const selectedDay = btn.dataset.day.toLowerCase();
+
+    // 💡 Clear existing active-day styles
+    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active-day'));
+
+    // 💡 Add to the one that was clicked
+    btn.classList.add('active-day');
+
+    document.querySelectorAll('.card').forEach(card => {
+      const cardDays = (card.dataset.days || '').toLowerCase();
+      console.log("Selected:", selectedDay, "| Card Days:", cardDays);
+
+      if (cardDays.includes(selectedDay)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+  });
+
+</script>
   </body>
 </html>

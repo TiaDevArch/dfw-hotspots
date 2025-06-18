@@ -147,7 +147,7 @@
   .links a {
     font-size: 0.85rem;
     margin-right: 10px;
-    color: #0077cc;
+    color: #7057c2;
     text-decoration: none;
   }
 
@@ -259,4 +259,10 @@
 
 .section-toggle .arrow {
   margin-right: 0.5rem;
+}
+
+.day-btn.active-day {
+  background-color: #524776;
+  color: #fff;
+  border: 2px solid #524776;
 }
