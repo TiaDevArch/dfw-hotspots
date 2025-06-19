@@ -29,12 +29,18 @@ try {
     .filter((e) => e["Event Date"]);
 
 
-  const today = new Date();
-  upcomingEvents = allEvents.filter((e) => new Date(e["Event Date"]) >= today);
-  pastEvents = allEvents.filter((e) => new Date(e["Event Date"]) < today);
+const now = new Date();
 
-  upcomingEvents.sort((a, b) => new Date(a["Event Date"]) - new Date(b["Event Date"]));
-  pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]));
+// Normalize today to midnight (start of the day)
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+upcomingEvents = allEvents.filter((e) => new Date(e["Event Date"]) >= today);
+pastEvents = allEvents.filter((e) => new Date(e["Event Date"]) < today);
+
+upcomingEvents.sort((a, b) => new Date(a["Event Date"]) - new Date(b["Event Date"]));
+pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]));
+
 } catch (error) {
   console.error("❌ Failed to fetch Airtable data:", error);
 }
@@ -90,8 +96,11 @@ try {
           {event.Area && <div class="meta-line"><strong>Area:</strong> {event.Area}</div>}
         </div>
         {event["Event Date"] && (
-          <p class="when-to-go"><i>{event["Event Date"]}</i></p>
-        )}
+  <p class="when-to-go">
+    <i>{event["Event Date"]}</i>
+    {event["Event Time"] && `| ${event["Event Time"]}`}
+  </p>
+)}
         {event.URL && (
           <div class="links">
             <a href={event.URL} target="_blank" rel="noopener noreferrer">
