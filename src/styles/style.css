@@ -30,7 +30,7 @@
     text-align: center;
     color: #333;
     margin-bottom: 1rem;
-    font-family: 'Raleway', serif;
+    font-family: 'Raleway', sans-serif;
   }
 
   input[type="text"] {
@@ -54,10 +54,36 @@
   gap: 0.5rem;
 }
 
+  .special-events-page {
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+}
+
 .section-toggle .arrow {
   font-size: 1.1rem;
   margin-right: 8px;
   transition: transform 0.2s ease;
+}
+/* Add to your style.css */
+#special-event-container .card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#special-event-container .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#special-event-container .meta-line {
+  margin: 0.25rem 0;
+}
+
+#special-event-container .links {
+  margin-top: 1rem;
 }
 
 .section-toggle:hover {
@@ -83,7 +109,12 @@
   .filter-options.collapsed {
     display: none;
   }
-
+  .no-events {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 2rem;
+    color: #666;
+  }
   .toggle-button {
     margin-bottom: 1rem;
     background-color: #eee;
@@ -126,6 +157,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    .card {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
   }
 
   .card h2 {
@@ -206,6 +242,28 @@
     margin-bottom: 1rem;
   }
 
+  .about-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.about-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.about-nav a {
+  font-weight: bold;
+  color: #524776;
+  text-decoration: none;
+}
+
+.about-nav a:hover {
+  text-decoration: underline;
+}
+
   @media (min-width: 640px) {
     #filters {
       justify-content: flex-start;
@@ -265,4 +323,8 @@
   background-color: #524776;
   color: #fff;
   border: 2px solid #524776;
+}
+.past-event {
+  opacity: 0.5;
+  filter: grayscale(100%);
 }
