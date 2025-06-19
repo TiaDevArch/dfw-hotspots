@@ -101,13 +101,13 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
     {event["Event Time"] && `| ${event["Event Time"]}`}
   </p>
 )}
-        {event.URL && (
-          <div class="links">
-            <a href={event.URL} target="_blank" rel="noopener noreferrer">
-              More Info
-            </a>
-          </div>
-        )}
+        {event["Event URL"] && (
+  <div class="links">
+    <a href={event["Event URL"]} target="_blank" rel="noopener noreferrer">
+      More Info
+    </a>
+  </div>
+)}
       </div>
     ))}
   </div>
@@ -135,19 +135,17 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
         {event["Event Date"] && (
           <p class="when-to-go"><i>{event["Event Date"]}</i></p>
         )}
-        {event.URL && (
-          <div class="links">
-            <a href={event.URL} target="_blank" rel="noopener noreferrer">
-              More Info
-            </a>
-          </div>
-        )}
+        {event["Event Page URL"] && (
+  <div class="links">
+    <a href={event["Event Page URL"]} target="_blank" rel="noopener noreferrer">
+      More Info
+    </a>
+  </div>
+)}
       </div>
     ))}
   </div>
 </div>
-
-
 
 
 <!-- Footer -->
