@@ -2,6 +2,13 @@
 import '../styles/style.css';
 import { getVenues } from '../lib/getVenues.ts';
 const venues = await getVenues();
+
+venues.sort((a, b) => {
+  const aMature = a["Mature Crowd"] ? 1 : 0;
+  const bMature = b["Mature Crowd"] ? 1 : 0;
+  return bMature - aMature;
+});
+
 ---
 <html lang="en">
 <head>
@@ -69,7 +76,7 @@ const venues = await getVenues();
       <div class="filter-section">
         <h3 class="section-toggle" onclick="toggleSection('vibeFilters', this)"><span class="arrow">▶</span> Filter by Vibe</h3>
         <div id="vibeFilters" class="filter-options collapsed">
-          {["Bougie", "Chill Vibes", "Classy", "Date Night", "Grown & Sexy", "Laid Back", "Lit", "Romantic", "Trendy", "Turn Up"]
+          {["Bougie", "Chill Vibes", "Classy", "Date Night", "Laid Back", "Lit", "Mature Crowd", "Romantic", "Trendy", "Turn Up"]
             .map(tag => <button class="vibe-btn" data-tag={tag}>{tag}</button>)}
         </div>
       </div>
@@ -105,7 +112,12 @@ const venues = await getVenues();
       data-whentogo={(venue['When to Go'] ?? '').toLowerCase()}
      >
      
-      <h2>{venue.Venue}</h2>
+      <h2>
+  {venue.Venue}
+  {venue["Mature Crowd"] && (
+    <span class="badge grown">🔥 Mature Crowd</span>
+  )}
+</h2>
       <p>{venue.Description}</p>
 <div class="meta">
   <div class="meta-line"><strong>City:</strong> {venue.City ?? ''}</div>

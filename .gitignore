@@ -1,1 +1,4 @@
 dev/special-events.json
+
+# Local Netlify folder
+.netlify
