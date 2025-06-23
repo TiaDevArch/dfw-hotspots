@@ -118,9 +118,9 @@ venues.sort((a, b) => {
      
 <h2>
   {venue.Venue}
-  {(venue.Vibe || "").toLowerCase().includes("mature crowd") && (
-    <span class="badge grown">🔥 Mature Crowd</span>
-  )}
+ {(Array.isArray(venue.Vibe) ? venue.Vibe.join(', ').toLowerCase() : (venue.Vibe || "").toLowerCase()).includes("mature crowd") && (
+  <span class="badge grown">🔥 Mature Crowd</span>
+)}
 </h2>
       <p>{venue.Description}</p>
 <div class="meta">
