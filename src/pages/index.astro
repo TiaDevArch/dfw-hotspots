@@ -4,10 +4,11 @@ import { getVenues } from '../lib/getVenues.ts';
 const venues = await getVenues();
 
 venues.sort((a, b) => {
-  const aMature = a["Mature Crowd"] ? 1 : 0;
-  const bMature = b["Mature Crowd"] ? 1 : 0;
+  const aMature = (Array.isArray(a.Vibe) ? a.Vibe.join(', ') : a.Vibe ?? '').toLowerCase().includes("mature crowd") ? 1 : 0;
+  const bMature = (Array.isArray(b.Vibe) ? b.Vibe.join(', ') : b.Vibe ?? '').toLowerCase().includes("mature crowd") ? 1 : 0;
   return bMature - aMature;
 });
+
 
 ---
 <html lang="en">
