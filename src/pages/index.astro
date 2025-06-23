@@ -112,9 +112,9 @@ venues.sort((a, b) => {
       data-whentogo={(venue['When to Go'] ?? '').toLowerCase()}
      >
      
-      <h2>
+<h2>
   {venue.Venue}
-  {venue["Mature Crowd"] && (
+  {(venue.Vibe || "").toLowerCase().includes("mature crowd") && (
     <span class="badge grown">🔥 Mature Crowd</span>
   )}
 </h2>
