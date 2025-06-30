@@ -6,11 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
     "airtable:pull": "node scripts/pullAirtableData.js"
   },
   "dependencies": {
     "astro": "^5.8.2",
-    "axios": "^1.10.0"
+    "axios": "^1.10.0",
+    "dotenv": "^17.0.0"
   }
 }

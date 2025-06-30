@@ -1,0 +1,326 @@
+[
+  {
+    "id": "recZfr08dMNVjCxnZ",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Oak Cliff Film Festival",
+      "Event Date": "2025-06-26",
+      "Venue": "Texas Theatre, Kessler Theatre, Bishop Arts Theatre Center",
+      "City": "Dallas",
+      "Area": "Oak Cliff",
+      "Description": "Annual indie film fest showcasing documentary, narrative, shorts, student workshops & live events",
+      "Event URL": "https://www.oakclifffilmfestival.com/",
+      "Tags": [
+        "Film Festival"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recp2uyqYVTo5ydLa",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Dallas Soul Flower Music Fest",
+      "Event Date": "2025-06-14",
+      "Venue": "Pacific Plaza / Main Street Garden Park",
+      "City": "Dallas",
+      "Area": "Downtown",
+      "Description": "One-day soul/R&B/hip‑hop festival with national/local artists, food, games, vendors",
+      "Event URL": "https://www.SoulFlowerDallas.com/ (via Instagram/Facebook)",
+      "Tags": [
+        "Music Festival",
+        "Soul"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recQCyjcgvVK0qB3H",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Juneteenth Soul Food Festival",
+      "Event Date": "2025-06-15",
+      "Venue": "Main Street Garden Park",
+      "City": "Dallas",
+      "Area": "TBD",
+      "Description": "Foodie‑centric festival celebrating Juneteenth with soul food (exact venue TBD)",
+      "Tags": [
+        "Foodie Event"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recDv6m7moCojDBp0",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Dallas Greek Picnic",
+      "Event Date": "2025-06-07",
+      "Venue": "William Bill Blair Jr Park",
+      "City": "Dallas",
+      "Area": "Downtown",
+      "Description": "Annual cultural picnic for the Greek-lettered community",
+      "Tags": [
+        "Cultural",
+        "Outdoor"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recFc5XSQKzNQTqRV",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Art Overdose DTX",
+      "Event Date": "2025-07-27",
+      "Venue": "Sandaga813",
+      "City": "Dallas",
+      "Area": "South Dallas",
+      "Description": "Local art show at Sandaga13 gallery",
+      "Event URL": "https://artoverdosedtx.com",
+      "Tags": [
+        "Art Show"
+      ],
+      "Month": "July"
+    }
+  },
+  {
+    "id": "recWeSdpB7Sda3ixr",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Juneteenth Freedom Vibes",
+      "Event Date": "2025-06-19",
+      "Venue": "Sundance Square",
+      "City": "Fort Worth",
+      "Area": "Sundance Square",
+      "Description": "Live music (Orchestra Noir blending symphony, R&B, hip‑hop) celebrating Juneteenth",
+      "Tags": [
+        "Live Music"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "rec0SHEAUVGaWKMwv",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "4th of July party",
+      "Event Date": "2025-07-04",
+      "Event Time": "11a-5p",
+      "Venue": "Lava Cantina",
+      "City": "The Colony",
+      "Area": "The Colony",
+      "Description": "Day party with DJ, dancing, games",
+      "Tags": [
+        "Day Party",
+        "Live DJ",
+        "Dancing",
+        "Games"
+      ],
+      "Month": "July"
+    }
+  },
+  {
+    "id": "recH9vLEwT8KG4H5E",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Black Boat Weekend",
+      "Event Date": "2025-07-26",
+      "Event Time": "2-7p",
+      "Venue": "Lewisville Lake",
+      "City": "Lewisville",
+      "Area": "Lake Area",
+      "Description": "Boat party/event on Lake Lewisville",
+      "Event URL": "https://www.eventbrite.com/e/dallas-black-boat-weekend-2025-tickets-1344285577349",
+      "Tags": [
+        "Boat Party"
+      ],
+      "Month": "July"
+    }
+  },
+  {
+    "id": "recHbAsOw61CXnM7X",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Wet Dreams Pool Party",
+      "Event Date": "2025-07-04",
+      "Venue": "Lux Hotel",
+      "City": "Arlington",
+      "Area": "East",
+      "Description": "Pool party at Lux Hotel",
+      "Tags": [
+        "Pool Party"
+      ],
+      "Month": "July"
+    }
+  },
+  {
+    "id": "recA3GasprQo3hzkx",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Lone Star Bayou Line Dance Food Festival",
+      "Event Date": "2025-07-06",
+      "Event Time": "12-7p",
+      "Venue": "Lofty Spaces",
+      "City": "Dallas",
+      "Description": "A day filled with toe-tappin' tunes, mouth-waterin' food, and plenty of line dancin' fun",
+      "Event URL": "https://www.eventbrite.com/e/lone-star-bayou-boots-on-the-ground-line-dance-food-festival-tickets-1333524310109",
+      "Tags": [
+        "Dance",
+        "Community"
+      ],
+      "Month": "July"
+    }
+  },
+  {
+    "id": "recJ8lYec12JpzlaT",
+    "createdTime": "2025-06-18T15:59:48.000Z",
+    "fields": {
+      "Event Name": "Ditch Day",
+      "Event Date": "2025-06-19",
+      "Event Time": "11a-5p",
+      "Venue": "Sidecar Social",
+      "City": "Addison",
+      "Area": "Addison",
+      "Description": "Outdoor community day, food, drinks, social gathering",
+      "Event URL": "https://ditchdaydallas3.eventbrite.com",
+      "Tags": [
+        "Community Event"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recfwBiuNkLosQ0W6",
+    "createdTime": "2025-06-19T04:40:16.000Z",
+    "fields": {
+      "Event Name": "Tequila Fest Dallas",
+      "Event Date": "2025-06-21",
+      "Event Time": "1-9p",
+      "Venue": "Dallas City Hall, 1500 Marilla St",
+      "City": "Dallas",
+      "Area": "Downtown Dallas",
+      "Description": "A vibrant festival featuring tastings from 15+ tequila brands, gourmet street food, live music, cultural festivities, expert mixologists, and a signature cocktail in a pineapple.",
+      "Event URL": "https://www.visitdallas.com/events/tequila-fest-dallas/",
+      "Tags": [
+        "Festival",
+        "Live Music"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recGLkd3kKD1rFOhB",
+    "createdTime": "2025-06-19T04:40:16.000Z",
+    "fields": {
+      "Event Name": "Hot Girl Walk",
+      "Event Date": "2025-06-28",
+      "Event Time": "9:30a",
+      "Venue": "Register for details",
+      "City": "Dallas",
+      "Description": "A 4-mile mindfulness walk for women focused on gratitude, confidence, and community",
+      "Event URL": "https://www.eventbrite.com/e/hot-girl-walk-dallas-june-28-tickets-1369246907359?aff=ebdssbdestsearch",
+      "Tags": [
+        "Wellness"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recBtqUq8X4IyR17N",
+    "createdTime": "2025-06-19T04:40:16.000Z",
+    "fields": {
+      "Event Name": "Perot Museum Adult Night",
+      "Event Date": "2025-06-26",
+      "Event Time": "6-10p",
+      "Venue": "Perot Museum of Nature and Science, 2201 N. Field St",
+      "City": "Dallas",
+      "Area": "Victory Park",
+      "Description": "21+ after-hours event with live music, adult beverages, food trucks, games, and access to exhibits.",
+      "Event URL": "https://www.perotmuseum.org/explore/events/thursdays-on-tap/",
+      "Tags": [
+        "Live Music"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recAGjRohh9UJa6bG",
+    "createdTime": "2025-06-19T04:55:41.000Z",
+    "fields": {
+      "Event Name": "Raise the Bar Cocktail Mixer",
+      "Event Date": "2025-07-20",
+      "Event Time": "4-8p",
+      "Venue": "On the Marquee",
+      "City": "Frisco",
+      "Description": "Bringing Dallas’ community of affluent creatives, professionals, and creatives together for an afternoon of social connections, music, and great vibes.",
+      "Event URL": "https://www.eventbrite.com/e/raise-the-bar-summer-day-party-tickets-1383342487619?aff=oddtdtcreator",
+      "Tags": [
+        "Networking",
+        "Live DJ",
+        "Cocktails"
+      ],
+      "Month": "July"
+    }
+  },
+  {
+    "id": "recKiMgIeaRHiqK8N",
+    "createdTime": "2025-06-19T05:02:29.000Z",
+    "fields": {
+      "Event Name": "Black Founder Weekend",
+      "Event Date": "2025-06-27",
+      "Venue": "Paul Quinn College",
+      "City": "Dallas",
+      "Description": "Free 3-day summit designed to bring Black founders, investors, and leaders together to build wealth, drive innovation, and create lasting change for our communities.",
+      "Event URL": "https://www.eventbrite.com/e/black-founder-weekend-2025-tickets-1306016122379?aff=erellivmlt",
+      "Tags": [
+        "Community Event",
+        "Networking"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recngDsVydabjEwE6",
+    "createdTime": "2025-06-20T20:34:41.000Z",
+    "fields": {
+      "Event Name": "Be Out Day DFW",
+      "Event Date": "2025-06-21",
+      "Event Time": "12-6p",
+      "Venue": "Kiest Park",
+      "City": "Dallas",
+      "Area": "Oak Cliff",
+      "Description": "DJ battle, food trucks, vendors, games, Greek stroll-off--sponsored by FAMU Alum and Dallas Cowboy Markquese Bell",
+      "Tags": [
+        "Live DJ",
+        "Community Event",
+        "Games",
+        "Outdoor"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recdbm3v1TxGA7ESg",
+    "createdTime": "2025-06-28T05:08:05.000Z",
+    "fields": {
+      "Event Name": "Night Swim",
+      "Event Date": "2025-06-28",
+      "Event Time": "8p-2a",
+      "Venue": "Statler Hotel",
+      "City": "Dallas",
+      "Area": "Downtown",
+      "Description": "Rooftop night swim. RSVP at waterproofdtx.com",
+      "Event URL": "https://waterproofdtx.com",
+      "Tags": [
+        "Live DJ"
+      ],
+      "Month": "June"
+    }
+  },
+  {
+    "id": "recQ9UhEmxGpkM5Rv",
+    "createdTime": "2025-06-28T05:10:07.000Z",
+    "fields": {}
+  }
+]
