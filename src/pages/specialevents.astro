@@ -56,12 +56,21 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
   <meta name="author" content="Tia Ross" />
 
   <!-- Open Graph for social sharing -->
-  <meta property="og:title" content="DFW Hotspot Vibes" />
+  <meta property="og:title" content="DFW Hotspots" />
   <meta property="og:description" content="Find your vibe in Dallas-Fort Worth — Brunch, date nights, happy hours, lounges, Black-owned gems and more." />
   <meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWHotspots-s.png" />
   <meta property="og:url" content="https://dfw-hotspot-vibes.netlify.app/" />
   <meta property="og:type" content="website" />
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-REEXGD3XZT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-REEXGD3XZT');
+</script>
   <body>
 <div class="header">
   <img src="/Logo-DFWHotspots-s.png" alt="DFW Hotspots" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Hotspots"/>
