@@ -321,6 +321,24 @@
   {
     "id": "recQ9UhEmxGpkM5Rv",
     "createdTime": "2025-06-28T05:10:07.000Z",
-    "fields": {}
+    "fields": {
+      "Event Name": "Vitruvian Salsa Festival (Salsa in the Park)",
+      "Event Date": "2025-08-09",
+      "Event Time": "6-10p",
+      "Venue": "Vitruvian Park",
+      "City": "Addison",
+      "Description": "Free and family-friendly! Enjoy live Latin music, salsa lessons around 6:30 PM, DJs, food trucks, and vendors offering a festive atmosphere.\n\nWhen? Every 2nd Saturday in June, July, August, and September, from 6:00 PM to 10:00 PM.\n\n2025 Lineup Highlights:\nJune 14: Havana NRG (Latin orchestra)\nJuly 12: Latin Swing\nAugust 9: Zone D’Mambo\nSeptember 13: Yamilka G & Orquesta\n\nParking: Free general parking at Vitruvian Park’s Bella Lane and Ponte Avenue lots. Additional lot available at Alfred J. Loos Sports Complex.",
+      "Event URL": "https://dancecouncil.clubexpress.com",
+      "Tags": [
+        "Outdoor Event",
+        "Music",
+        "Dancing",
+        "Live DJ",
+        "LiveMusic",
+        "Community Event",
+        "Cultural"
+      ],
+      "Month": "June, July, August, September"
+    }
   }
 ]
