@@ -340,5 +340,24 @@
       ],
       "Month": "June, July, August, September"
     }
+  },
+  {
+    "id": "recyx3mfJD9io2sla",
+    "createdTime": "2025-08-09T03:49:57.000Z",
+    "fields": {
+      "Event Name": "Dallas Mavericks African American Heritage Night",
+      "Event Date": "2026-02-20",
+      "Event Time": "7p-11p",
+      "Venue": "American Airlines Cen",
+      "City": "Dallas",
+      "Area": "Victory Park",
+      "Description": "[Date tentative] A cultural celebration and Mavericks game in one — recognizing African American heritage on and off the court. Combines sports, culture, fundraising (UNCF & NPHC), and community in a vibrant, themed experience.\n\nWhen: Annual event, most recently held on February 21, 2025",
+      "Event URL": "https://www.mavs.com/themenights/",
+      "Tags": [
+        "Community",
+        "Sports"
+      ],
+      "Month": "February"
+    }
   }
 ]
