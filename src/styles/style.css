@@ -54,19 +54,18 @@
   gap: 0.5rem;
 }
 
-  .special-events-page {
-  padding: 2rem 1rem;
+.special-events-page {
   background-color: #f9f9f9;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 2rem 1rem; /* single source of truth */
 }
-
 .section-toggle .arrow {
   font-size: 1.1rem;
-  margin-right: 8px;
+  margin-right: 0.5rem;
   transition: transform 0.2s ease;
 }
+
 /* Add to your style.css */
 #special-event-container .card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -148,15 +147,17 @@
     padding: 0 1rem;
   }
 
-  .card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .card {
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  display: flex;              /* keep flex layout */
+  flex-direction: column;
+  justify-content: space-between;
+}
+/* If you truly need a force-visible variant, use a class */
+.card.force-visible {
   display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -337,4 +338,69 @@
   font-weight: bold;
   vertical-align: middle;
   display: inline-block;
+}
+
+/* TESTHEADERCSS */
+/* Layout */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0.75rem 1rem; }
+
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.85);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.site-header .wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+
+/* Brand */
+.brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+.brand img { display: block; height: 40px; width: auto; }
+.brand-text { line-height: 1.1; display: grid; }
+.brand-name { font-weight: 700; letter-spacing: .2px; color: #0f172a; }
+.tagline { font-size: .85rem; color: #64748b; }
+
+/* Nav */
+.main-nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.main-nav a {
+  text-decoration: none; color: #0f172a; font-weight: 500;
+  padding: .35rem .5rem; border-radius: .5rem;
+}
+.main-nav a[aria-current="page"] { background: #eef2ff; }
+.main-nav a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Button (ghost) */
+.btn.btn-ghost {
+  padding: .45rem .75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 9999px;
+}
+.btn-ghost:hover { background: #f8fafc; }
+
+/* Page hero */
+.page-hero {
+  background: linear-gradient(90deg, #f8fafc, #eef2ff);
+  border-bottom: 1px solid #e5e7eb;
+}
+.page-hero .wrap { padding-top: 1rem; padding-bottom: 1rem; }
+.page-hero h1 { margin: 0 0 .25rem; font-size: 1.5rem; }
+.page-hero p { margin: 0 0 .5rem; color: #475569; }
+.back-link { font-size: .95rem; }
+
+/* Small screens */
+@media (max-width: 720px) {
+  .brand-text .tagline { display: none; } /* keep it clean on mobile */
+  .main-nav { gap: .5rem; }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .site-header { background: rgba(15,23,42,0.7); border-bottom-color: #1f2937; }
+  .brand-name, .main-nav a, .back-link { color: #e5e7eb; }
+  .tagline { color: #94a3b8; }
+  .main-nav a[aria-current="page"] { background: #1f2937; }
+  .page-hero { background: linear-gradient(90deg, #0b1220, #131a2d); border-bottom-color: #1f2937; }
+  .page-hero p { color: #a0aec0; }
 }
