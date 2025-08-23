@@ -542,3 +542,43 @@
 @media (prefers-color-scheme: dark){
   .brand-tag{ color:#b9c2d3; }
 }
+/* ===== Minimal top bar ===== */
+.topbar{
+  position: sticky; top: 0; z-index: 60;
+  background: #524776;                 /* requested purple */
+  color: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+}
+.topbar__inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px;
+  gap: 12px;
+}
+.topbar__brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+.topbar__brand img{ display:block; width:36px; height:36px; border-radius:8px; }
+.topbar__name{ color:#fff; font-weight:800; letter-spacing:.2px; }
+
+.topbar__nav{ display:flex; align-items:center; gap:14px; }
+.topbar__nav a{
+  color:#fff; text-decoration:none; opacity:.92;
+  font-weight:600; padding:6px 6px; border-radius:6px; line-height:1;
+}
+.topbar__nav a:hover{ opacity:1; text-decoration: underline; text-underline-offset: 2px; }
+.topbar__nav a[aria-current="page"]{ text-decoration: underline; text-underline-offset: 2px; }
+
+/* tiny outline CTA, still minimal */
+.topbar__cta{
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;
+  padding:6px 10px;
+}
+
+/* Mobile: keep it super clean */
+@media (max-width: 720px){
+  .topbar__name{ display:none; }      /* logo-only on small screens */
+  .topbar__nav{ gap:10px; }
+  .topbar__nav a{ font-weight:600; }
+}

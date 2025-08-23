@@ -72,25 +72,22 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
   gtag('config', 'G-REEXGD3XZT');
 </script>
   <body>
-<!-- Header v2 -->
-<header class="header-v2">
-  <div class="container-v2">
-    <a href="/" class="brand-v2" aria-label="DFW Scene — Home">
-      <img src="/Logo-DFWScene-s.png" alt="DFW Scene logo" width="40" height="40">
-      <div class="brand-copy">
-        <span class="brand-name">DFW Scene</span>
-        <span class="brand-tag">Outings That Actually Hit. <strong>Find Your Scene.</strong></span>
-      </div>
+<header class="topbar">
+  <div class="topbar__inner">
+    <a href="/" class="topbar__brand" aria-label="DFW Scene — Home">
+      <img src="/Logo-DFWScene-s.png" alt="DFW Scene logo" width="36" height="36" />
+      <span class="topbar__name">DFW Scene</span><!-- remove this span if you want icon-only -->
     </a>
 
-    <nav class="nav-v2" aria-label="Primary">
-      <a href="/"        >Venues</a>
-      <a href="/events"  aria-current="page">Special Events</a>
-      <a href="/about"   >About</a>
-      <a href="/submit" class="btn-v2">Submit an Event</a>
+    <nav class="topbar__nav" aria-label="Primary">
+      <a href="/">Venues</a>
+      <a href="/events" aria-current="page">Special Events</a>
+      <a href="/about">About</a>
+      <a class="topbar__cta" href="/submit">Submit</a>
     </nav>
   </div>
 </header>
+
 
 <!-- Page hero v2 -->
 <section class="hero-v2">
