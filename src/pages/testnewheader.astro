@@ -1,0 +1,226 @@
+---
+import '../styles/style.css';
+import { getVenues } from '../lib/getVenues.ts';
+const venues = await getVenues();
+const apiKey = import.meta.env.PUBLIC_AIRTABLE_SPECIAL_EVENTS_KEY;
+const baseId = import.meta.env.PUBLIC_AIRTABLE_SPECIAL_EVENTS_BASE;
+const tableName = import.meta.env.PUBLIC_AIRTABLE_SPECIAL_EVENTS_TABLE;
+
+let events = [];
+let allEvents = [];
+let upcomingEvents = [];
+let pastEvents = [];
+
+try {
+  const res = await fetch(`https://api.airtable.com/v0/${baseId}/${tableName}?view=Grid%20view`, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+
+  const json = await res.json();
+
+  if (!json.records) {
+    console.error("⚠️ Airtable response missing 'records':", json);
+  }
+
+  allEvents = (json.records || [])
+    .map((r) => r.fields)
+    .filter((e) => e["Event Date"]);
+
+
+const now = new Date();
+
+// Normalize today to midnight (start of the day)
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+upcomingEvents = allEvents.filter((e) => new Date(e["Event Date"]) >= today);
+pastEvents = allEvents.filter((e) => new Date(e["Event Date"]) < today);
+
+upcomingEvents.sort((a, b) => new Date(a["Event Date"]) - new Date(b["Event Date"]));
+pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]));
+
+} catch (error) {
+  console.error("❌ Failed to fetch Airtable data:", error);
+}
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DFW Scene | Special Events in Dallas-Fort Worth</title>
+  <meta name="description" content="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres." />
+  <meta name="keywords" content="Dallas nightlife, DFW hotspots, brunch in Dallas, date spots DFW, live music Dallas, black-owned venues Dallas, chill bars Fort Worth, where to go out in DFW" />
+  <meta name="author" content="Tia Ross" />
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="DFW Scene" />
+  <meta property="og:description" content="Find your vibe in Dallas-Fort Worth — Brunch, date nights, happy hours, lounges, Black-owned gems and more." />
+  <meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWScene-s.png" />
+  <meta property="og:url" content="https://dfwscene.app/" />
+  <meta property="og:type" content="website" />
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-REEXGD3XZT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-REEXGD3XZT');
+</script>
+  <body>
+<!-- Site header -->
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="brand" aria-label="DFW Scene — Home">
+      <img src="/Logo-DFWScene-s.png" width="124" height="40" alt="DFW Scene logo">
+      <div class="brand-text">
+        <span class="brand-name">DFW Scene</span>
+        <span class="tagline">Outings That Actually Hit. <strong>Find Your Scene.</strong></span>
+      </div>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <a href="/" >Venues</a>
+      <a href="/events" aria-current="page">Special Events</a>
+      <a href="/about">About</a>
+      <a class="btn btn-ghost" href="/submit">Submit an Event</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Page-specific hero -->
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Special Events in DFW</h1>
+    <p>Explore special events happening around Dallas–Fort Worth!</p>
+    <a class="back-link" href="/">← Back to Venues</a>
+  </div>
+</section>
+
+<!-- UPCOMING EVENTS -->
+<h3 class="section-heading">Upcoming Events</h3>
+<div class="card-grid-wrapper">
+  <div class="card-grid" id="special-event-container">
+    {upcomingEvents.map((event, index) => (
+      <div
+        class="card"
+        data-index={index}
+        data-city={(event["City"] || "").toLowerCase()}
+        data-area={(event["Area"] || "").toLowerCase()}
+        data-tags={(event["Tags"] || []).join(",").toLowerCase()}
+      >
+        <h2>{event["Event Name"]}</h2>
+        {event.Description && <p>{event.Description}</p>}
+        <div class="meta">
+          {event.Venue && <div class="meta-line"><strong>Venue:</strong> {event.Venue}</div>}
+          {event.City && <div class="meta-line"><strong>City:</strong> {event.City}</div>}
+          {event.Area && <div class="meta-line"><strong>Area:</strong> {event.Area}</div>}
+        </div>
+        {event["Event Date"] && (
+  <p class="when-to-go">
+    <i>{event["Event Date"]}</i>
+    {event["Event Time"] && `| ${event["Event Time"]}`}
+  </p>
+)}
+        {event["Event URL"] && (
+  <div class="links">
+    <a href={event["Event URL"]} target="_blank" rel="noopener noreferrer">
+      More Info
+    </a>
+  </div>
+)}
+      </div>
+    ))}
+  </div>
+</div>
+
+<!-- PAST EVENTS -->
+<h3 class="section-heading">Past Events</h3>
+<div class="card-grid-wrapper">
+  <div class="card-grid">
+    {pastEvents.map((event, index) => (
+      <div
+        class="card past-event"
+        data-index={index}
+        data-city={(event["City"] || "").toLowerCase()}
+        data-area={(event["Area"] || "").toLowerCase()}
+        data-tags={(event["Tags"] || []).join(",").toLowerCase()}
+      >
+        <h2>{event["Event Name"]}</h2>
+        {event.Description && <p>{event.Description}</p>}
+        <div class="meta">
+          {event.Venue && <div class="meta-line"><strong>Venue:</strong> {event.Venue}</div>}
+          {event.City && <div class="meta-line"><strong>City:</strong> {event.City}</div>}
+          {event.Area && <div class="meta-line"><strong>Area:</strong> {event.Area}</div>}
+        </div>
+        {event["Event Date"] && (
+          <p class="when-to-go"><i>{event["Event Date"]}</i></p>
+        )}
+        {event["Event Page URL"] && (
+  <div class="links">
+    <a href={event["Event Page URL"]} target="_blank" rel="noopener noreferrer">
+      More Info
+    </a>
+  </div>
+)}
+      </div>
+    ))}
+  </div>
+</div>
+
+
+<!-- Footer -->
+
+<footer style="margin-top: 4rem; padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: #555;">
+<div style="transform: scale(0.5); transform-origin: top center;">
+  <script type="text/javascript" 
+    src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
+    data-name="bmc-button" 
+    data-slug="tiaross" 
+    data-color="#BD5FFF" 
+    data-emoji="📖"  
+    data-font="Bree" 
+    data-text="Buy me a book" 
+    data-outline-color="#000000" 
+    data-font-color="#ffffff" 
+    data-coffee-color="#FFDD00">
+  </script>
+</div>
+
+     <p>📍 DFW Scene<br />
+     <em>Outings That Actually Hit. Find Your Scene.</em><br />
+      <a href="/about">About</a></p>
+    </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.createElement("input");
+  searchInput.type = "text";
+  searchInput.placeholder = "Search events by name, venue, or description...";
+  searchInput.style.cssText = `
+    width: 100%;
+    padding: 0.75rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  `;
+
+  // Insert search bar after the header
+  document.querySelector('.about-header').after(searchInput);
+
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    document.querySelectorAll('#special-event-container .card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(term) ? 'block' : 'none';
+    });
+  });
+});
+</script>
+  </body>
+</html>
