@@ -83,12 +83,13 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
       </div>
     </a>
 
-    <nav class="main-nav" aria-label="Primary">
-      <a href="/" >Venues</a>
-      <a href="/events" aria-current="page">Special Events</a>
-      <a href="/about">About</a>
-      <a class="btn btn-ghost" href="/submit">Submit an Event</a>
-    </nav>
+  <nav class="main-nav" aria-label="Primary">
+  <a href="/">Venues</a>
+  <a href="/events" class="is-active" aria-current="page">Special Events</a>
+  <a href="/about">About</a>
+  <a class="btn-ghost" href="/submit">Submit an Event</a>
+</nav>
+
   </div>
 </header>
 
