@@ -146,6 +146,70 @@
     margin: 0 auto;
     padding: 0 1rem;
   }
+/* Compact grid layout */
+.card-grid.compact{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;              /* down from 20–32px */
+}
+
+/* Card spacing reduced */
+.card-grid.compact .card{
+  margin: 0;              /* remove outer gaps if any */
+  padding: 12px 14px;     /* down from ~20px+ */
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+
+/* Titles & text tightened */
+.card-grid.compact .card h2{
+  font-size: 1.05rem;
+  line-height: 1.25;
+  margin: 0 0 .35rem;
+}
+
+.card-grid.compact .card p{
+  margin: 0 0 .5rem;
+}
+
+/* Meta lines compact */
+.card-grid.compact .meta{ margin: .25rem 0 .35rem; }
+.card-grid.compact .meta-line{
+  margin: 0; 
+  font-size: .92rem;
+  line-height: 1.25;
+}
+
+/* Date/time line */
+.card-grid.compact .when-to-go{
+  margin: .35rem 0 0;
+  font-size: .92rem;
+}
+
+/* Links area */
+.card-grid.compact .links{
+  margin-top: .5rem;
+}
+.card-grid.compact .links a{
+  font-size: .92rem;
+  padding: .35rem .55rem;
+  border-radius: 8px;
+}
+
+/* Section heading a bit closer to the grid */
+.section-heading{ margin: 1rem 0 .6rem; }
+
+/* Mobile: one-column with even tighter gap if you want */
+@media (max-width: 640px){
+  .card-grid.compact{
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .card-grid.compact .card{
+    padding: 12px;
+  }
+}
+
 
 .card {
   background: #fff;
@@ -494,7 +558,7 @@ html, body { margin: 0; }
 }
 
 .dfw-nav-note a{
-  color: var(--nav-fg, #c0c0c0);
+  color: var(--nav-fg, #353535);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -508,4 +572,40 @@ html, body { margin: 0; }
 .dfw-nav + .dfw-nav-note{
   border-top: 1px solid var(--nav-border, rgba(0,0,0,.06));
   padding-top: 10px;
+}
+/* --- Flush banner to the very top --- */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Nuke any inherited “sticky offset” */
+:where(body, #app, .page, main) {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Ensure the banner itself adds no top spacing */
+.dfw-banner {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: 0;
+}
+
+/* If you kept the safe-area helper earlier, override it */
+@supports (padding: max(0px)) {
+  .dfw-banner { padding-top: 0 !important; }
+}
+
+/* Prevent first-child margin collapse from pushing the banner down */
+.dfw-banner > *:first-child { margin-top: 0; }
+.events-search{
+  width: 100%;
+  max-width: 760px;
+  display: block;
+  margin: .5rem auto .8rem;
+  padding: .6rem .8rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: .95rem;
 }

@@ -86,7 +86,7 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
 <nav class="dfw-nav dfw-nav--underline is-caps" aria-label="Primary">
   <ul>
     <li><a href="/">Venues</a></li>
-    <li><a href="/events" aria-current="page">Special Events</a></li>
+    <li><a href="/specialevents" aria-current="page">Special Events</a></li>
   </ul>
 </nav>
 
@@ -94,8 +94,32 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
 
 <!-- UPCOMING EVENTS -->
 <h3 class="section-heading">Upcoming Events</h3>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.createElement("input");
+  searchInput.type = "text";
+  searchInput.placeholder = "Search events by name, venue, or description…";
+  searchInput.className = "events-search";
+
+  // Insert after the first section heading or after the nav note as fallback
+  const anchor = document.querySelector('.section-heading')
+                || document.querySelector('.dfw-nav-note')
+                || document.querySelector('.dfw-nav');
+  if (anchor && anchor.parentNode) {
+    anchor.parentNode.insertBefore(searchInput, anchor.nextSibling);
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    document.querySelectorAll('#special-event-container .card').forEach(card => {
+      card.style.display = card.textContent.toLowerCase().includes(term) ? '' : 'none';
+    });
+  });
+});
+</script>
+
 <div class="card-grid-wrapper">
-  <div class="card-grid" id="special-event-container">
+  <div class="card-grid compact" id="special-event-container">
     {upcomingEvents.map((event, index) => (
       <div
         class="card"
@@ -132,7 +156,7 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
 <!-- PAST EVENTS -->
 <h3 class="section-heading">Past Events</h3>
 <div class="card-grid-wrapper">
-  <div class="card-grid">
+  <div class="card-grid compact">
     {pastEvents.map((event, index) => (
       <div
         class="card past-event"
