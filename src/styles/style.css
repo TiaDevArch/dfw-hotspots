@@ -617,22 +617,24 @@ html, body { margin: 0; }
 }
 /* No gap between banner and nav */
 .dfw-banner + .dfw-nav { margin-top: 0 !important; }
-/* Center the logo link inside the full-width banner */
+
+/* Force the banner to center its single child horizontally & vertically */
 .dfw-banner{
-  display: grid;              /* make the banner a grid */
-  place-items: center;        /* center its single child horizontally & vertically */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-/* Ensure the link spans the banner so its grid centering works everywhere */
+/* If this exists earlier, override it */
 .dfw-banner__logo{
-  width: 100%;
-  display: grid;              /* keep your existing grid centering */
-  place-items: center;
-  margin: 0;                  /* no accidental margins */
+  /* was: display:grid; place-items:center; width:100%; */
+  display: block !important;
+  width: max-content !important;
+  place-items: initial !important;
 }
 
-/* Defensive: images never add inline gaps */
+/* Images should not add inline gaps */
 .dfw-banner__logo img{
-  display: block;
-  margin: 0;
+  display: block !important;
+  margin: 0 auto !important;
 }
