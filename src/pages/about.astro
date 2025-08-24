@@ -4,24 +4,23 @@ import Layout from '../layouts/Layout.astro'
 
 <Layout title="About">
   <div class="page-wrapper about-page">
-    <header class="about-header">
-      <h1>About This Project</h1>
-      <nav class="about-nav">
-        <a href="/">← Back to Venues</a>
-        <a href="/specialevents">Upcoming Events</a>
-      </nav>
+<header class="dfw-banner" role="banner">
+  <a class="dfw-banner__logo" href="/" aria-label="DFW Scene — Home">
+    <img
+      src="/Logo-DFWScene-s.png"
+      srcset="/Logo-DFWScene-s.png 1x, /Logo-DFWScene.png 2x"
+      alt="DFW Scene logo"
+      width="256" height="256" alt="DFW Scene" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Scene"/>
+  </a>
+</header>
 
-      <!-- Centered site nav -->
+<!-- Centered site nav -->
 <nav class="dfw-nav dfw-nav--underline is-caps" aria-label="Primary">
   <ul>
-    <li><a href="/"         >Venues</a></li>
-    <li><a href="/events"   aria-current="page">Special Events</a></li>
-    <li><a href="/about"    >About</a></li>
-    <li><a href="/submit"   class="cta">Submit</a></li>
+    <li><a href="/">Venues</a></li>
+    <li><a href="/events" aria-current="page">Special Events</a></li>
   </ul>
 </nav>
-
-
 
 
     </header>

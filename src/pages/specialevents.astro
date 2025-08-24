@@ -72,16 +72,23 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
   gtag('config', 'G-REEXGD3XZT');
 </script>
   <body>
-<div class="header">
-  <img src="/Logo-DFWScene-s.png" alt="DFW Scene" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Scene"/>
+<header class="dfw-banner" role="banner">
+  <a class="dfw-banner__logo" href="/" aria-label="DFW Scene — Home">
+    <img
+      src="/Logo-DFWScene-s.png"
+      srcset="/Logo-DFWScene-s.png 1x, /Logo-DFWScene.png 2x"
+      alt="DFW Scene logo"
+      width="256" height="256" alt="DFW Scene" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Scene"/>
+  </a>
+</header>
 
-    <header class="about-header">
-      <h2>Special Events in DFW</h2>
-      <nav class="about-nav">
-        <a href="/">← Back to Venues</a>
-        <a href="/about">About</a>
-      </nav>
-    </header>
+<!-- Centered site nav -->
+<nav class="dfw-nav dfw-nav--underline is-caps" aria-label="Primary">
+  <ul>
+    <li><a href="/">Venues</a></li>
+    <li><a href="/events" aria-current="page">Special Events</a></li>
+  </ul>
+</nav>
 
       <p>Explore special events happening around Dallas-Fort Worth!</p>
 

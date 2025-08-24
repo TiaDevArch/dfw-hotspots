@@ -482,3 +482,30 @@ html, body { margin: 0; }
   .dfw-nav a{ font-size: .9rem; }
   .dfw-nav a.cta{ white-space: nowrap; }
 }
+/* Note under the primary nav */
+.dfw-nav-note{
+  max-width: 960px;
+  margin: 8px auto 20px;
+  padding: 6px 12px;
+  text-align: center;
+  font-size: clamp(.85rem, 1.15vw, .95rem);
+  line-height: 1.4;
+  color: var(--nav-dim, #aeb4c5);          /* uses your nav token if present */
+}
+
+.dfw-nav-note a{
+  color: var(--nav-fg, #e6e7ee);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.dfw-nav-note em{
+  color: var(--nav-dim, #aeb4c5);
+  font-style: italic;
+}
+
+/* Optional: subtle divider from the nav */
+.dfw-nav + .dfw-nav-note{
+  border-top: 1px solid var(--nav-border, rgba(255,255,255,.08));
+  padding-top: 10px;
+}

@@ -47,13 +47,31 @@ venues.sort((a, b) => {
       <h2>DFW Scene</h2>
     </div>
 
-    <header class="about-header">
-      <nav class="about-nav">
-        See also <a href="specialevents/">Special Events Calendar</a><br>
-        <em>(Spotlights annual, monthly, and one-off happenings that don’t follow a set schedule—unique events worth marking your calendar for)
-        </em>
-      </nav>
-    </header>
+<header class="dfw-banner" role="banner">
+  <a class="dfw-banner__logo" href="/" aria-label="DFW Scene — Home">
+    <img
+      src="/Logo-DFWScene-s.png"
+      srcset="/Logo-DFWScene-s.png 1x, /Logo-DFWScene.png 2x"
+      alt="DFW Scene logo"
+      width="256" height="256" alt="DFW Scene" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Scene"/>
+  </a>
+</header>
+
+<!-- Centered site nav -->
+<nav class="dfw-nav dfw-nav--underline is-caps" aria-label="Primary">
+  <ul>
+    <li><a href="/">Venues</a></li>
+    <li><a href="/events">Special Events</a></li>
+  </ul>
+</nav>
+
+<!-- Short directive below the nav -->
+<p class="dfw-nav-note">
+  See also <a href="/specialevents/">Special Events Calendar</a><br />
+  <em>(Spotlights annual, monthly, and one-off happenings that don’t follow a set schedule—unique events worth marking your calendar for.)</em>
+</p>
+
+
 
     <input
       type="text"
