@@ -1,9 +1,10 @@
-  body {
-    font-family: Calibri, sans-serif;
-    padding: 2rem;
-    background: #f9f9f9;
-    margin: 0;
-  }
+body {
+  font-family: Calibri, sans-serif;
+  /* no top padding so the header sits flush */
+  padding: 0 2rem 2rem;
+  background: #f9f9f9;
+  margin: 0;
+}
 
   .header {
     display: flex;
@@ -440,7 +441,7 @@ html, body { margin: 0; }
   background:
     radial-gradient(120% 160% at 0% 0%, var(--dfw-bg-a) 0%, var(--dfw-bg-b) 55%, var(--dfw-bg-c) 100%),
     linear-gradient(180deg, #1a1033 0%, #0b0d1f 100%);
-}=
+}
 
 /* Center the logo perfectly */
 .dfw-banner__logo {
@@ -460,11 +461,6 @@ html, body { margin: 0; }
   filter:
     drop-shadow(0 0 10px rgba(255, 102, 0, 0.35))
     drop-shadow(0 0 12px rgba(0, 180, 255, 0.25));
-}
-
-/* Account for iOS notches if you keep it sticky */
-@supports (padding: max(0px)) {
-  .dfw-banner { padding-top: max(10px, env(safe-area-inset-top)); padding-bottom: 10px; }
 }
 /* ===== tokens to match the banner ===== */
 :root{
@@ -580,7 +576,7 @@ html, body { margin: 0; }
 }
 
 .dfw-nav-note a{
-  color: var(--nav-fg, #353535);
+  color: var(--nav-fg, #353535 !important);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -619,3 +615,6 @@ html, body { margin: 0; }
   border-radius: 10px;
   font-size: .95rem;
 }
+
+/* No gap between banner and nav */
+.dfw-banner + .dfw-nav { margin-top: 0 !important; }
