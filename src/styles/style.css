@@ -480,24 +480,27 @@ html, body { margin: 0; }
 }
 .dfw-nav ul{
   overflow: visible !important;   /* was overflow-x:auto */
-  flex-wrap: wrap !important;     /* put extra items on a new line */
   justify-content: center !important;
-}
-
-/* Just in case any browser still shows a track */
-.dfw-nav ul::-webkit-scrollbar{ display:none; }
-.dfw-nav{ -ms-overflow-style:none; scrollbar-width:none; }
-
-/* Slightly tighter spacing so a single row fits more often */
-.dfw-nav ul{
-  gap: clamp(10px, 2.2vw, 22px);
+  display: flex !important;
+  flex-wrap: nowrap !important;          /* keep one line */
+  gap: clamp(10px, 2vw, 20px);
   padding: 8px clamp(12px, 3vw, 26px);
+  overflow-x: auto !important;           /* allow scroll if it overflows */
+  -webkit-overflow-scrolling: touch;     /* smooth on iOS */
 }
 
+/* hide the scrollbar visuals */
+.dfw-nav ul::-webkit-scrollbar{ display: none; }
+.dfw-nav{ -ms-overflow-style: none; scrollbar-width: none; }
+
+/* prevent items from stretching or stacking */
+.dfw-nav li{ flex: 0 0 auto !important; }
 .dfw-nav a{
+  display: inline-block;
+  white-space: nowrap;                   /* keep labels on one line */
+  font-size: clamp(.82rem, 1.1vw, .95rem);
   color: var(--nav-fg); text-decoration: none;
   font-weight: 700;
-  font-size: clamp(.85rem, 1.3vw, .95rem); /* smaller & responsive */
   letter-spacing: .2px; line-height: 1;
   opacity: .9; transition: color .15s ease, opacity .15s ease, background .15s ease, border-color .15s ease;
 }

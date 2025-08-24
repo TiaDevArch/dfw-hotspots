@@ -1,8 +1,47 @@
 ---
-import Layout from '../layouts/Layout.astro'
----
+import '../styles/style.css';
+import { getVenues } from '../lib/getVenues.ts';
+const venues = await getVenues();
 
-<Layout title="About">
+venues.sort((a, b) => {
+  const aVibe = a?.Vibe ? (Array.isArray(a.Vibe) ? a.Vibe.join(', ') : a.Vibe) : "";
+  const bVibe = b?.Vibe ? (Array.isArray(b.Vibe) ? b.Vibe.join(', ') : b.Vibe) : "";
+
+  const aMature = aVibe.toLowerCase().includes("mature crowd") ? 1 : 0;
+  const bMature = bVibe.toLowerCase().includes("mature crowd") ? 1 : 0;
+
+  return bMature - aMature;
+});
+
+---
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+  <title>DFW Scene | Best Places to Go Out in Dallas-Fort Worth</title>
+  <meta name="description" content="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres." />
+  <meta name="keywords" content="Dallas nightlife, DFW scene, DFW hotspots, brunch in Dallas, date spots DFW, live music Dallas, black-owned venues Dallas, chill bars Fort Worth, where to go out in DFW" />
+  <meta name="author" content="Tia Ross" />
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="DFW Scene" />
+  <meta property="og:description" content="Find your vibe in Dallas-Fort Worth — Brunch, date nights, happy hours, lounges, Black-owned gems and more." />
+  <meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWScene-s.png" />
+  <meta property="og:url" content="https://dfwscene.app/" />
+  <meta property="og:type" content="website" />
+  </head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-REEXGD3XZT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-REEXGD3XZT');
+</script>
+  <body>
 <header class="dfw-banner" role="banner">
   <a class="dfw-banner__logo" href="/" aria-label="DFW Scene — Home">
     <img
