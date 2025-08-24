@@ -134,12 +134,22 @@
     font-size: 0.9rem;
   }
 
-  .card-grid {
+  .card-grid,
+  #venueList.card-grid,
+#special-event-container.card-grid,
+#past-event-container.card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
   }
+  /* Responsive min: 260px up to 460px */
+#venueList.card-grid,
+#special-event-container.card-grid,
+#past-event-container.card-grid{
+  grid-template-columns: repeat(auto-fit, minmax(clamp(260px, 80vw, 460px), 1fr));
+}
+
 
   .card-grid-wrapper {
     max-width: 1200px;
@@ -209,49 +219,6 @@
     padding: 12px;
   }
 }
-/* VENUES PAGE: tighter cards (inside only) + top-aligned content */
-#venueList { align-items: start; }  /* grid items align to top (no stretch) */
-
-#venueList .card{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;   /* no space-between pushing content down */
-  gap: 8px;                      /* tight vertical rhythm */
-  padding: 12px 14px;            /* smaller interior padding */
-  border-radius: 10px;           /* keep your look */
-  box-shadow: 0 1px 3px rgba(0,0,0,.08);
-  margin: 0;                     /* no extra outside gap added by card */
-}
-
-/* headings & text */
-#venueList .card h2{
-  font-size: 1.05rem;
-  line-height: 1.25;
-  margin: 0 0 .35rem;
-}
-#venueList .card p{ margin: 0 0 .45rem; }
-
-/* meta block */
-#venueList .meta{ margin: 0; }
-#venueList .meta-line{
-  margin: 0;
-  font-size: .95rem;
-  line-height: 1.3;
-}
-
-/* date/when-to-go line (if present) */
-#venueList .when-to-go{
-  margin: .35rem 0 0;
-  font-size: .95rem;
-}
-
-/* links row close to content; no push to bottom */
-#venueList .links{ margin-top: .4rem; }
-#venueList .links a{
-  font-size: .95rem;
-  padding: .35rem .55rem;
-  border-radius: 8px;
-}
 
 
 .card {
@@ -269,8 +236,6 @@
   opacity: 1 !important;
   visibility: visible !important;
 }
-  }
-
   .card h2 {
     margin: 0 0 0.5rem 0;
     font-size: 1.2rem;
@@ -461,24 +426,21 @@
 html, body { margin: 0; }
 
 /* Full-bleed header that always spans the viewport width */
-.dfw-banner {
-  position: sticky;        /* remove if you don't want it to stick */
-  top: 0;
-  z-index: 50;
+.dfw-banner{
+  position: sticky; top: 0; z-index: 50;
 
-  /* full-bleed even inside centered page layouts */
+  /* full-bleed regardless of parent padding */
   width: 100vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  transform: none;
 
-  /* height scales with screen; tweak if you want shorter/taller */
+  /* keep your existing background/height/etc below this line */
   min-height: clamp(72px, 14vw, 140px);
-
-  /* layered gradients to mimic the logo’s backdrop */
   background:
     radial-gradient(120% 160% at 0% 0%, var(--dfw-bg-a) 0%, var(--dfw-bg-b) 55%, var(--dfw-bg-c) 100%),
     linear-gradient(180deg, #1a1033 0%, #0b0d1f 100%);
-}
+}=
 
 /* Center the logo perfectly */
 .dfw-banner__logo {
@@ -520,8 +482,10 @@ html, body { margin: 0; }
   width: 100%;
   background: linear-gradient(180deg, #11162b 0%, var(--nav-bg) 100%);
   border-bottom: 1px solid var(--nav-border);
+  margin: 0 !important;
 }
 .dfw-nav ul{
+  margin: 0 !important;
   overflow: visible !important;   /* was overflow-x:auto */
   justify-content: center !important;
   display: flex !important;
@@ -542,6 +506,7 @@ html, body { margin: 0; }
   display: inline-block;
   white-space: nowrap;                   /* keep labels on one line */
   font-size: clamp(.82rem, 1.1vw, .95rem);
+
   color: var(--nav-fg); text-decoration: none;
   font-weight: 700;
   letter-spacing: .2px; line-height: 1;
@@ -628,19 +593,8 @@ html, body { margin: 0; }
 /* Optional: subtle divider from the nav */
 .dfw-nav + .dfw-nav-note{
   border-top: 1px solid var(--nav-border, rgba(0,0,0,.06));
+  padding-top: 10px;
 }
-/* --- Flush banner to the very top --- */
-html, body {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Nuke any inherited “sticky offset” */
-:where(body, #app, .page, main) {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
 /* Ensure the banner itself adds no top spacing */
 .dfw-banner {
   margin-top: 0 !important;
@@ -650,7 +604,7 @@ html, body {
 
 /* If you kept the safe-area helper earlier, override it */
 @supports (padding: max(0px)) {
-  .dfw-banner { padding-top: 0 !important; }
+  .dfw-banner { padding-top: 0; padding-bottom: 10px; }
 }
 
 /* Prevent first-child margin collapse from pushing the banner down */
@@ -665,13 +619,3 @@ html, body {
   border-radius: 10px;
   font-size: .95rem;
 }
-/* --- Make banner + nav flush --- */
-html, body { margin: 0; padding: 0; }
-
-.dfw-banner{ margin: 0 !important; padding-bottom: 0; border-bottom: 0; }
-.dfw-banner > *{ margin: 0; }                 /* prevent child margins from adding space */
-.dfw-banner img{ display: block; }            /* no inline gap */
-
-.dfw-banner + .dfw-nav{ margin-top: 0 !important; }
-.dfw-nav{ margin: 0 !important; }
-.dfw-nav ul{ margin: 0 !important; }          /* default UL margin can create a visible gap */
