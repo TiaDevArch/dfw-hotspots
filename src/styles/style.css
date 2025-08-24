@@ -494,7 +494,7 @@ html, body { margin: 0; }
 }
 
 .dfw-nav-note a{
-  color: var(--nav-fg, #e6e7ee);
+  color: var(--nav-fg, #c0c0c0);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -506,6 +506,6 @@ html, body { margin: 0; }
 
 /* Optional: subtle divider from the nav */
 .dfw-nav + .dfw-nav-note{
-  border-top: 1px solid var(--nav-border, rgba(255,255,255,.08));
+  border-top: 1px solid var(--nav-border, rgba(0,0,0,.06));
   padding-top: 10px;
 }
