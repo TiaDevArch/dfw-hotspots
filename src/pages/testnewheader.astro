@@ -71,22 +71,23 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
 
   gtag('config', 'G-REEXGD3XZT');
 </script>
-  <body>
-<header class="topbar">
-  <div class="topbar__inner">
-    <a href="/" class="topbar__brand" aria-label="DFW Scene — Home">
-      <img src="/Logo-DFWScene-s.png" alt="DFW Scene logo" width="36" height="36" />
-      <span class="topbar__name">DFW Scene</span><!-- remove this span if you want icon-only -->
-    </a>
+  <body><!-- Full-width dark banner -->
+<header class="dfw-banner" role="banner">
+  <a class="dfw-banner__logo" href="/" aria-label="DFW Scene — Home">
+    <img
+      src="/Logo-DFWScene-s.png"
+      srcset="/Logo-DFWScene-s.png 1x, /Logo-DFWScene.png 2x"
+      alt="DFW Scene logo"
+      width="256" height="256" alt="DFW Scene" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Scene"/>
+  </a>
+</header>
+
 
     <nav class="topbar__nav" aria-label="Primary">
       <a href="/">Venues</a>
       <a href="/events" aria-current="page">Special Events</a>
       <a href="/about">About</a>
-      <a class="topbar__cta" href="/submit">Submit</a>
     </nav>
-  </div>
-</header>
 
 
 <!-- Page hero v2 -->
