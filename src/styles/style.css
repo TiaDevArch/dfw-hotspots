@@ -475,7 +475,7 @@ html, body { margin: 0; }
 
   /* === Full-bleed nav bar (edge-to-edge) === */
 .dfw-nav{
-  background: linear-gradient(180deg, #1b1033 0%, var(--nav-bg) 100%);
+  background: linear-gradient(180deg, #0b0d1f 0%, var(--nav-bg) 100%);
   border-bottom: 1px solid var(--nav-border);
   width: auto !important;                 /* instead of 100vw */
   margin-left: 0 !important;              /* cancel calc(50% - 50vw) */
