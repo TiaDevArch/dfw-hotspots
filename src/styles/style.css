@@ -475,18 +475,27 @@ html, body { margin: 0; }
 
   /* === Full-bleed nav bar (edge-to-edge) === */
 .dfw-nav{
-  width: 100vw;
-  background: linear-gradient(180deg, #11162b 0%, var(--nav-bg) 100%);
+  background: linear-gradient(180deg, #1b1033 0%, var(--nav-bg) 100%);
   border-bottom: 1px solid var(--nav-border);
-  margin: 0 !important;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-
-  /* no side padding on the bar itself; the <ul> provides inner gutters */
-  padding-left: 0 !important;
+  width: auto !important;                 /* instead of 100vw */
+  margin-left: 0 !important;              /* cancel calc(50% - 50vw) */
+  margin-right: 0 !important;
+  padding-left: 0 !important;             /* ul handles inner gutters */
   padding-right: 0 !important;
+
+  border-bottom-left-radius: 16px;        /* round the bottom only */
+  border-bottom-right-radius: 16px;
+  overflow: hidden;                        /* clip gradient to corners */
+
+  /* optional depth */
+  box-shadow:
+    inset 0 -1px 0 rgba(255,255,255,.06),
+    0 8px 20px rgba(0,0,0,.08);
 }
-}
+
+/* keep it snug under the banner */
+.dfw-banner + .dfw-nav{ margin-top: 0 !important; }
+
 .dfw-nav ul{
   margin: 0 !important;
   overflow: visible !important;   /* was overflow-x:auto */
@@ -494,7 +503,7 @@ html, body { margin: 0; }
   display: flex !important;
   flex-wrap: nowrap !important;          /* keep one line */
   gap: clamp(10px, 2vw, 20px);
-  padding: 8px clamp(12px, 3vw, 26px);
+  padding: 10px clamp(12px, 3vw, 26px);
   overflow-x: auto !important;           /* allow scroll if it overflows */
   -webkit-overflow-scrolling: touch;     /* smooth on iOS */
 }
