@@ -654,3 +654,21 @@ html, body { margin: 0; }
   display: block !important;
   margin: 0 auto !important;
 }
+
+/* styles for share functionality */
+;border:1px solid #ddd;border-radius:999px;background:#fff;cursor:pointer;font-size:.9rem}
+  .share-btn:hover{background:#f6f6f6}
+  .share-menu{position:absolute;right:0;top:110%;width:240px;background:#fff;border:1px solid #e5e5e5;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:.35rem;display:none;z-index:20}
+  .share-menu.open{display:block}
+  .share-item{display:block;width:100%;text-align:left;border:0;background:transparent;padding:.55rem .6rem;border-radius:10px;font-size:.95rem;cursor:pointer}
+  .share-item:hover{background:#f4f6f8}
+  .share-divider{height:1px;background:#eee;margin:.25rem 0}
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;background:#111;color:#fff;padding:.55rem .8rem;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s ease}
+  .toast.show{opacity:1}
+  /* QR modal */
+  .qr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:50}
+  .qr-overlay.open{display:flex}
+  .qr-modal{background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:18px;width:min(92vw,360px);text-align:center}
+  .qr-modal h3{margin:0 0 .5rem;font-size:1rem}
+  .qr-modal img{display:block;margin:0 auto;border-radius:8px}
+  .qr-close{margin-top:.75rem}

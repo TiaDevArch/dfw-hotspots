@@ -165,8 +165,6 @@ venues.sort((a, b) => {
         ? venue.Days.map(day => day.charAt(0).toUpperCase() + day.slice(1)).join(', ')
         : venue.Days}
     </div>
-  )}
-</div>
 
 <div class="meta-line cost">💰 Cost: {venue.Cost}</div>
 
@@ -178,6 +176,180 @@ venues.sort((a, b) => {
   ))}
 </div>
 
+
+
+      <!-- Share at the very bottom -->
+      <div class="share-wrapper">
+        <button class="share-btn"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-share-title={shareText}
+          data-share-text={venue.Description ?? shareText}
+          data-share-rel={rel}
+          data-share-index={index}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98"/><path d="M15.41 6.51L8.59 10.49"/></svg>
+          Share
+        </button>
+        <div class="share-menu" role="menu" id={`share-menu-${index}`}>
+          <button class="share-item" data-action="native">Share…</button>
+          <div class="share-divider"></div>
+          <button class="share-item" data-action="copy">Copy link</button>
+          <button class="share-item" data-action="fb">Share to Facebook</button>
+          <button class="share-item" data-action="wa">Share to WhatsApp</button>
+          <button class="share-item" data-action="tg">Share to Telegram</button>
+          <button class="share-item" data-action="bsky">Share to Bluesky</button>
+          <button class="share-item" data-action="mail">Share via Email</button>
+          <div class="share-divider"></div>
+          <button class="share-item" data-action="qr">Show QR</button>
+        </div>
+      </div>
+
+    </div>
+    );
+  })}
+</div>
+
+<script>
+(function(){
+  const grid = document.getElementById('venueList');
+  const toast = createToast();
+
+  function absUrl(rel){
+    try { return new URL(rel, window.location.origin).toString(); }
+    catch { return window.location.origin + rel; }
+  }
+
+  // Add UTMs for share INTENTS only (not for copy)
+  function withUtm(url){
+    const u = new URL(url);
+    if(!u.searchParams.has('utm_source')){
+      u.searchParams.set('utm_source','share');
+      u.searchParams.set('utm_medium','card');
+      u.searchParams.set('utm_campaign','dfwscene');
+    }
+    return u.toString();
+  }
+
+  function openMenu(btn){
+    closeAll();
+    const idx = btn.getAttribute('data-share-index');
+    const m = document.getElementById(`share-menu-${idx}`);
+    if(m){ m.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    document.addEventListener('click', onDocClick, { once:true });
+  }
+  function closeAll(){
+    document.querySelectorAll('.share-menu.open').forEach(m => m.classList.remove('open'));
+    document.querySelectorAll('.share-btn[aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded','false'));
+  }
+  function onDocClick(e){ if(!e.target.closest('.share-wrapper')) closeAll(); }
+
+  async function doNativeShare(title, text, url){
+    if(navigator.share){
+      try{ await navigator.share({ title, text, url }); track('native', url); return true; }
+      catch{ /* fall back to menu */ }
+    }
+    return false;
+  }
+
+  function copyToClipboard(text){
+    return (navigator.clipboard?.writeText(text) || Promise.reject())
+      .then(()=> showToast('Link copied'))
+      .catch(()=>{
+        const ta=document.createElement('textarea');
+        ta.value=text; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); }catch{}
+        document.body.removeChild(ta);
+        showToast('Link copied');
+      });
+  }
+
+  // Social intents (no SDKs). NOTE: no Twitter/X here.
+  function social(kind, title, text, url){
+    const u = encodeURIComponent(url);
+    const t = encodeURIComponent(text || title || '');
+    const s = encodeURIComponent(title || '');
+    const href =
+        kind === 'fb'   ? `https://www.facebook.com/sharer/sharer.php?u=${u}`
+      : kind === 'wa'   ? `https://api.whatsapp.com/send?text=${t}%20${u}`
+      : kind === 'tg'   ? `https://t.me/share/url?url=${u}&text=${t}`
+      : kind === 'bsky' ? `https://bsky.app/intent/compose?text=${t}&url=${u}`
+      : /* mail */        `mailto:?subject=${s}&body=${t}%20${u}`;
+    window.open(href, '_blank', 'noopener,noreferrer');
+    track(kind, url);
+  }
+
+  function track(method, url){
+    // Hook in analytics here if you’d like, e.g. gtag('event','share',{method, item_id:url})
+  }
+
+  function createToast(){ const el=document.createElement('div'); el.className='toast'; document.body.appendChild(el); return el; }
+  function showToast(msg){ toast.textContent=msg; toast.classList.add('show'); setTimeout(()=> toast.classList.remove('show'), 1400); }
+
+  // QR modal (no deps)
+  const qr = createQrModal();
+  function createQrModal(){
+    const overlay = document.createElement('div');
+    overlay.className = 'qr-overlay';
+    overlay.innerHTML = `
+      <div class="qr-modal">
+        <h3>Scan to open</h3>
+        <img id="qr-img" alt="QR code" width="256" height="256" />
+        <div class="share-divider" style="margin:.65rem 0"></div>
+        <button class="share-btn qr-close">Close</button>
+      </div>`;
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', (e)=>{
+      if(e.target === overlay || e.target.closest('.qr-close')) overlay.classList.remove('open');
+    });
+    return overlay;
+  }
+  function showQr(url){
+    const img = qr.querySelector('#qr-img');
+    const api = 'https://api.qrserver.com/v1/create-qr-code/';
+    img.setAttribute('src', api + '?size=256x256&data=' + encodeURIComponent(url));
+    qr.classList.add('open');
+  }
+
+  grid?.addEventListener('click', async (e)=>{
+    const btn = e.target.closest('.share-btn');
+    const item = e.target.closest('.share-item');
+
+    if(btn){
+      const title = btn.getAttribute('data-share-title') || document.title;
+      const text  = btn.getAttribute('data-share-text') || title;
+      const rel   = btn.getAttribute('data-share-rel') || '/';
+      const url   = absUrl(rel);
+      const did   = await doNativeShare(title, text, url);
+      if(!did) openMenu(btn);
+    }
+
+    if(item){
+      const wrap  = item.closest('.share-wrapper');
+      const btn2  = wrap.querySelector('.share-btn');
+      const title = btn2.getAttribute('data-share-title') || document.title;
+      const text  = btn2.getAttribute('data-share-text') || title;
+      const rel   = btn2.getAttribute('data-share-rel') || '/';
+      const url   = absUrl(rel);
+      const action = item.getAttribute('data-action');
+
+      if(action === 'native'){
+        await doNativeShare(title, text, url);
+      } else if(action === 'copy'){
+        // Copy clean URL (no UTMs)
+        await copyToClipboard(url);
+      } else if(['fb','wa','tg','bsky','mail'].includes(action)){
+        // Add UTMs only on outbound share intents
+        social(action, title, text, withUtm(url));
+      } else if(action === 'qr'){
+        showQr(withUtm(url));
+      }
+      closeAllMenus();
+    }
+  });
+
+})();
+</script>
 
 <!-- ✍️ Suggest an Edit + Submit a Venue Buttons -->
 <div style="margin-top: 3rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
