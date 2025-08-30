@@ -6,6 +6,13 @@ const apiKey = import.meta.env.PUBLIC_AIRTABLE_SPECIAL_EVENTS_KEY;
 const baseId = import.meta.env.PUBLIC_AIRTABLE_SPECIAL_EVENTS_BASE;
 const tableName = import.meta.env.PUBLIC_AIRTABLE_SPECIAL_EVENTS_TABLE;
 
+// SLUGIFY CODE BEGINS
+// Special Event Share integration
+const slugify = (s) => s?.toString().toLowerCase().trim()
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/(^-|-$)+/g, '');
+// SLUGIFY CODE ENDS
+
 let events = [];
 let allEvents = [];
 let upcomingEvents = [];
@@ -118,225 +125,78 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<div class="card-grid-wrapper">
-  <div class="card-grid compact" id="special-event-container">
-    {upcomingEvents.map((event, index) => (
-      <div
-        class="card"
-        data-index={index}
-        data-city={(event["City"] || "").toLowerCase()}
-        data-area={(event["Area"] || "").toLowerCase()}
-        data-tags={(event["Tags"] || []).join(",").toLowerCase()}
-      >
-        <h2>{event["Event Name"]}</h2>
-        {event.Description && <p>{event.Description}</p>}
-        <div class="meta">
-          {event.Venue && <div class="meta-line"><strong>Venue:</strong> {event.Venue}</div>}
-          {event.City && <div class="meta-line"><strong>City:</strong> {event.City}</div>}
-          {event.Area && <div class="meta-line"><strong>Area:</strong> {event.Area}</div>}
-        </div>
-        {event["Event Date"] && (
-  <p class="when-to-go">
-    <i>{event["Event Date"]}</i>
-    {event["Event Time"] && `| ${event["Event Time"]}`}
-  </p>
-)}
-        {event["Event URL"] && (
-  <div class="links">
-    <a href={event["Event URL"]} target="_blank" rel="noopener noreferrer">
-      More Info
-    </a>
-  </div>
-)}
 
 
-<!-- start of share function -->
-<div class="share-wrapper">
-          <button class="share-btn"
-            aria-haspopup="menu"
-            aria-expanded="false"
-            data-share-title={shareText}
-            data-share-text={event.Description ?? shareText}
-            data-share-rel={rel}
-            data-share-index={index}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98"/><path d="M15.41 6.51L8.59 10.49"/></svg>
-            Share
-          </button>
-          <div class="share-menu" role="menu" id={`share-menu-${index}`}>
-            <button class="share-item" data-action="native">Share…</button>
-            <div class="share-divider"></div>
-            <button class="share-item" data-action="copy">Copy link</button>
-            <button class="share-item" data-action="fb">Share to Facebook</button>
-            <button class="share-item" data-action="wa">Share to WhatsApp</button>
-            <button class="share-item" data-action="tg">Share to Telegram</button>
-            <button class="share-item" data-action="bsky">Share to Bluesky</button>
-            <button class="share-item" data-action="thr">Share to Threads</button>
-            <button class="share-item" data-action="mail">Share via Email</button>
-            <div class="share-divider"></div>
-            <button class="share-item" data-action="qr">Show QR</button>
-          </div>
-        </div>
-<!-- end of share function addition -->
-      </div>
-      );
-    })}
-  </div>
-</div>
 
-<script>
-(function(){
-  const grid = document.getElementById('special-event-container');
-  const toast = createToast();
 
-  function absUrl(rel){
-    // If rel is absolute (external event URL), return as-is.
-    try {
-      const u = new URL(rel, window.location.origin);
-      return u.toString();
-    } catch {
-      return window.location.origin + rel;
-    }
-  }
+function toastMsg(m){toast.textContent=m;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400)}
 
-  // Add UTMs only when sharing your own domain; don't mutate external event URLs.
-  function withUtmIfSameOrigin(url){
-    try{
-      const u = new URL(url);
-      if(u.origin === window.location.origin){
-        if(!u.searchParams.has('utm_source')){
-          u.searchParams.set('utm_source','share');
-          u.searchParams.set('utm_medium','event-card');
-          u.searchParams.set('utm_campaign','dfwscene');
-        }
-      }
-      return u.toString();
-    }catch{return url;}
-  }
 
-  function openMenu(btn){
-    closeAll();
-    const idx = btn.getAttribute('data-share-index');
-    const m = document.getElementById(`share-menu-${idx}`);
-    if(m){ m.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-    document.addEventListener('click', onDocClick, { once:true });
-  }
-  function closeAll(){
-    document.querySelectorAll('.share-menu.open').forEach(m => m.classList.remove('open'));
-    document.querySelectorAll('.share-btn[aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded','false'));
-  }
-  function onDocClick(e){ if(!e.target.closest('.share-wrapper')) closeAll(); }
+// QR modal
+const qr=createQrModal();
+function createQrModal(){
+const overlay=document.createElement('div');
+overlay.className='qr-overlay';
+overlay.innerHTML=`
+<div class="qr-modal">
+<h3>Scan to open</h3>
+<img id="qr-img" alt="QR code" width="256" height="256" />
+<div class="share-divider" style="margin:.65rem 0"></div>
+<button class="share-btn qr-close">Close</button>
+</div>`;
+document.body.appendChild(overlay);
+overlay.addEventListener('click',e=>{if(e.target===overlay||e.target.closest('.qr-close'))overlay.classList.remove('open')});
+return overlay;
+}
 
-  async function doNativeShare(title, text, url){
-    if(navigator.share){
-      try{ await navigator.share({ title, text, url }); track('native', url); return true; }
-      catch{ /* fall back to menu */ }
-    }
-    return false;
-  }
 
-  function copyToClipboard(text){
-    return (navigator.clipboard?.writeText(text) || Promise.reject())
-      .then(()=> showToast('Link copied'))
-      .catch(()=>{
-        const ta=document.createElement('textarea');
-        ta.value=text; document.body.appendChild(ta); ta.select();
-        try{ document.execCommand('copy'); }catch{}
-        document.body.removeChild(ta);
-        showToast('Link copied');
-      });
-  }
+function showQr(url){
+const img=qr.querySelector('#qr-img');
+const api='https://api.qrserver.com/v1/create-qr-code/';
+img.setAttribute('src',api+'?size=256x256&data='+encodeURIComponent(url));
+qr.classList.add('open');
+}
 
-  // Social intents (no SDKs). No Twitter/X. Adds Bluesky + Threads.
-  function social(kind, title, text, url){
-    const u = encodeURIComponent(url);
-    const t = encodeURIComponent(text || title || '');
-    const s = encodeURIComponent(title || '');
-    const href =
-        kind === 'fb'   ? `https://www.facebook.com/sharer/sharer.php?u=${u}`
-      : kind === 'wa'   ? `https://api.whatsapp.com/send?text=${t}%20${u}`
-      : kind === 'tg'   ? `https://t.me/share/url?url=${u}&text=${t}`
-      : kind === 'bsky' ? `https://bsky.app/intent/compose?text=${t}&url=${u}`
-      : kind === 'thr'  ? `https://www.threads.net/intent/post?text=${t}%20${u}`
-      : /* mail */        `mailto:?subject=${s}&body=${t}%20${u}`;
-    window.open(href, '_blank', 'noopener,noreferrer');
-    track(kind, url);
-  }
 
-  function track(method, url){
-    // Hook in analytics here if you’d like, e.g. gtag('event','share',{method, item_id:url})
-  }
+grid?.addEventListener('click',async e=>{
+const b=e.target.closest('.share-btn');
+const i=e.target.closest('.share-item');
 
-  function createToast(){ const el=document.createElement('div'); el.className='toast'; document.body.appendChild(el); return el; }
-  function showToast(msg){ toast.textContent=msg; toast.classList.add('show'); setTimeout(()=> toast.classList.remove('show'), 1400); }
 
-  // QR modal (no deps)
-  const qr = createQrModal();
-  function createQrModal(){
-    const overlay = document.createElement('div');
-    overlay.className = 'qr-overlay';
-    overlay.innerHTML = `
-      <div class="qr-modal">
-        <h3>Scan to open</h3>
-        <img id="qr-img" alt="QR code" width="256" height="256" />
-        <div class="share-divider" style="margin:.65rem 0"></div>
-        <button class="share-btn qr-close">Close</button>
-      </div>`;
-    document.body.appendChild(overlay);
-    overlay.addEventListener('click', (e)=>{
-      if(e.target === overlay || e.target.closest('.qr-close')) overlay.classList.remove('open');
-    });
-    return overlay;
-  }
-  function showQr(url){
-    const img = qr.querySelector('#qr-img');
-    const api = 'https://api.qrserver.com/v1/create-qr-code/';
-    img.setAttribute('src', api + '?size=256x256&data=' + encodeURIComponent(url));
-    qr.classList.add('open');
-  }
+if(b){
+const t=b.getAttribute('data-share-title')||document.title;
+const tx=b.getAttribute('data-share-text')||t;
+const rel=b.getAttribute('data-share-rel')||'/';
+const u=absUrl(rel);
+const did=await nativeShare(t,tx,u);
+if(!did)openMenu(b);
+}
 
-  grid?.addEventListener('click', async (e)=>{
-    const btn = e.target.closest('.share-btn');
-    const item = e.target.closest('.share-item');
 
-    if(btn){
-      const title = btn.getAttribute('data-share-title') || document.title;
-      const text  = btn.getAttribute('data-share-text') || title;
-      const rel   = btn.getAttribute('data-share-rel') || '/';
-      const url   = absUrl(rel);
-      const did   = await doNativeShare(title, text, url);
-      if(!did) openMenu(btn);
-    }
+if(i){
+const wrap=i.closest('.share-wrapper');
+const b2=wrap.querySelector('.share-btn');
+const t=b2.getAttribute('data-share-title')||document.title;
+const tx=b2.getAttribute('data-share-text')||t;
+const rel=b2.getAttribute('data-share-rel')||'/';
+const u=absUrl(rel);
+const a=i.getAttribute('data-action');
 
-    if(item){
-      const wrap  = item.closest('.share-wrapper');
-      const btn2  = wrap.querySelector('.share-btn');
-      const title = btn2.getAttribute('data-share-title') || document.title;
-      const text  = btn2.getAttribute('data-share-text') || title;
-      const rel   = btn2.getAttribute('data-share-rel') || '/';
-      const url   = absUrl(rel);
-      const action = item.getAttribute('data-action');
 
-      if(action === 'native'){
-        await doNativeShare(title, text, url);
-      } else if(action === 'copy'){
-        // Copy clean URL (no UTMs)
-        await copyToClipboard(url);
-      } else if(['fb','wa','tg','bsky','thr','mail'].includes(action)){
-        // Add UTMs only when it's your domain
-        social(action, title, text, withUtmIfSameOrigin(url));
-      } else if(action === 'qr'){
-        showQr(withUtmIfSameOrigin(url));
-      }
-      closeAllMenus();
-    }
-  });
-
+if(a==='native'){
+await nativeShare(t,tx,u);
+} else if(a==='copy'){
+await copyLink(u);
+} else if(['fb','wa','tg','bsky','thr','mail'].includes(a)){
+social(a,t,tx,withUtmIfSameOrigin(u));
+} else if(a==='qr'){
+showQr(withUtmIfSameOrigin(u));
+}
+closeAll();
+}
+});
 })();
 </script>
-
-
-
 <!-- end of card -->
 
 
@@ -424,6 +284,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+const qr = createQrModal();
+function createQrModal(){
+  const overlay = document.createElement('div');
+  overlay.className = 'qr-overlay';
+  overlay.innerHTML = `
+    <div class="qr-modal">
+      <h3>Scan to open</h3>
+      <img id="qr-img" alt="QR code" width="256" height="256" />
+      <div class="share-divider" style="margin:.65rem 0"></div>
+      <button class="share-btn qr-close">Close</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', (e)=>{
+    if(e.target === overlay || e.target.closest('.qr-close')) overlay.classList.remove('open');
+  });
+  return overlay;
+}
+function showQr(url){
+  const img = qr.querySelector('#qr-img');
+  const api = 'https://api.qrserver.com/v1/create-qr-code/';
+  img.setAttribute('src', api + '?size=256x256&data=' + encodeURIComponent(url));
+  qr.classList.add('open');
+}
 </script>
   </body>
 </html>

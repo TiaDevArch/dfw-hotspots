@@ -672,3 +672,9 @@ html, body { margin: 0; }
   .qr-modal h3{margin:0 0 .5rem;font-size:1rem}
   .qr-modal img{display:block;margin:0 auto;border-radius:8px}
   .qr-close{margin-top:.75rem}
+.qr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:50}
+.qr-overlay.open{display:flex}
+.qr-modal{background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:18px;width:min(92vw,360px);text-align:center}
+.qr-modal h3{margin:0 0 .5rem;font-size:1rem}
+.qr-modal img{display:block;margin:0 auto;border-radius:8px}
+.qr-close{margin-top:.75rem}
