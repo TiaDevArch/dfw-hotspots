@@ -307,6 +307,135 @@ function showQr(url){
   img.setAttribute('src', api + '?size=256x256&data=' + encodeURIComponent(url));
   qr.classList.add('open');
 }
-</script>
+
+// LAST SCTN APPEN
+
+
+(function(){
+  // ----- Inject minimal CSS for the share UI -----
+  const css = `
+  .share-wrapper{position:relative;margin-top:0.75rem}
+  .share-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .7rem;border:1px solid #ddd;border-radius:999px;background:#fff;cursor:pointer;font-size:.9rem}
+  .share-btn:hover{background:#f6f6f6}
+  .share-menu{position:absolute;right:0;top:110%;width:240px;background:#fff;border:1px solid #e5e5e5;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:.35rem;display:none;z-index:20}
+  .share-menu.open{display:block}
+  .share-item{display:block;width:100%;text-align:left;border:0;background:transparent;padding:.55rem .6rem;border-radius:10px;font-size:.95rem;cursor:pointer}
+  .share-item:hover{background:#f4f6f8}
+  .share-divider{height:1px;background:#eee;margin:.25rem 0}
+  .qr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:50}
+  .qr-overlay.open{display:flex}
+  .qr-modal{background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:18px;width:min(92vw,360px);text-align:center}
+  .qr-modal h3{margin:0 0 .5rem;font-size:1rem}
+  .qr-modal img{display:block;margin:0 auto;border-radius:8px}
+  .qr-close{margin-top:.75rem}
+  `;
+  const style = document.createElement('style');
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  // ----- Helpers -----
+  function absUrl(href){
+    try { return new URL(href, window.location.origin).toString(); }
+    catch { return href.startsWith('http') ? href : window.location.origin + href; }
+  }
+
+  function withUtmIfSameOrigin(url){
+    try{
+      const u = new URL(url);
+      if (u.origin === window.location.origin) {
+        if (!u.searchParams.has('utm_source')) {
+          u.searchParams.set('utm_source','share');
+          u.searchParams.set('utm_medium','event-card');
+          u.searchParams.set('utm_campaign','dfwscene');
+        }
+      }
+      return u.toString();
+    }catch{ return url; }
+  }
+
+  async function doNativeShare(title, text, url){
+    if (navigator.share){
+      try { await navigator.share({ title, text, url }); return true; } catch {}
+    }
+    return false;
+  }
+
+  function copyToClipboard(text){
+    return (navigator.clipboard?.writeText(text) || Promise.reject())
+      .catch(()=>{
+        const ta=document.createElement('textarea');
+        ta.value=text; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); }catch{}
+        document.body.removeChild(ta);
+      });
+  }
+
+  function social(kind, title, text, url){
+    const u = encodeURIComponent(url);
+    const t = encodeURIComponent(text || title || '');
+    const s = encodeURIComponent(title || '');
+    const href =
+        kind === 'fb'   ? `https://www.facebook.com/sharer/sharer.php?u=${u}`
+      : kind === 'wa'   ? `https://api.whatsapp.com/send?text=${t}%20${u}`
+      : kind === 'tg'   ? `https://t.me/share/url?url=${u}&text=${t}`
+      : kind === 'bsky' ? `https://bsky.app/intent/compose?text=${t}&url=${u}`
+      : kind === 'thr'  ? `https://www.threads.net/intent/post?text=${t}%20${u}`
+      : /* mail */        `mailto:?subject=${s}&body=${t}%20${u}`;
+    window.open(href, '_blank', 'noopener,noreferrer');
+  }
+
+  // QR modal
+  const qr = createQrModal();
+  function createQrModal(){
+    const overlay = document.createElement('div');
+    overlay.className = 'qr-overlay';
+    overlay.innerHTML = `
+      <div class="qr-modal">
+        <h3>Scan to open</h3>
+        <img id="qr-img" alt="QR code" width="256" height="256" />
+        <div class="share-divider" style="margin:.65rem 0"></div>
+        <button class="share-btn qr-close">Close</button>
+      </div>`;
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', (e)=>{
+      if (e.target === overlay || e.target.closest('.qr-close')) overlay.classList.remove('open');
+    });
+    return overlay;
+  }
+  function showQr(url){
+    const img = qr.querySelector('#qr-img');
+    const api = 'https://api.qrserver.com/v1/create-qr-code/';
+    img.setAttribute('src', api + '?size=256x256&data=' + encodeURIComponent(url));
+    qr.classList.add('open');
+  }
+
+  // ----- Build/share UI on each special event card -----
+  const grid = document.getElementById('special-event-container');
+  if (!grid) return;
+
+  const cards = grid.querySelectorAll('.card');
+  cards.forEach((card, idx) => {
+    // Skip if already has a share-wrapper
+    if (card.querySelector('.share-wrapper')) return;
+
+    // Compute title/desc/url from the card DOM
+    const title = (card.querySelector('h2')?.textContent || 'Event').trim();
+    const desc  = (card.querySelector('p')?.textContent || title).trim();
+    const external = card.querySelector('.links a')?.getAttribute('href');
+    const slug = title.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)+/g,'');
+    const rel = external || `/event/${slug}`;
+    const url = absUrl(rel);
+
+    // Build share UI
+    const wrap = document.createElement('div');
+    wrap.className = 'share-wrapper';
+    wrap.innerHTML = `
+      <button class="share-btn" aria-haspopup="menu" aria-expanded="false"
+        data-share-title="${escapeHtml(title)}"
+        data-share-text="${escapeHtml(desc)}"
+        data-share-rel="${escapeHtml(url)}"
+        data-share-index="${idx}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l
+
   </body>
 </html>
