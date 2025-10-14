@@ -2,19 +2,16 @@
   "name": "dfw-hotspot-vibes",
   "version": "0.0.1",
   "type": "module",
- 
- 
- "scripts": {
-  "dev": "astro dev",
-  "build": "astro build",
-  "preview": "astro preview",
-  "astro": "astro",
-  "airtable:pull": "node scripts/pullAirtableData.js",
-  "update": "npm run airtable:pull && git add -A && (git diff --cached --quiet && echo \"No changes to commit.\" || git commit -m \"Airtable sync: $(date '+%Y-%m-%d %H:%M')\") && git push"
-
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "airtable:pull": "node scripts/pullAirtableData.js",
+    "update": "npm run airtable:pull && git add -A && (git diff --cached --quiet && echo \"No changes to commit.\" || git commit -m \"Airtable sync: $(date '+%Y-%m-%d %H:%M')\") && git push"
   },
   "dependencies": {
-    "astro": "^5.8.2",
+    "astro": "^5.14.4",
     "axios": "^1.10.0",
     "dotenv": "^17.0.0"
   }
