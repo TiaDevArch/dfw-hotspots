@@ -36,7 +36,7 @@ venues.sort((a, b) => {
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-REEXGD3XZT"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
 
   gtag('config', 'G-REEXGD3XZT');
@@ -158,14 +158,14 @@ venues.sort((a, b) => {
       🕒 <strong>When to Go:</strong> {venue['When to Go']}
     </div>
   )}
-  {venue.Days && venue.Days.length > 0 && (
-    <div class="meta-line">
-      📅 <strong>Days:</strong>{' '}
-      {Array.isArray(venue.Days)
-        ? venue.Days.map(day => day.charAt(0).toUpperCase() + day.slice(1)).join(', ')
-        : venue.Days}
-    </div>
-
+{venue.Days && venue.Days.length > 0 && (
+  <div class="meta-line">
+    📅 <strong>Days:</strong>{' '}
+    {Array.isArray(venue.Days)
+      ? venue.Days.map(day => day.charAt(0).toUpperCase() + day.slice(1)).join(', ')
+      : venue.Days}
+  </div>
+)}
 <div class="meta-line cost">💰 Cost: {venue.Cost}</div>
 
 <div class="links">
