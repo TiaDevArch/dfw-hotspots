@@ -13,8 +13,6 @@ const slugify = (s) => s?.toString().toLowerCase().trim()
   .replace(/(^-|-$)+/g, '');
 // SLUGIFY CODE ENDS
 
-let events = [];
-let allEvents = [];
 let upcomingEvents = [];
 let pastEvents = [];
 
@@ -31,14 +29,10 @@ try {
     console.error("⚠️ Airtable response missing 'records':", json);
   }
 
-  allEvents = (json.records || [])
+  const allEvents = (json.records || [])
     .map((r) => r.fields)
     .filter((e) => e["Event Date"]);
 
-
-const now = new Date();
-
-// Normalize today to midnight (start of the day)
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
