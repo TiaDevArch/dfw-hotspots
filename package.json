@@ -11,8 +11,11 @@
     "update": "npm run airtable:pull && git add -A && (git diff --cached --quiet && echo \"No changes to commit.\" || git commit -m \"Airtable sync: $(date '+%Y-%m-%d %H:%M')\") && git push"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "astro": "^5.14.6",
-    "dotenv": "^16.0.0"
+    "axios": "^1.12.2",
+    "dotenv": "^16.0.0",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@astrojs/netlify": "^6.5.13"

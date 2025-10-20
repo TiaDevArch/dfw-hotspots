@@ -678,3 +678,13 @@ html, body { margin: 0; }
 .qr-modal h3{margin:0 0 .5rem;font-size:1rem}
 .qr-modal img{display:block;margin:0 auto;border-radius:8px}
 .qr-close{margin-top:.75rem}
+
+.past-event {
+  opacity: 0.55;
+  filter: grayscale(0.9);
+  transition: opacity 0.3s ease;
+}
+.past-event:hover {
+  opacity: 1;
+  filter: none;
+}

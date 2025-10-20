@@ -1,76 +1,48 @@
 ---
+import Layout from '../layouts/Layout.astro';
 import '../styles/style.css';
-import { getVenues } from '../lib/getVenues.ts';
-const venues = await getVenues();
+
 const apiKey = import.meta.env.PUBLIC_AIRTABLE_SPECIAL_EVENTS_KEY;
 const baseId = import.meta.env.PUBLIC_AIRTABLE_SPECIAL_EVENTS_BASE;
 const tableName = import.meta.env.PUBLIC_AIRTABLE_SPECIAL_EVENTS_TABLE;
-
-// SLUGIFY CODE BEGINS
-// Special Event Share integration
-const slugify = (s) => s?.toString().toLowerCase().trim()
-  .replace(/[^a-z0-9]+/g, '-')
-  .replace(/(^-|-$)+/g, '');
-// SLUGIFY CODE ENDS
 
 let upcomingEvents = [];
 let pastEvents = [];
 
 try {
   const res = await fetch(`https://api.airtable.com/v0/${baseId}/${tableName}?view=Grid%20view`, {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-    },
+    headers: { Authorization: `Bearer ${apiKey}` },
   });
 
   const json = await res.json();
-
-  if (!json.records) {
-    console.error("⚠️ Airtable response missing 'records':", json);
-  }
+  if (!json.records) console.error("⚠️ Airtable response missing 'records':", json);
 
   const allEvents = (json.records || [])
     .map((r) => r.fields)
     .filter((e) => e["Event Date"]);
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-upcomingEvents = allEvents.filter((e) => new Date(e["Event Date"]) >= today);
-pastEvents = allEvents.filter((e) => new Date(e["Event Date"]) < today);
+  upcomingEvents = allEvents.filter((e) => new Date(e["Event Date"]) >= today);
+  pastEvents = allEvents.filter((e) => new Date(e["Event Date"]) < today);
 
-upcomingEvents.sort((a, b) => new Date(a["Event Date"]) - new Date(b["Event Date"]));
-pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]));
-
+  upcomingEvents.sort((a, b) => new Date(a["Event Date"]) - new Date(b["Event Date"]));
+  pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]));
 } catch (error) {
   console.error("❌ Failed to fetch Airtable data:", error);
 }
 ---
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DFW Scene | Special Events in Dallas-Fort Worth</title>
-  <meta name="description" content="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres." />
-  <meta name="keywords" content="Dallas nightlife, DFW hotspots, brunch in Dallas, date spots DFW, live music Dallas, black-owned venues Dallas, chill bars, Arlington, Las Colinas, Plano, Frisco, Irving, Grand Prairie, Mansfield, Carrollton, Richardson, Desoto, Duncanville, Cedar Hill, Lewisville, Fort Worth, where to go out in DFW" />
-  <meta name="author" content="Tia Ross" />
+<Layout title="DFW Scene | Special Events in Dallas-Fort Worth">
 
-  <!-- Open Graph for social sharing -->
-  <meta property="og:title" content="DFW Scene" />
-  <meta property="og:description" content="Find your scene in Dallas-Fort Worth — Brunch, date nights, happy hours, lounges, Black-owned gems and more." />
-  <meta property="og:image" content="https://github.com/TiaDevArch/dfw-hotspots/blob/main/src/assets/Logo-DFWScene-s.png" />
-  <meta property="og:url" content="https://dfwscene.app/" />
-  <meta property="og:type" content="website" />
-</head>
-  <body>
 <header class="dfw-banner" role="banner">
   <a class="dfw-banner__logo" href="/" aria-label="DFW Scene — Home">
     <img
       src="/Logo-DFWScene-s.png"
       srcset="/Logo-DFWScene-s.png 1x, /Logo-DFWScene.png 2x"
       alt="DFW Scene logo"
-      width="256" height="256" alt="DFW Scene" description="Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth with curated vibes, audience, and atmospheres" title="DFW Scene"/>
+      width="256" height="256" alt="DFW Scene – Explore the best restaurants, bars, lounges, brunch spots, and nightlife venues across Dallas-Fort Worth" title="DFW Scene"/>
   </a>
 </header>
 
@@ -82,109 +54,44 @@ pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]))
   </ul>
 </nav>
 
-      <p>Explore special events happening around Dallas-Fort Worth!</p>
+<p class="dfw-nav-note">
+  <em>Explore special events happening around Dallas-Fort Worth!</em>
+</p>
 
 <!-- UPCOMING EVENTS -->
 <h3 class="section-heading">Upcoming Events</h3>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.createElement("input");
-  searchInput.type = "text";
-  searchInput.placeholder = "Search events by name, venue, or description…";
-  searchInput.className = "events-search";
 
-  // Insert after the first section heading or after the nav note as fallback
-  const anchor = document.querySelector('.section-heading')
-                || document.querySelector('.dfw-nav-note')
-                || document.querySelector('.dfw-nav');
-  if (anchor && anchor.parentNode) {
-    anchor.parentNode.insertBefore(searchInput, anchor.nextSibling);
-  }
-
-  searchInput.addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    document.querySelectorAll('#special-event-container .card').forEach(card => {
-      card.style.display = card.textContent.toLowerCase().includes(term) ? '' : 'none';
-    });
-  });
-});
-</script>
-
-
-
-
-
-function toastMsg(m){toast.textContent=m;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400)}
-
-
-// QR modal
-const qr=createQrModal();
-function createQrModal(){
-const overlay=document.createElement('div');
-overlay.className='qr-overlay';
-overlay.innerHTML=`
-<div class="qr-modal">
-<h3>Scan to open</h3>
-<img id="qr-img" alt="QR code" width="256" height="256" />
-<div class="share-divider" style="margin:.65rem 0"></div>
-<button class="share-btn qr-close">Close</button>
-</div>`;
-document.body.appendChild(overlay);
-overlay.addEventListener('click',e=>{if(e.target===overlay||e.target.closest('.qr-close'))overlay.classList.remove('open')});
-return overlay;
-}
-
-
-function showQr(url){
-const img=qr.querySelector('#qr-img');
-const api='https://api.qrserver.com/v1/create-qr-code/';
-img.setAttribute('src',api+'?size=256x256&data='+encodeURIComponent(url));
-qr.classList.add('open');
-}
-
-
-grid?.addEventListener('click',async e=>{
-const b=e.target.closest('.share-btn');
-const i=e.target.closest('.share-item');
-
-
-if(b){
-const t=b.getAttribute('data-share-title')||document.title;
-const tx=b.getAttribute('data-share-text')||t;
-const rel=b.getAttribute('data-share-rel')||'/';
-const u=absUrl(rel);
-const did=await nativeShare(t,tx,u);
-if(!did)openMenu(b);
-}
-
-
-if(i){
-const wrap=i.closest('.share-wrapper');
-const b2=wrap.querySelector('.share-btn');
-const t=b2.getAttribute('data-share-title')||document.title;
-const tx=b2.getAttribute('data-share-text')||t;
-const rel=b2.getAttribute('data-share-rel')||'/';
-const u=absUrl(rel);
-const a=i.getAttribute('data-action');
-
-
-if(a==='native'){
-await nativeShare(t,tx,u);
-} else if(a==='copy'){
-await copyLink(u);
-} else if(['fb','wa','tg','bsky','thr','mail'].includes(a)){
-social(a,t,tx,withUtmIfSameOrigin(u));
-} else if(a==='qr'){
-showQr(withUtmIfSameOrigin(u));
-}
-closeAll();
-}
-});
-})();
-</script>
-<!-- end of card -->
-
-
+<div id="special-event-container" class="card-grid-wrapper">
+  <div class="card-grid">
+    {upcomingEvents.map((event, index) => (
+      <div
+        class="card"
+        data-index={index}
+        data-city={(event["City"] || "").toLowerCase()}
+        data-area={(event["Area"] || "").toLowerCase()}
+        data-tags={(event["Tags"] || []).join(",").toLowerCase()}
+      >
+        <h2>{event["Event Name"]}</h2>
+        {event.Description && <p>{event.Description}</p>}
+        <div class="meta">
+          {event.Venue && <div class="meta-line"><strong>Venue:</strong> {event.Venue}</div>}
+          {event.City && <div class="meta-line"><strong>City:</strong> {event.City}</div>}
+          {event.Area && <div class="meta-line"><strong>Area:</strong> {event.Area}</div>}
+        </div>
+        {event["Event Date"] && (
+          <p class="when-to-go"><i>{event["Event Date"]}</i></p>
+        )}
+        {event["Event Page URL"] && (
+          <div class="links">
+            <a href={event["Event Page URL"]} target="_blank" rel="noopener noreferrer">
+              More Info
+            </a>
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
 
 <!-- PAST EVENTS -->
 <h3 class="section-heading">Past Events</h3>
@@ -209,12 +116,12 @@ closeAll();
           <p class="when-to-go"><i>{event["Event Date"]}</i></p>
         )}
         {event["Event Page URL"] && (
-  <div class="links">
-    <a href={event["Event Page URL"]} target="_blank" rel="noopener noreferrer">
-      More Info
-    </a>
-  </div>
-)}
+          <div class="links">
+            <a href={event["Event Page URL"]} target="_blank" rel="noopener noreferrer">
+              More Info
+            </a>
+          </div>
+        )}
       </div>
     ))}
   </div>
@@ -273,159 +180,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-const qr = createQrModal();
-function createQrModal(){
-  const overlay = document.createElement('div');
-  overlay.className = 'qr-overlay';
-  overlay.innerHTML = `
-    <div class="qr-modal">
-      <h3>Scan to open</h3>
-      <img id="qr-img" alt="QR code" width="256" height="256" />
-      <div class="share-divider" style="margin:.65rem 0"></div>
-      <button class="share-btn qr-close">Close</button>
-    </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e)=>{
-    if(e.target === overlay || e.target.closest('.qr-close')) overlay.classList.remove('open');
-  });
-  return overlay;
-}
-function showQr(url){
-  const img = qr.querySelector('#qr-img');
-  const api = 'https://api.qrserver.com/v1/create-qr-code/';
-  img.setAttribute('src', api + '?size=256x256&data=' + encodeURIComponent(url));
-  qr.classList.add('open');
-}
-
-// LAST SCTN APPENDED
-
-
-(function()
-{
-  // ----- Inject minimal CSS for the share UI -----
-  const css = `
-  .share-wrapper{position:relative;margin-top:0.75rem}
-  .share-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .7rem;border:1px solid #ddd;border-radius:999px;background:#fff;cursor:pointer;font-size:.9rem}
-  .share-btn:hover{background:#f6f6f6}
-  .share-menu{position:absolute;right:0;top:110%;width:240px;background:#fff;border:1px solid #e5e5e5;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:.35rem;display:none;z-index:20}
-  .share-menu.open{display:block}
-  .share-item{display:block;width:100%;text-align:left;border:0;background:transparent;padding:.55rem .6rem;border-radius:10px;font-size:.95rem;cursor:pointer}
-  .share-item:hover{background:#f4f6f8}
-  .share-divider{height:1px;background:#eee;margin:.25rem 0}
-  .qr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:50}
-  .qr-overlay.open{display:flex}
-  .qr-modal{background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:18px;width:min(92vw,360px);text-align:center}
-  .qr-modal h3{margin:0 0 .5rem;font-size:1rem}
-  .qr-modal img{display:block;margin:0 auto;border-radius:8px}
-  .qr-close{margin-top:.75rem}
-  `;
-  const style = document.createElement('style');
-  style.textContent = css;
-  document.head.appendChild(style);
-
-  // ----- Helpers -----
-  function absUrl(href){
-    try { return new URL(href, window.location.origin).toString(); }
-    catch { return href.startsWith('http') ? href : window.location.origin + href; }
-  }
-
-  function withUtmIfSameOrigin(url){
-    try{
-      const u = new URL(url);
-      if (u.origin === window.location.origin) {
-        if (!u.searchParams.has('utm_source')) {
-          u.searchParams.set('utm_source','share');
-          u.searchParams.set('utm_medium','event-card');
-          u.searchParams.set('utm_campaign','dfwscene');
-        }
-      }
-      return u.toString();
-    }catch{ return url; }
-  }
-
-  async function doNativeShare(title, text, url){
-    if (navigator.share){
-      try { await navigator.share({ title, text, url }); return true; } catch {}
-    }
-    return false;
-  }
-
-  function copyToClipboard(text){
-    return (navigator.clipboard?.writeText(text) || Promise.reject())
-      .catch(()=>{
-        const ta=document.createElement('textarea');
-        ta.value=text; document.body.appendChild(ta); ta.select();
-        try{ document.execCommand('copy'); }catch{}
-        document.body.removeChild(ta);
-      });
-  }
-
-  function social(kind, title, text, url){
-    const u = encodeURIComponent(url);
-    const t = encodeURIComponent(text || title || '');
-    const s = encodeURIComponent(title || '');
-    const href =
-        kind === 'fb'   ? `https://www.facebook.com/sharer/sharer.php?u=${u}`
-      : kind === 'wa'   ? `https://api.whatsapp.com/send?text=${t}%20${u}`
-      : kind === 'tg'   ? `https://t.me/share/url?url=${u}&text=${t}`
-      : kind === 'bsky' ? `https://bsky.app/intent/compose?text=${t}&url=${u}`
-      : kind === 'thr'  ? `https://www.threads.net/intent/post?text=${t}%20${u}`
-      : /* mail */        `mailto:?subject=${s}&body=${t}%20${u}`;
-    window.open(href, '_blank', 'noopener,noreferrer');
-  }
-
-  // QR modal
-  const qr = createQrModal();
-  function createQrModal(){
-    const overlay = document.createElement('div');
-    overlay.className = 'qr-overlay';
-    overlay.innerHTML = `
-      <div class="qr-modal">
-        <h3>Scan to open</h3>
-        <img id="qr-img" alt="QR code" width="256" height="256" />
-        <div class="share-divider" style="margin:.65rem 0"></div>
-        <button class="share-btn qr-close">Close</button>
-      </div>`;
-    document.body.appendChild(overlay);
-    overlay.addEventListener('click', (e)=>{
-      if (e.target === overlay || e.target.closest('.qr-close')) overlay.classList.remove('open');
-    });
-    return overlay;
-  }
-  function showQr(url){
-    const img = qr.querySelector('#qr-img');
-    const api = 'https://api.qrserver.com/v1/create-qr-code/';
-    img.setAttribute('src', api + '?size=256x256&data=' + encodeURIComponent(url));
-    qr.classList.add('open');
-  }
-
-  // ----- Build/share UI on each special event card -----
-  const grid = document.getElementById('special-event-container');
-  if (!grid) return;
-
-  const cards = grid.querySelectorAll('.card');
-  cards.forEach((card, idx) => {
-    // Skip if already has a share-wrapper
-    if (card.querySelector('.share-wrapper')) return;
-
-    // Compute title/desc/url from the card DOM
-    const title = (card.querySelector('h2')?.textContent || 'Event').trim();
-    const desc  = (card.querySelector('p')?.textContent || title).trim();
-    const external = card.querySelector('.links a')?.getAttribute('href');
-    const slug = title.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)+/g,'');
-    const rel = external || `/event/${slug}`;
-    const url = absUrl(rel);
-
-    // Build share UI
-    const wrap = document.createElement('div');
-    wrap.className = 'share-wrapper';
-    wrap.innerHTML = `
-      <button class="share-btn" aria-haspopup="menu" aria-expanded="false"
-        data-share-title="${escapeHtml(title)}"
-        data-share-text="${escapeHtml(desc)}"
-        data-share-rel="${escapeHtml(url)}"
-        data-share-index="${idx}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l
-
-  </body>
-</html>
+</script>
+</Layout>
