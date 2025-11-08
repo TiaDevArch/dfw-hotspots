@@ -22,10 +22,17 @@ try {
     .filter((e) => e["Event Date"]);
 
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
+today.setHours(0, 0, 0, 0);
 
-  upcomingEvents = allEvents.filter((e) => new Date(e["Event Date"]) >= today);
-  pastEvents = allEvents.filter((e) => new Date(e["Event Date"]) < today);
+// Cutoff date for 90 days ago
+const cutoff = new Date(today);
+cutoff.setDate(today.getDate() - 90);
+
+upcomingEvents = allEvents.filter((e) => new Date(e["Event Date"]) >= today);
+pastEvents = allEvents.filter((e) => {
+  const eventDate = new Date(e["Event Date"]);
+  return eventDate < today && eventDate >= cutoff; // only show past 90 days
+});
 
   upcomingEvents.sort((a, b) => new Date(a["Event Date"]) - new Date(b["Event Date"]));
   pastEvents.sort((a, b) => new Date(b["Event Date"]) - new Date(a["Event Date"]));
@@ -79,15 +86,27 @@ try {
           {event.Area && <div class="meta-line"><strong>Area:</strong> {event.Area}</div>}
         </div>
         {event["Event Date"] && (
-          <p class="when-to-go"><i>{event["Event Date"]}</i></p>
-        )}
-        {event["Event Page URL"] && (
-          <div class="links">
-            <a href={event["Event Page URL"]} target="_blank" rel="noopener noreferrer">
-              More Info
-            </a>
-          </div>
-        )}
+  <p class="when-to-go">
+    <i>{event["Event Date"]}</i>
+    {event["Event Time"] && <> • <span>{event["Event Time"]}</span></>}
+  </p>
+)}
+
+{event["Event URL"] && (
+  <div class="links">
+    <a href={event["Event URL"]} target="_blank" rel="noopener noreferrer">
+      🔗 Event Website
+    </a>
+  </div>
+)}
+
+{event.Tags && event.Tags.length > 0 && (
+  <p class="tags">
+    {event.Tags.map((tag) => (
+      <span class="tag">{tag}</span>
+    ))}
+  </p>
+)}
       </div>
     ))}
   </div>
